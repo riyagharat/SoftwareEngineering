@@ -79,3 +79,4 @@ C:\Users\bmwqg\Desktop\SoftwareEngineering\FindTheBooty\FindTheBooty\bin\Microso
 C:\Users\bmwqg\Desktop\SoftwareEngineering\FindTheBooty\FindTheBooty\obj\Debug\FindTheBooty.csprojResolveAssemblyReference.cache
 C:\Users\bmwqg\Desktop\SoftwareEngineering\FindTheBooty\FindTheBooty\obj\Debug\FindTheBooty.dll
 C:\Users\bmwqg\Desktop\SoftwareEngineering\FindTheBooty\FindTheBooty\obj\Debug\FindTheBooty.pdb
+C:\Users\bmwqg\Desktop\SoftwareEngineering\FindTheBooty\FindTheBooty\bin\FindTheBooty.dll.config
