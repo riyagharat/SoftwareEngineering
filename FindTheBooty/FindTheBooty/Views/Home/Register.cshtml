@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Come Aboard!";
+}
+
+<h3>Come Aboard, Matey!</h3>
+<form>
+    <div class="form-group">
+        <label for="">First Name</label>
+        <input id="userFirstName" class="form-control" placeholder="Enter your first name" />
+    </div>
+    <div class="form-group">
+        <label for="">Last Name</label>
+        <input id="userLastName" class="form-control" placeholder="Enter your last name" />
+    </div>
+    <div class="form-group">
+        <label for="">Email</label>
+        <input id="userEmail" class="form-control" placeholder="Enter your email address" />
+    </div>
+    <div class="form-group">
+        <label for="">Confirm Email</label>
+        <input id="userEmailConf" class="form-control" placeholder="Re-enter your email address" />
+    </div>
+    <div class="form-group">
+        <label for="">Password</label>
+        <input type="password" id="userPassword" class="form-control" placeholder="Enter a password" />
+    </div>
+    <div class="form-group">
+        <label for="">Confirm Password</label>
+        <input type="password" id="userPasswordConf" class="form-control" placeholder="Re-enter your password" />
+    </div>
+    <hr />
+    <div class="form-group">
+        <label for="">Display Name</label>
+        <input id="userDispName" class="form-control" placeholder="Enter a public display name" />
+    </div>
+    <div class="form-group">
+        <label for="">Gender</label>
+        <select id="userGender" class="form-control">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="">Phone Number</label>
+        <input id="userPhoneNum" class="form-control" placeholder="Enter your phone number: (XXX) XXX-XXXX" />
+    </div>
+    <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="reset" class="btn btn-danger">Clear Form</button>
+    </div>
+</form>

@@ -30,10 +30,17 @@ namespace FindTheBooty.Controllers
             return View();
         }
 
+        // Anything below this line is added for placeholder purposes
+
         public ActionResult Login()
         {
             ViewBag.Message = "Unnecessary";
 
+            return View();
+        }
+
+        public ActionResult Register()
+        {
             return View();
         }
     }
