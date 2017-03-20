@@ -5,40 +5,11 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1.0">
     <title>@ViewBag.Title - Find The Booty</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+    @Scripts.Render("~/bundles/modernizr")      @* Is this necessary? *@
+    @Scripts.Render("~/bundles/jquery")         @* jQuery scripts include *@
+    @Scripts.Render("~/bundles/menu-handler")   @* menu handler functions *@
 </head>
 <body>
-
-
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>*@
-
-
-
-    <script src="//cdn.jsdelivr.net/jquery/2.2.0/jquery.min.js"></script>
-    <!-- Include the Sidr JS -->
-    <script src="//cdn.jsdelivr.net/jquery.sidr/2.2.1/jquery.sidr.min.js"></script>
     
     <nav class="navbar navbar-default navbar-static-top navbar-inverse">
       <div class="container-fluid header">
@@ -49,17 +20,15 @@
       </div>
     </nav>
 
-
-
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year Javalanche Studios - Find The Booty</p>
         </footer>
     </div>
 
-
+    @* Menu sidebar information *@
 	<div id="sidr">
 	  <ul>
 		<li><a href="#">&lt;&lt;Captain Leas&gt;&gt;</a></li>
@@ -72,38 +41,7 @@
 	  </ul>
 	</div>
 
-	<script>
-	$(document).ready(function() {
-	  $('#left-menu').sidr();
-  
-	  // menu icon handler
-	  var menuFlag = false;
-	  $('#left-menu').bind('touchstart click',function(){
-		var iconObj = $('#menu-icon');
-		const hamburger = 'glyphicon-menu-hamburger';
-		const close = 'glyphicon-arrow-left';
-    
-		// ensure touchstart & click don't cancel each other
-		if(!menuFlag){
-		  menuFlag = true;
-		  setTimeout(function(){ menuFlag = false}, 100);
-		}
-    
-		// swap icon accordingly
-		if( iconObj.hasClass(hamburger) ){
-		  iconObj.removeClass(hamburger);
-		  iconObj.addClass(close);
-		}else if(iconObj.hasClass(close)){
-		  iconObj.removeClass(close);
-		  iconObj.addClass(hamburger);
-		}
-	  });
-  
-	});
-	</script>
-
-    @*@Scripts.Render("~/bundles/jquery")*@
-    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @Scripts.Render("~/bundles/bootstrap") @* Include Bootstrap scripts *@
     @RenderSection("scripts", required: false)
 </body>
 </html>
