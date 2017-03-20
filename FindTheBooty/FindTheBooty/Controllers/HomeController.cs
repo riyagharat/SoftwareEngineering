@@ -43,5 +43,25 @@ namespace FindTheBooty.Controllers
         {
             return View();
         }
+
+        public ActionResult TestPage()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Test()
+        {
+            HttpPostedFileBase file = Request.Files["inputFile"];
+            string str, streamString, output;
+            if (file.ContentLength > 0)
+            {
+                str = file.ToString();
+                System.IO.StreamReader reader = new System.IO.StreamReader(file.InputStream);
+                streamString = reader.ReadToEnd();
+                output = QRReader.getQRCode(file.InputStream);
+            }
+            return RedirectToAction("TestPage");
+        }
     }
 }
