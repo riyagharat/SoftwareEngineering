@@ -58,7 +58,7 @@ namespace FindTheBooty.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Test()
+        public ActionResult Test(string inputString)
         {
             HttpPostedFileBase file = Request.Files["inputFile"];
             string str, streamString, output;
@@ -69,6 +69,13 @@ namespace FindTheBooty.Controllers
                 streamString = reader.ReadToEnd();
                 output = QRReader.getQRCode(file.InputStream);
             }
+            else if (inputString.Length > 0)
+            {
+                System.Drawing.Bitmap image = QRGenerator.generateQRCode(inputString);
+                string outputPath = Server.MapPath("~/") + "output.png";
+                image.Save(outputPath, System.Drawing.Imaging.ImageFormat.Png);
+            }
+            
             return RedirectToAction("TestPage");
         }
     }
