@@ -44,11 +44,19 @@ namespace FindTheBooty.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Use this Page for testing Back-end Code
+        /// </summary>
+        /// <returns></returns>
         public ActionResult TestPage()
         {
             return View();
         }
 
+        /// <summary>
+        /// Use this page for testing the responses to front-end code
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Test()
         {
