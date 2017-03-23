@@ -2,8 +2,8 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/FindTheBooty/FindTheBooty/bin/**
-/FindTheBooty/FindTheBooty/obj/**
+bin/
+obj/
 FindTheBooty/\.vs/config/applicationhost\.config
 
 FindTheBooty/\.vs/FindTheBooty/v14/\.suo
