@@ -16,6 +16,7 @@ namespace FindTheBooty
             // set QR Code Format info
             encoder.QRCodeVersion = 2;
             encoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.M;
+            encoder.QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.ALPHA_NUMERIC;
 
             image = encoder.Encode(qrCode);
             return image;
