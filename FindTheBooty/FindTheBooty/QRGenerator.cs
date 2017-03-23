@@ -12,6 +12,11 @@ namespace FindTheBooty
         {
             Bitmap image;
             QRCodeEncoder encoder = new QRCodeEncoder();
+
+            // set QR Code Format info
+            encoder.QRCodeVersion = 2;
+            encoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.M;
+
             image = encoder.Encode(qrCode);
             return image;
         } 
