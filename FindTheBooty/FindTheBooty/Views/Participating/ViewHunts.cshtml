@@ -1,7 +1,40 @@
 ﻿
 @{
-    ViewBag.Title = "View Nearby Hunts";
+    ViewBag.Title = "View Hunts";
 }
+
+<h2>View Joined Hunts</h2>
+<h4><i>Click Hunt Name to Continue Hunting!</i></h4>
+
+<table class="table table-striped" style="background-color: #FFF;">
+    <tr>
+        <th>Distance</th>
+        <th>Hunt Name</th>
+        <th>Type of Hunt</th>
+        <th>Time Left</th>
+    </tr>
+
+    @*This is where you would iterate for X number of results in the model (loaded on page fire)*@
+
+    <tr>
+        <td>0.2 Mi</td>
+        <td>Bootylicious</td>
+        <td>Timed Sequential</td>
+        <td>1H:21M</td>
+    </tr>
+    <tr>
+        <td>0.7 Mi</td>
+        <td>Bootylicious 2.0</td>
+        <td>Timed Sequential</td>
+        <td>1H:21M</td>
+    </tr>
+    <tr>
+        <td>2.1 Mi</td>
+        <td>Bootylicious 2.1</td>
+        <td>Free-for-all</td>
+        <td>1H:21M</td>
+    </tr>
+</table>
 
 <h2>View Nearby Hunts</h2>
 <h4><i>Click Hunt Name to Join a Hunt</i></h4>
