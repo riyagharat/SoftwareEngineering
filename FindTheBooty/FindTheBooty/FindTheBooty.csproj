@@ -281,8 +281,9 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\TestPage.cshtml" />
-    <Content Include="Views\Participating\ViewHunts.cshtml" />
+    <Content Include="Views\Participating\ViewJoinedHunts.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Hunt.cshtml" />
+    <Content Include="Views\Participating\ViewJoinableHunts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

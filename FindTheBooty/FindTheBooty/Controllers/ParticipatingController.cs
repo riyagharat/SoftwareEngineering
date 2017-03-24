@@ -12,13 +12,19 @@ namespace FindTheBooty.Controllers
         // GET: Participating
         public ActionResult Index()
         {
-            return RedirectToAction("ViewHunts");
+            return RedirectToAction("ViewJoinedHunts");
         }
 
-        public ActionResult ViewHunts()
+        public ActionResult ViewJoinedHunts()
         {
             Models.ParticipatingHuntList huntList = new Models.ParticipatingHuntList();
-            return View(huntList.GetParticipatingHunts());
+            return View(huntList.GetJoinedHunts());
+        }
+
+        public ActionResult ViewJoinableHunts()
+        {
+            Models.JoinableHuntList huntList = new Models.JoinableHuntList();
+            return View(huntList.GetJoinableHunts());
         }
     }
 }

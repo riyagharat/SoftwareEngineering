@@ -24,7 +24,7 @@ namespace FindTheBooty.Models
     public class ParticipatingHuntList
     {
 
-        public List<Hunt> GetParticipatingHunts()
+        public List<Hunt> GetJoinedHunts()
         {
             // hunts joined and participating
             //TODO: Implement DB call to retrieve participating hunts
@@ -62,8 +62,44 @@ namespace FindTheBooty.Models
         }
     }
 
-    public class AvailableHuntList
+    public class JoinableHuntList
     {
         // hunts available
+        public List<Hunt> GetJoinableHunts()
+        {
+            // hunts joined and participating
+            //TODO: Implement DB call to retrieve joinable hunts
+            List<Hunt> huntList = new List<Hunt>();
+            Hunt huntItem = new Hunt();
+            huntItem.huntID = 3;
+            huntItem.huntName = "Bootylicious 3.0";
+            huntItem.huntType = "Timed Free-for-all";
+            huntItem.timeCreate = 1490376653;
+            huntItem.timeExpire = 1494547320;
+
+            System.DateTime dtDateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddSeconds(huntItem.timeExpire).ToLocalTime();
+
+            huntItem.endDateTime = dtDateTime.ToString("MM/dd/yyyy HH:mm");
+
+            huntList.Add(huntItem);
+
+            Hunt huntItem2 = new Hunt();
+            huntItem2.huntID = 4;
+            huntItem2.huntName = "Bootylicious 4.0";
+            huntItem2.huntType = "Timed Sequential";
+            huntItem2.timeCreate = 1490376653;
+            huntItem2.timeExpire = 1494547380;
+
+            System.DateTime dtDateTime2 = new System.DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime2.AddSeconds(huntItem2.timeExpire).ToLocalTime();
+
+            huntItem2.endDateTime = dtDateTime.ToString("MM/dd/yyyy HH:mm");
+
+            huntList.Add(huntItem2);
+
+            return huntList;
+
+        }
     }
 }

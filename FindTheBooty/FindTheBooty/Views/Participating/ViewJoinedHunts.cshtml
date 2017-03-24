@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "View Joined Hunts";
+}
+
+<h2>View Joined Hunts</h2>
+<h4><i>Click Hunt Name to Continue Hunting!</i></h4>
+
+<table class="table table-striped" style="background-color: #FFF;">
+    <tr>
+        <th>Hunt Name</th>
+        <th>Type of Hunt</th>
+        <th>End Time</th>
+        <th>Actions</th>
+    </tr>
+
+    @*This is where you would iterate for X number of results in the model (loaded on page fire)*@
+    @model List<FindTheBooty.Models.Hunt>
+
+    @* May need to change the format of this and the model down the road *@
+    @Html.DisplayFor(Model => Model)
+</table>
