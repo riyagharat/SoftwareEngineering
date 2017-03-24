@@ -8,10 +8,11 @@ namespace FindTheBooty.Controllers
 {
     public class ParticipatingController : Controller
     {
+
         // GET: Participating
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("ViewHunts");
         }
 
         public ActionResult ViewHunts()
