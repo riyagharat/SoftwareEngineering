@@ -10,38 +10,42 @@
     @Scripts.Render("~/bundles/menu-handler")   @* menu handler functions *@
 </head>
 <body>
-    
-    <nav class="navbar navbar-default navbar-static-top navbar-inverse">
-      <div class="container-fluid header">
-        <a id="left-menu" class="btn btn-inverse" href="#sidr">
-          <span id="menu-icon" class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-        </a>
-        <span id="nav-logo">Find the Booty</span>
-      </div>
-    </nav>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year Javalanche Studios - Find The Booty</p>
-        </footer>
+    <div class="page-container">
+
+        <nav class="navbar navbar-default navbar-static-top navbar-inverse">
+            <div class="container-fluid header">
+                <a id="left-menu" class="btn btn-inverse" href="#sidr">
+                    <span id="menu-icon" class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </a>
+                <span id="nav-logo">Find the Booty</span>
+            </div>
+        </nav>
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year Javalanche Studios - Find The Booty</p>
+            </footer>
+        </div>
+
+        @* Menu sidebar information *@
+        <div id="sidr">
+            <ul>
+                <li><a href="#">&lt;&lt;Captain Leas&gt;&gt;</a></li>
+                <li class="active"><a href="#"><span class="glyphicon glyphicon-search"></span> Hunts</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-th-list"></span> Leaderboards</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Admin Settings</a></li>
+                <li class="danger"><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+        </div>
+
+        @Scripts.Render("~/bundles/bootstrap") @* Include Bootstrap scripts *@
+        @RenderSection("scripts", required: false)
+
     </div>
-
-    @* Menu sidebar information *@
-	<div id="sidr">
-	  <ul>
-		<li><a href="#">&lt;&lt;Captain Leas&gt;&gt;</a></li>
-		<li class="active"><a href="#"><span class="glyphicon glyphicon-search"></span> Hunts</a></li>
-		<li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-		<li><a href="#"><span class="glyphicon glyphicon-th-list"></span> Leaderboards</a></li>
-		<li><a href="#"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
-		<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Admin Settings</a></li>
-		<li class="danger"><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-	  </ul>
-	</div>
-
-    @Scripts.Render("~/bundles/bootstrap") @* Include Bootstrap scripts *@
-    @RenderSection("scripts", required: false)
 </body>
 </html>
