@@ -5,8 +5,12 @@ namespace FindTheBooty.Models
 {
     public class Hunt
     {
+        // hunt identifier information
         public int huntID { get; set; }
         public int sponsorID { get; set; }
+        public string huntName { get; set; }
+
+        // hunt type information
         public int huntType { get; set; } 
         public int timeCreate { get; set; }
         public int timeExpire { get; set; }
