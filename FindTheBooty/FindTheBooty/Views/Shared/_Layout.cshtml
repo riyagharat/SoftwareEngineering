@@ -8,6 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")      @* Is this necessary? *@
     @Scripts.Render("~/bundles/jquery")         @* jQuery scripts include *@
     @Scripts.Render("~/bundles/menu-handler")   @* menu handler functions *@
+
 </head>
 <body>
 
@@ -26,20 +27,20 @@
             @RenderBody()
             <hr />
             <footer>
-                <p>&copy; @DateTime.Now.Year Javalanche Studios - Find The Booty</p>
+                <p>&copy; @DateTime.Now.Year Javalanche Studios - Find The Booty | @ViewBag.URL</p>
             </footer>
         </div>
 
         @* Menu sidebar information *@
         <div id="sidr">
             <ul>
-                <li><a href="#">&lt;&lt;Captain Leas&gt;&gt;</a></li>
-                <li class="active"><a href="#"><span class="glyphicon glyphicon-search"></span> Hunts</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-th-list"></span> Leaderboards</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Admin Settings</a></li>
-                <li class="danger"><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                <li id="homeNavLink"><a href="/">&lt;&lt;Captain Leas&gt;&gt;</a></li>
+                <li id="huntsNavLink"><a href="/Participating/ViewHunts"><span class="glyphicon glyphicon-search"></span> Hunts</a></li>
+                <li id="profileNavLink"><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                <li id="leaderboardsNavLink"><a href="#"><span class="glyphicon glyphicon-th-list"></span> Leaderboards</a></li>
+                <li id="statisticsNavLink"><a href="#"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
+                <li id="adminSettingsNavLink"><a href="#"><span class="glyphicon glyphicon-cog"></span> Admin Settings</a></li>
+                <li id="logoutNavLink" class="danger"><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div>
 
