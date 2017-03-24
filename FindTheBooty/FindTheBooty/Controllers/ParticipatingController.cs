@@ -15,16 +15,29 @@ namespace FindTheBooty.Controllers
             return RedirectToAction("ViewJoinedHunts");
         }
 
+        // GET: Participating/ViewJoinedHunts
         public ActionResult ViewJoinedHunts()
         {
             Models.JoinedHuntList huntList = new Models.JoinedHuntList();
             return View(huntList.GetJoinedHunts());
         }
 
-        public ActionResult ViewJoinableHunts()
+        // GET: Participating/ViewJoinableHunts
+        public ActionResult ViewJoinableHunts(string error = null)
         {
             Models.JoinableHuntList huntList = new Models.JoinableHuntList();
             return View(huntList.GetJoinableHunts());
+        }
+
+        // GET: Participating/JoinHunt/{id of hunt to join}
+        public ActionResult JoinHunt(int id = -1)
+        {
+            if (id == -1)
+            {
+                //TODO: Handle error and give feedback somehow
+                return RedirectToAction("ViewJoinableHunts");
+            }
+            return View();
         }
     }
 }

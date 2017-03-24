@@ -28,6 +28,8 @@ namespace FindTheBooty.Models
         {
             // hunts joined and participating
             //TODO: Implement DB call to retrieve participating hunts
+
+            // START SAMPLE POPULATION
             List<Hunt> huntList = new List<Hunt>();
             Hunt huntItem = new Hunt();
             huntItem.huntID = 1;
@@ -56,6 +58,7 @@ namespace FindTheBooty.Models
             huntItem2.endDateTime = dtDateTime.ToString("MM/dd/yyyy HH:mm");
 
             huntList.Add(huntItem2);
+            // END SAMPLE POPULATION
 
             return huntList;
 
@@ -69,6 +72,8 @@ namespace FindTheBooty.Models
         {
             // hunts joined and participating
             //TODO: Implement DB call to retrieve joinable hunts
+
+            // START SAMPLE POPULATION
             List<Hunt> huntList = new List<Hunt>();
             Hunt huntItem = new Hunt();
             huntItem.huntID = 3;
@@ -97,6 +102,7 @@ namespace FindTheBooty.Models
             huntItem2.endDateTime = dtDateTime.ToString("MM/dd/yyyy HH:mm");
 
             huntList.Add(huntItem2);
+            // END SAMPLE POPULATION
 
             return huntList;
 
