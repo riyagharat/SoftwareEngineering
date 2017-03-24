@@ -21,7 +21,7 @@ namespace FindTheBooty.Models
         public string endDateTime { get; set; }
     }
 
-    public class ParticipatingHuntList
+    public class JoinedHuntList
     {
 
         public List<Hunt> GetJoinedHunts()

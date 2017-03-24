@@ -17,7 +17,7 @@ namespace FindTheBooty.Controllers
 
         public ActionResult ViewJoinedHunts()
         {
-            Models.ParticipatingHuntList huntList = new Models.ParticipatingHuntList();
+            Models.JoinedHuntList huntList = new Models.JoinedHuntList();
             return View(huntList.GetJoinedHunts());
         }
 
