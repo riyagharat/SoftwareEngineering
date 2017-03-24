@@ -10,29 +10,14 @@
         <th>Distance</th>
         <th>Hunt Name</th>
         <th>Type of Hunt</th>
-        <th>Time Left</th>
+        <th>End Time</th>
     </tr>
 
     @*This is where you would iterate for X number of results in the model (loaded on page fire)*@
+    @model List<FindTheBooty.Models.Hunt>
 
-    <tr>
-        <td>0.2 Mi</td>
-        <td>Bootylicious</td>
-        <td>Timed Sequential</td>
-        <td>1H:21M</td>
-    </tr>
-    <tr>
-        <td>0.7 Mi</td>
-        <td>Bootylicious 2.0</td>
-        <td>Timed Sequential</td>
-        <td>1H:21M</td>
-    </tr>
-    <tr>
-        <td>2.1 Mi</td>
-        <td>Bootylicious 2.1</td>
-        <td>Free-for-all</td>
-        <td>1H:21M</td>
-    </tr>
+    @* May need to change the format of this and the model down the road *@
+    @Html.DisplayFor(Model => Model)
 </table>
 
 <h2>View Nearby Hunts</h2>

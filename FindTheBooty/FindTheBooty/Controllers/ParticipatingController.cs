@@ -17,7 +17,8 @@ namespace FindTheBooty.Controllers
 
         public ActionResult ViewHunts()
         {
-            return View();
+            Models.ParticipatingHuntList huntList = new Models.ParticipatingHuntList();
+            return View(huntList.GetParticipatingHunts());
         }
     }
 }

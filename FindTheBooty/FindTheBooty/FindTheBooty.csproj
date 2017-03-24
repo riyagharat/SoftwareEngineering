@@ -282,6 +282,7 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\TestPage.cshtml" />
     <Content Include="Views\Participating\ViewHunts.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Hunt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
