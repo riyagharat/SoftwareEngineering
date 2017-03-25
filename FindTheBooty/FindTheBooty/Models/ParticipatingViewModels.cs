@@ -24,6 +24,7 @@ namespace FindTheBooty.Models
     public class JoinedHuntList
     {
 
+        public bool DoHuntError { get; set; }   // used for invalid hunt access
         public List<Hunt> HuntList { get; set; }
 
         public List<Hunt> GetJoinedHunts()

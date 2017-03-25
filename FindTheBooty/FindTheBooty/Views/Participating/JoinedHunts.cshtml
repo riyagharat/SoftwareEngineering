@@ -16,6 +16,14 @@
     @*This is where you would iterate for X number of results in the model (loaded on page fire)*@
     @model FindTheBooty.Models.JoinedHuntList
 
+    @if (Model.DoHuntError)
+    {
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>ERROR:</strong> An error has occurred while trying to continue the hunt! Please try again later.
+        </div>
+    }
+
     @* May need to change the format of this and the model down the road *@
     @Html.DisplayFor(Model => Model.HuntList)
 </table>
