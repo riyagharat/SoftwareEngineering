@@ -1,9 +1,9 @@
 ﻿@{
-    ViewBag.Title = "Join a Hunt";
+    ViewBag.Title = "View Joined Hunts";
 }
 
-<h2>Join a Hunt</h2>
-<h4><i>Click Hunt Name to Join a Hunt</i></h4>
+<h2>View Joined Hunts</h2>
+<h4><i>Click Hunt Name to Continue Hunting!</i></h4>
 
 <table class="table table-striped" style="background-color: #FFF;">
     <tr>
@@ -14,8 +14,8 @@
     </tr>
 
     @*This is where you would iterate for X number of results in the model (loaded on page fire)*@
-    @model List<FindTheBooty.Models.Hunt>
+    @model FindTheBooty.Models.JoinedHuntList
 
     @* May need to change the format of this and the model down the road *@
-    @Html.DisplayFor(Model => Model)
+    @Html.DisplayFor(Model => Model.HuntList)
 </table>

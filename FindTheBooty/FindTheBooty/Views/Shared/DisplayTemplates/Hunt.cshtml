@@ -1,8 +1,8 @@
 ﻿@model FindTheBooty.Models.Hunt
 
-<tr>
-    <td><a href="/Participating/Hunt?id=@Model.huntID">@Model.huntName</a></td>
-    <td>@Model.huntType</td>
-    <td>@Model.endDateTime</td>
+<tr id="@Model.HuntID">
+    <td><a href="/Participating/Hunt?id=@Model.HuntID">@Model.HuntName</a></td>
+    <td>@Model.HuntType</td>
+    <td>@Model.EndDateTime</td>
     <td><a href="">View Actions</a></td>
 </tr>
