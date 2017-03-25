@@ -17,7 +17,10 @@
     @model FindTheBooty.Models.JoinableHuntList
 
     @if (Model.JoinHuntError) {
-        <div class="alert alert-danger"><strong>ERROR:</strong> Sorry, an error has occurred while trying to join the hunt!</div>
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>ERROR:</strong> An error has occurred while trying to join the hunt! Please try again later.
+        </div>
     }
 
     @* May need to change the format of this and the model down the road *@
