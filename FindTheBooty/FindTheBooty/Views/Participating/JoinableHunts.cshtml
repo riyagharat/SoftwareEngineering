@@ -27,7 +27,7 @@
             <th>Hunt Name</th>
             <th>Type of Hunt</th>
             <th>End Time</th>
-            <th>Actions</th>
+            @*<th>Actions</th>*@
         </tr>
 
         @*This is where you would iterate for X number of results in the model (loaded on page fire)*@
@@ -42,7 +42,6 @@
         // alter each name link to JoinHunt/{HuntID}
         $("[id$=-name-link]").each(function () {
             var huntID = this.id.replace('-name-link', '');
-            console.log(huntID);
             $(this).attr("href", "/Participating/JoinHunt/" + huntID);
         });
     </script>
