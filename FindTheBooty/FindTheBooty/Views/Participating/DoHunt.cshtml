@@ -29,9 +29,16 @@
         *@
 
         <h3>Treasure(s)</h3>
+        <p><strong>Filter: </strong>
+            <button id="filter-all-btn" class="btn btn-default">Show All</button>
+            <button id="filter-found-btn" class="btn btn-default" style="color: green;">Found <span class="glyphicon glyphicon-ok"></span></button>
+            <button id="filter-missing-btn" class="btn btn-default" style="color: darkred;">Missing <span class="glyphicon glyphicon-remove"></span></button>
+        </p>
+
+        <hr />
 
         <div class="row">
-            <div id="1" class="col-md-4 col-sm-12 col-xs-12">
+            <div id="1-found" class="col-md-4 col-sm-12 col-xs-12">
                 <p><strong>Name: </strong> Treasure 1</p>
                 <p>
                     <strong>Status: </strong>
@@ -39,12 +46,14 @@
                         Found <span class="glyphicon glyphicon-ok"></span>
                     </span>
                 </p>
-                <img src="http://placehold.it/250x250" />
+                <img class="img-responsive" src="http://placehold.it/400x400" />
+
+
+                <div class="col-sm-12 col-xs-12 visible-sm visible-xs hidden-md hidden-lg">
+                    <hr />
+                </div>
             </div>
-            <div class="col-sm-12 col-xs-12 visible-sm visible-xs hidden-md hidden-lg">
-                <hr />
-            </div>
-            <div id="2" class="col-md-4 col-sm-12 col-xs-12">
+            <div id="2-found" class="col-md-4 col-sm-12 col-xs-12">
                 <p><strong>Name: </strong> Treasure 2</p>
                 <p>
                     <strong>Status: </strong>
@@ -52,12 +61,16 @@
                         Found <span class="glyphicon glyphicon-ok"></span>
                     </span>
                 </p>
-                <img src="http://placehold.it/250x250" />
+                <img class="img-responsive" src="http://placehold.it/400x400" />
+
+
+                <div class="col-sm-12 col-xs-12 visible-sm visible-xs hidden-md hidden-lg">
+                    <hr />
+                </div>
             </div>
-            <div class="col-sm-12 col-xs-12 visible-sm visible-xs hidden-md hidden-lg">
-                <hr />
-            </div>
-            <div id="3" class="col-md-4 col-sm-12 col-xs-12">
+
+
+            <div id="3-missing" class="col-md-4 col-sm-12 col-xs-12">
                 <p><strong>Name: </strong> Treasure 3</p>
                 <p>
                     <strong>Status: </strong>
@@ -65,9 +78,29 @@
                         Missing <span class="glyphicon glyphicon-remove"></span>
                     </span>
                 </p>
-                <img src="http://placehold.it/250x250" />
+                <img class="img-responsive" src="http://placehold.it/400x400" />
             </div>
         </div>
+
+        <script>
+            $("#filter-all-btn").click(function (e) {
+                e.preventDefault();
+                $("[id$=-missing]").show();
+                $("[id$=-found]").show();
+            });
+
+            $("#filter-found-btn").click(function (e) {
+                e.preventDefault();
+                $("[id$=-missing]").hide();
+                $("[id$=-found]").show();
+            });
+
+            $("#filter-missing-btn").click(function (e) {
+                e.preventDefault();
+                $("[id$=-found]").hide();
+                $("[id$=-missing]").show();
+            });
+        </script>
 
         @*
             If FFA show full list of treasures
