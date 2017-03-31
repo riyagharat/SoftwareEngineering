@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1.0">
+    <title>@ViewBag.Title - Find The Booty</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")      @* Is this necessary? *@
+    @Scripts.Render("~/bundles/jquery")         @* jQuery scripts include *@
+    @Scripts.Render("~/bundles/menu-handler")   @* menu handler functions *@
+
+</head>
+<body>
+
+    <div class="page-container">
+
+        <nav class="navbar navbar-default navbar-static-top navbar-inverse">
+            <div class="container-fluid header">
+                <a id="left-menu" class="btn btn-inverse" href="#sidr">
+                    <span id="menu-icon" class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </a>
+                <span id="nav-logo">Find the Booty</span>
+            </div>
+        </nav>
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year Javalanche Studios - Find The Booty</p>
+            </footer>
+        </div>
+
+        @* Menu sidebar information *@
+        <div id="sidr">
+            <ul>
+                <li id="homeNavLink"><a href="/">&lt;&lt;Captain Leas&gt;&gt;</a></li>
+                <li id="huntsNavLink"><a href="/Participating/"><span class="glyphicon glyphicon-search"></span> Hunts</a></li>
+                <li id="profileNavLink"><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                <li id="leaderboardsNavLink"><a href="#"><span class="glyphicon glyphicon-th-list"></span> Leaderboards</a></li>
+                <li id="statisticsNavLink"><a href="#"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
+                <li id="adminSettingsNavLink"><a href="#"><span class="glyphicon glyphicon-cog"></span> Admin Settings</a></li>
+                <li id="logoutNavLink" class="danger"><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+        </div>
+
+        @Scripts.Render("~/bundles/bootstrap") @* Include Bootstrap scripts *@
+        @RenderSection("scripts", required: false)
+
+    </div>
+</body>
+</html>
