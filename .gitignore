@@ -5,6 +5,9 @@
 obj/
 bin/
 
+# Allow Published bin...
+!Published/bin
+
 FindTheBooty/\.vs/config/applicationhost\.config
 
 FindTheBooty/\.vs/FindTheBooty/v14/\.suo
