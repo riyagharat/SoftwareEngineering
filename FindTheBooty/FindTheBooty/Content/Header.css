@@ -1,0 +1,69 @@
+﻿/* start parchment paper look */
+html {
+    height: 100% !important;
+}
+
+body {
+    background-image: url(./Images/subtle-grunge.png) !important;
+    background-color: #F1F1D4 !important;
+}
+/* end parchment paper look */
+
+hr {
+    border-color: burlywood !important;
+}
+
+.header .btn-inverse {
+  margin-top: 8px;
+  color: #FFF;
+  background-color: #333;
+  border-color: #DDD;
+}
+
+.header .btn-inverse:hover {
+  background-color: #444 !important;
+  color: #FFF !important;
+}
+
+.header .btn-inverse:active {
+  background-color: #AAA !important;
+  color: #000 !important;
+}
+
+#nav-logo {
+  float: right;
+  font-family: "Trajan Pro" !important;
+  color: #FFF !important;
+  font-size: x-large;
+  line-height: 50px;
+  vertical-align: middle;
+}
+
+/* --- SIDEBAR MENU SCROLLBAR STYLE START --- */
+#sidr::-webkit-scrollbar {
+    width: 8px;
+}
+
+#sidr::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+
+#sidr::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+/* --- SIDEBAR MENU SCROLLBAR STYLE END --- */
+
+#sidr span {
+  padding: 0px;
+  display: inline;
+}
+
+.danger a {
+  color: #DD0000 !important;
+}
+
+.danger .glyphicon {
+  color: #DD0000 !important;
+}
