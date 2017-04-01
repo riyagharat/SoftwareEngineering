@@ -283,6 +283,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\TestPage.cshtml" />
+    <Content Include="Views\Admin\Admin.cshtml" />
     <Content Include="Views\Participating\JoinedHunts.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Hunt.cshtml" />
     <Content Include="Views\Participating\JoinableHunts.cshtml" />
