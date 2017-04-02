@@ -1,5 +1,7 @@
 ﻿
 @{
+    // Anything to should need on the View has to be placed inside the ViewBag.
+    // Read more here: http://www.binaryintellect.net/articles/36941654-8bd4-4535-9226-ddf47841892f.aspx
     ViewBag.Title = "Admin";
 }
 
@@ -28,5 +30,12 @@
             This here is a link to the register placeholder test page. Click the button below to check it out!
         </p>
         <p><a class="btn btn-default" href="/Home/Register">Check it out &raquo;</a></p>
+    </div>
+
+    <div class="col-md-4">
+        <p>
+            The letter of the Day is @ViewBag.RandomCharacter <br /> Otherwise the number is @ViewBag.RandomNumber 
+        </p>
+        <p><a class="btn btn-default">I do nothing.</a></p>
     </div>
 </div>
