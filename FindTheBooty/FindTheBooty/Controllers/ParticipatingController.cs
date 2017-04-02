@@ -12,7 +12,7 @@ namespace FindTheBooty.Controllers
         // GET: Participating
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("JoinedHunts");
         }
 
         // GET: Participating/JoinedHunts
