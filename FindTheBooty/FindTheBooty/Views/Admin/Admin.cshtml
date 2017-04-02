@@ -6,36 +6,52 @@
 }
 
 <h2>Admin</h2>
-
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
-<div class="row">
-    <!-- template test column -->
-    <div class="col-md-4">
-        <h2>Login Test Page</h2>
-        <p>
-            This here is a link to the login placeholder test page. Click the button below to check it out!
-        </p>
-        <p><a class="btn btn-default" href="/Home/Login">Check it out &raquo;</a></p>
+<html>
+<head>
+        <div class="title">
+            <p>Welcome to the Admin Page </p>
+        </div>
+        <div class="btn-group">
+            <div class="headers"><p> Import or Export Bulk Data </p></div>
+            <button class="btn btn-default">
+                <span class="glyphicon glyphicon-import"></span> Import
+            </button>
+            <button class="btn btn-default">
+                <span class="glyphicon glyphicon-export"></span> Export
+            </button>
+        </div>
+        <br></br>
+        <div class="btn-group">
+            <div class="headers"><p> View Reports </p></div><div>
+                <button class="btn btn-default">
+                    <span class="glyphicon glyphicon-file"></span>  Treasures Found Graph
+                </button>
+            </div>
+            <button class="btn btn-default">
+                <span class="glyphicon glyphicon-file"></span>  System Engagement Graph
+            </button>
+            <button class="btn btn-default">
+                <span class="glyphicon glyphicon-file"></span>  Total Play Time Graph
+            </button>
+            <button class="btn btn-default">
+                <span class="glyphicon glyphicon-file"></span>  Types of Hunts Graph
+            </button>
+        </div>
+        <br></br>
+        <div class="btn-group">
+            <div class="headers"><p> Upgrade User to Creator </p></div>
+            <button class="btn btn-default">
+                <span class="glyphicon glyphicon-open"></span> Upgrade
+            </button>
+        </div>
+        <br></br>
+        <div class="btn-group">
+            <div class="headers"><p> View Scoreboard </p></div>
+            <button class="btn btn-default">
+                <span class="glyphicon glyphicon-th-list"></span> Scoreboard
+            </button>
+        </div>
     </div>
-    <!-- end template test column -->
 
-    <div class="col-md-4">
-        <h2>Register Test Page</h2>
-        <p>
-            This here is a link to the register placeholder test page. Click the button below to check it out!
-        </p>
-        <p><a class="btn btn-default" href="/Home/Register">Check it out &raquo;</a></p>
-    </div>
-
-    <div class="col-md-4">
-        <p>
-            The letter of the Day is @ViewBag.RandomCharacter <br /> Otherwise the number is @ViewBag.RandomNumber 
-        </p>
-        <p><a class="btn btn-default">I do nothing.</a></p>
-    </div>
-</div>
+</body>
+</html>
