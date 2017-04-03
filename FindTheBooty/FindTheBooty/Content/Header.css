@@ -1,15 +1,23 @@
-﻿/* start parchment paper look */
-html {
+﻿/* fonts 
+font-family: 'Jim Nightshade', cursive;
+font-family: 'Kaushan Script', cursive;
+font-family: 'Great Vibes', cursive;
+font-family: 'Tangerine', cursive;
+font-family: 'Italianno', cursive;
+font-family: 'La Belle Aurore', cursive;
+font-family: 'Bilbo Swash Caps', cursive;
+font-family: 'Dawning of a New Day', cursive; */
+
+@import url('https://fonts.googleapis.com/css?family=Bilbo+Swash+Caps|Dawning+of+a+New+Day|Great+Vibes|Italianno|Jim+Nightshade|Kaushan+Script|La+Belle+Aurore|Tangerine');
+
+/* start parchment paper look */
+css {
     height: 100% !important;
 }
 
 body {
-    background-color: #F1F1D4 !important;
-    box-sizing: border-box !important;
-    box-shadow: inset 0 0 20px 20px rgba(0,0,0,0.1) !important;
     background-image: url(./Images/subtle-grunge.png) !important;
-    margin: 0;
-    height: 100% !important;
+    background-color: #F1F1D4 !important;
 }
 /* end parchment paper look */
 
@@ -36,7 +44,7 @@ hr {
 
 #nav-logo {
   float: right;
-  font-family: "Trajan Pro" !important;
+  font-family: "Jim Nightshade" !important;
   color: #FFF !important;
   font-size: x-large;
   line-height: 50px;
