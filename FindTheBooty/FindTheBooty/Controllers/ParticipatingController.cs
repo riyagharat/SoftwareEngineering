@@ -8,6 +8,7 @@ namespace FindTheBooty.Controllers
 {
     public class ParticipatingController : Controller
     {
+        private System.Data.SqlClient.SqlConnection db = new System.Data.SqlClient.SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["FTBConnection"].ConnectionString);
 
         // GET: Participating
         public ActionResult Index()
@@ -18,6 +19,8 @@ namespace FindTheBooty.Controllers
         // GET: Participating/JoinedHunts
         public ActionResult JoinedHunts(bool error = false)
         {
+            db.Open(); //TODO: Remove this at some point... maybe...
+            db.Close();
             Models.JoinedHuntList joined = new Models.JoinedHuntList();
             if (error)
                 joined.DoHuntError = true;
