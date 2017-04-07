@@ -55,5 +55,57 @@ namespace FindTheBooty.Controllers
             }
             return View();
         }
+
+        // POST: Participating/UploadQR
+        [HttpPost]
+        public ActionResult UploadQR()
+        {
+            // initialize response object
+            /* success value description:
+                -1 -- Invalid format/QR Code not found
+                0  -- Image failed to upload
+                1  -- Upload/processing success
+            */
+            var response = new Dictionary<string, object>();
+            response.Add("huntId", -1);
+            response.Add("treasureId", -1);
+            response.Add("success", 0);
+
+            // capture uploaded QR Code image
+            HttpPostedFileBase qrImage = Request.Files["qr-image"];
+
+            // validate file was submitted
+            if (qrImage != null && qrImage.ContentLength > 0)
+            {
+                string[] QRValueSplit;
+                string QRHuntId;
+                string QRTreasureId;
+
+                var QRValue = QRReader.getQRCode(qrImage.InputStream);
+
+                // validate we have the correct format
+                if (QRValue == null || !QRValue.Contains("-"))
+                {
+                    response["success"] = -1; // status = failure
+                    return Json(response);
+                }
+
+                QRValueSplit = QRValue.Split('-');
+                QRHuntId = QRValueSplit[0];
+                QRTreasureId = QRValueSplit[1];
+
+                //TODO: Connect to DB to link treasure found for hunt
+                response["huntId"] =  QRHuntId;
+                response["treasureId"] = QRTreasureId;
+                response["success"] = 1;
+
+                return Json(response);
+            }
+            else
+            {
+                return Json(response);
+            }
+
+        }
     }
 }
