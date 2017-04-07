@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FindTheBooty.Models
 {
+    // Generic Hunt Model
     public class Hunt
     {
         // hunt identifier information
@@ -21,16 +22,27 @@ namespace FindTheBooty.Models
         public string EndDateTime { get; set; }
     }
 
+    // Generic Treasure Model
+    public class Treasure
+    {
+        public int Id { get; set; }
+        public string Description { get; set; }
+        public string Confirmation { get; set; }
+        public int Points { get; set; }
+        public bool Found { get; set; }
+        public string Image { get; set; } // to be used only for storing image path (calculated)
+    }
+
     public class JoinedHuntList
     {
 
         public bool DoHuntError { get; set; }   // used for invalid hunt access
         public List<Hunt> HuntList { get; set; }
 
+        //TODO: Remove after obtaining DB Connection
         public List<Hunt> GetJoinedHunts()
         {
             // hunts joined and participating
-            //TODO: Implement DB call to retrieve participating hunts
 
             // START SAMPLE POPULATION
             List<Hunt> huntList = new List<Hunt>();
@@ -76,6 +88,7 @@ namespace FindTheBooty.Models
         public List<Hunt> HuntList { get; set; }
 
         // hunts available
+        //TODO: Remove after obtaining DB Connection
         public List<Hunt> GetJoinableHunts()
         {
             // hunts joined and participating
@@ -115,5 +128,12 @@ namespace FindTheBooty.Models
             return huntList;
 
         }
+    }
+
+    // used in the DoHunt action
+    public class DoHuntList
+    {
+        public Hunt Hunt { get; set; }  // hunt information
+        public List<Treasure> TreasureList { get; set; } // list of treasures for the hunt
     }
 }
