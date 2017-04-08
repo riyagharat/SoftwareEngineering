@@ -86,6 +86,14 @@ namespace FindTheBooty
             }
             return manager;
         }
+
+        internal bool IsValid(string email, string password)
+        {
+            using (var db = new FindTheBooty.Models.GeneratedModels.FindTheBooty_prodEntities())
+            {
+                return (db.users.Any(user => user.email == email && user.password == password));
+            }
+        }
     }
 
     // Configure the application sign-in manager which is used in this application.

@@ -13,7 +13,7 @@ using FindTheBooty.Models;
 namespace FindTheBooty.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : DataController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -70,6 +70,30 @@ namespace FindTheBooty.Controllers
         {
             if (!ModelState.IsValid)
             {
+                return View(model);
+            }
+            else if (UserManager.IsValid(model.Email, model.Password))
+            {
+                // See this
+                //http://stackoverflow.com/questions/31584506/how-to-implement-custom-authentication-in-asp-net-mvc-5
+                var ident = new ClaimsIdentity(
+                  new[] { 
+                      // adding following 2 claim just for supporting default anti-forgery provider
+                      new Claim(ClaimTypes.NameIdentifier, model.Email),
+                      new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "ASP.NET Identity", "http://www.w3.org/2001/XMLSchema#string"),
+
+                      new Claim(ClaimTypes.Name,model.Email),
+
+                      // optionally you could add roles if any
+                      new Claim(ClaimTypes.Role, "User"),
+                      new Claim(ClaimTypes.Role, "Creator"),
+                      new Claim(ClaimTypes.Role, "Admin"),
+
+                  },
+                    DefaultAuthenticationTypes.ApplicationCookie);
+
+                HttpContext.GetOwinContext().Authentication.SignIn(new AuthenticationProperties { IsPersistent = false }, ident);
+                ModelState.AddModelError("", "I win");
                 return View(model);
             }
 

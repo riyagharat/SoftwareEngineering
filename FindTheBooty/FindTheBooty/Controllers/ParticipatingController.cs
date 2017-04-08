@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace FindTheBooty.Controllers
 {
-    public class ParticipatingController : Controller
+    public class ParticipatingController : DataController
     {
 
         // GET: Participating

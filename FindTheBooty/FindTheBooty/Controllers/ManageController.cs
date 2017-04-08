@@ -11,7 +11,7 @@ using FindTheBooty.Models;
 namespace FindTheBooty.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : DataController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

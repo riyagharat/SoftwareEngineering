@@ -8,7 +8,7 @@ namespace FindTheBooty.Controllers
      *  
      *  This AdminController class will have reference to all Views in the Views/Admin folder
      */
-    public class AdminController : Controller
+    public class AdminController : DataController
     {
         /// <summary>
         /// Not the controller action that Riya needs. But the controller action Riya deserves.
