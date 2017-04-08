@@ -9,6 +9,35 @@ font-family: 'Bilbo Swash Caps', cursive;
 font-family: 'Dawning of a New Day', cursive; */
 
 @import url('https://fonts.googleapis.com/css?family=Bilbo+Swash+Caps|Dawning+of+a+New+Day|Great+Vibes|Italianno|Jim+Nightshade|Kaushan+Script|La+Belle+Aurore|Tangerine');
+/* Jim Nightshade font */
+.jimNightShade {
+    font-family: 'Jim Nightshade', cursive;
+}
+
+/* Kaushan Script font */
+.kaushanScript {
+    font-family: 'Kaushan Script', cursive;
+}
+
+.splashbg {
+  background: url('./Images/ship.jpg') no-repeat center center;
+  position: fixed;
+  width: 100%;
+  height: 350px; /*same height as jumbotron */
+  top:0;
+  left:0;
+  z-index: -1;
+}
+
+.wumbotron {
+  margin-bottom: 0px;
+  height: 350px;
+  color: white;
+  
+  text-shadow: black 0.1em 0.1em 0.1em;
+      
+  background:transparent;
+}
 
 /* start parchment paper look */
 css {
