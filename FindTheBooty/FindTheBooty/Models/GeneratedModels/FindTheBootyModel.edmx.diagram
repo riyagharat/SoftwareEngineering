@@ -4,32 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5beb4e0b833f4cf88b1001e5d17d4435" Name="Diagram1" ZoomLevel="27">
-        <EntityTypeShape EntityType="FindTheBooty_prodModel.award" Width="1.5" PointX="11.375" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="FindTheBooty_prodModel.badge" Width="1.5" PointX="11.375" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FindTheBooty_prodModel.hunt" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="FindTheBooty_prodModel.sponsor" Width="1.5" PointX="0.5" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FindTheBooty_prodModel.treasure" Width="1.5" PointX="6.5" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FindTheBooty_prodModel.user" Width="1.5" PointX="14.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FindTheBooty_prodModel.user_award_relation" Width="1.5" PointX="14.375" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FindTheBooty_prodModel.user_badge_relation" Width="1.5" PointX="18" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="FindTheBooty_prodModel.user_hunt_relation" Width="1.5" PointX="11.25" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FindTheBooty_prodModel.user_setting" Width="1.5" PointX="17.875" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="FindTheBooty_prodModel.user_setting_relation" Width="1.5" PointX="17.875" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FindTheBooty_prodModel.user_treasure_relation" Width="1.5" PointX="11.375" PointY="3.5" IsExpanded="true" />
-        <AssociationConnector Association="FindTheBooty_prodModel.award_treasure" ManuallyRouted="false" />
-        <AssociationConnector Association="FindTheBooty_prodModel.badge_award" ManuallyRouted="false" />
-        <AssociationConnector Association="FindTheBooty_prodModel.user_award_relation_award" ManuallyRouted="false" />
+      <Diagram DiagramId="4963fe3c4b1c41b5a60a80f7f2d93aed" Name="Diagram1">
+        <EntityTypeShape EntityType="FindTheBooty_prodModel.badge" Width="1.5" PointX="0.75" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FindTheBooty_prodModel.hunt" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FindTheBooty_prodModel.sponsor" Width="1.5" PointX="1.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FindTheBooty_prodModel.treasure" Width="1.5" PointX="3.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FindTheBooty_prodModel.user" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FindTheBooty_prodModel.user_badge_relation" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FindTheBooty_prodModel.user_hunt_relation" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FindTheBooty_prodModel.user_setting" Width="1.5" PointX="0.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FindTheBooty_prodModel.user_setting_relation" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FindTheBooty_prodModel.user_treasure_relation" Width="1.5" PointX="6" PointY="6.375" IsExpanded="true" />
         <AssociationConnector Association="FindTheBooty_prodModel.badge_hunt" ManuallyRouted="false" />
         <AssociationConnector Association="FindTheBooty_prodModel.badge_treasure" ManuallyRouted="false" />
         <AssociationConnector Association="FindTheBooty_prodModel.user_badge_relation_badge" ManuallyRouted="false" />
-        <AssociationConnector Association="FindTheBooty_prodModel.hunt_sponsor" ManuallyRouted="false" >
-        </AssociationConnector>
+        <AssociationConnector Association="FindTheBooty_prodModel.hunt_sponsor" ManuallyRouted="false" />
         <AssociationConnector Association="FindTheBooty_prodModel.treasure_hunt" ManuallyRouted="false" />
         <AssociationConnector Association="FindTheBooty_prodModel.user_hunt_relation_hunt" ManuallyRouted="false" />
         <AssociationConnector Association="FindTheBooty_prodModel.Table_11_treasure" ManuallyRouted="false" />
         <AssociationConnector Association="FindTheBooty_prodModel.Table_11_user" ManuallyRouted="false" />
-        <AssociationConnector Association="FindTheBooty_prodModel.user_award_relation_user" ManuallyRouted="false" />
         <AssociationConnector Association="FindTheBooty_prodModel.user_badge_relation_user" ManuallyRouted="false" />
         <AssociationConnector Association="FindTheBooty_prodModel.user_hunt_relation_user" ManuallyRouted="false" />
         <AssociationConnector Association="FindTheBooty_prodModel.user_setting_relation_user" ManuallyRouted="false" />

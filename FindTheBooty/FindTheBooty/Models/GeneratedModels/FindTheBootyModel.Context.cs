@@ -25,13 +25,11 @@ namespace FindTheBooty.Models.GeneratedModels
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<award> awards { get; set; }
         public virtual DbSet<badge> badges { get; set; }
         public virtual DbSet<hunt> hunts { get; set; }
         public virtual DbSet<sponsor> sponsors { get; set; }
         public virtual DbSet<treasure> treasures { get; set; }
         public virtual DbSet<user> users { get; set; }
-        public virtual DbSet<user_award_relation> user_award_relation { get; set; }
         public virtual DbSet<user_badge_relation> user_badge_relation { get; set; }
         public virtual DbSet<user_hunt_relation> user_hunt_relation { get; set; }
         public virtual DbSet<user_setting> user_setting { get; set; }

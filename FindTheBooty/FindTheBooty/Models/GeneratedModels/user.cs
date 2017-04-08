@@ -18,7 +18,6 @@ namespace FindTheBooty.Models.GeneratedModels
         public user()
         {
             this.user_treasure_relation = new HashSet<user_treasure_relation>();
-            this.user_award_relation = new HashSet<user_award_relation>();
             this.user_badge_relation = new HashSet<user_badge_relation>();
             this.user_hunt_relation = new HashSet<user_hunt_relation>();
             this.user_setting_relation = new HashSet<user_setting_relation>();
@@ -40,8 +39,6 @@ namespace FindTheBooty.Models.GeneratedModels
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<user_treasure_relation> user_treasure_relation { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<user_award_relation> user_award_relation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<user_badge_relation> user_badge_relation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

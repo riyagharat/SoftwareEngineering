@@ -21,14 +21,12 @@ namespace FindTheBooty.Models.GeneratedModels
         }
     
         public int badge_id { get; set; }
-        public int award_award_id { get; set; }
-        public int hunt_hunt_id { get; set; }
-        public int treasure_treasure_id { get; set; }
-        public int treasure_hunt_hunt_id { get; set; }
+        public Nullable<int> hunt_hunt_id { get; set; }
+        public Nullable<int> treasure_treasure_id { get; set; }
+        public Nullable<int> treasure_hunt_hunt_id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
     
-        public virtual award award { get; set; }
         public virtual hunt hunt { get; set; }
         public virtual treasure treasure { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -30,6 +30,7 @@ namespace FindTheBooty.Models.GeneratedModels
         public System.DateTime time_expire { get; set; }
         public int max_users { get; set; }
         public int multi_single { get; set; }
+        public string seq_ffa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<badge> badges { get; set; }

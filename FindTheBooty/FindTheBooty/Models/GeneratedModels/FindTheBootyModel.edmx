@@ -5,24 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="FindTheBooty_prodModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="award">
-          <Key>
-            <PropertyRef Name="award_id" />
-          </Key>
-          <Property Name="award_id" Type="int" Nullable="false" />
-          <Property Name="treasure_treasure_id" Type="int" Nullable="false" />
-          <Property Name="treasure_hunt_hunt_id" Type="int" Nullable="false" />
-          <Property Name="points" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="badge">
           <Key>
             <PropertyRef Name="badge_id" />
           </Key>
           <Property Name="badge_id" Type="int" Nullable="false" />
-          <Property Name="award_award_id" Type="int" Nullable="false" />
-          <Property Name="hunt_hunt_id" Type="int" Nullable="false" />
-          <Property Name="treasure_treasure_id" Type="int" Nullable="false" />
-          <Property Name="treasure_hunt_hunt_id" Type="int" Nullable="false" />
+          <Property Name="hunt_hunt_id" Type="int" />
+          <Property Name="treasure_treasure_id" Type="int" />
+          <Property Name="treasure_hunt_hunt_id" Type="int" />
           <Property Name="name" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="description" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
@@ -38,6 +28,7 @@
           <Property Name="time_expire" Type="datetime" Nullable="false" />
           <Property Name="max_users" Type="int" Nullable="false" />
           <Property Name="multi_single" Type="int" Nullable="false" />
+          <Property Name="seq_ffa" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="sponsor">
           <Key>
@@ -57,7 +48,7 @@
           <Property Name="treasure_id" Type="int" Nullable="false" />
           <Property Name="hunt_hunt_id" Type="int" Nullable="false" />
           <Property Name="description" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="seq_ffa" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="seq_order" Type="int" />
           <Property Name="confirmation" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="points" Type="int" Nullable="false" />
         </EntityType>
@@ -78,15 +69,6 @@
           <Property Name="num_hunts" Type="int" Nullable="false" />
           <Property Name="num_treasures" Type="int" Nullable="false" />
           <Property Name="user_type" Type="nvarchar" MaxLength="10" Nullable="false" />
-        </EntityType>
-        <EntityType Name="user_award_relation">
-          <Key>
-            <PropertyRef Name="user_user_id" />
-            <PropertyRef Name="award_award_id" />
-          </Key>
-          <Property Name="user_user_id" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="award_award_id" Type="int" Nullable="false" />
-          <Property Name="completed" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="user_badge_relation">
           <Key>
@@ -133,34 +115,8 @@
           <Property Name="treasure_hunt_hunt_id" Type="int" Nullable="false" />
           <Property Name="found" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
-        <Association Name="award_treasure">
-          <End Role="treasure" Type="Self.treasure" Multiplicity="1" />
-          <End Role="award" Type="Self.award" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="treasure">
-              <PropertyRef Name="treasure_id" />
-              <PropertyRef Name="hunt_hunt_id" />
-            </Principal>
-            <Dependent Role="award">
-              <PropertyRef Name="treasure_treasure_id" />
-              <PropertyRef Name="treasure_hunt_hunt_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="badge_award">
-          <End Role="award" Type="Self.award" Multiplicity="1" />
-          <End Role="badge" Type="Self.badge" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="award">
-              <PropertyRef Name="award_id" />
-            </Principal>
-            <Dependent Role="badge">
-              <PropertyRef Name="award_award_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="badge_hunt">
-          <End Role="hunt" Type="Self.hunt" Multiplicity="1" />
+          <End Role="hunt" Type="Self.hunt" Multiplicity="0..1" />
           <End Role="badge" Type="Self.badge" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="hunt">
@@ -172,7 +128,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="badge_treasure">
-          <End Role="treasure" Type="Self.treasure" Multiplicity="1" />
+          <End Role="treasure" Type="Self.treasure" Multiplicity="0..1" />
           <End Role="badge" Type="Self.badge" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="treasure">
@@ -232,30 +188,6 @@
             </Principal>
             <Dependent Role="treasure">
               <PropertyRef Name="hunt_hunt_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="user_award_relation_award">
-          <End Role="award" Type="Self.award" Multiplicity="1" />
-          <End Role="user_award_relation" Type="Self.user_award_relation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="award">
-              <PropertyRef Name="award_id" />
-            </Principal>
-            <Dependent Role="user_award_relation">
-              <PropertyRef Name="award_award_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="user_award_relation_user">
-          <End Role="user" Type="Self.user" Multiplicity="1" />
-          <End Role="user_award_relation" Type="Self.user_award_relation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="user_award_relation">
-              <PropertyRef Name="user_user_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -332,26 +264,16 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FindTheBooty_prodModelStoreContainer">
-          <EntitySet Name="award" EntityType="Self.award" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="badge" EntityType="Self.badge" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="hunt" EntityType="Self.hunt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sponsor" EntityType="Self.sponsor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="treasure" EntityType="Self.treasure" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="user_award_relation" EntityType="Self.user_award_relation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user_badge_relation" EntityType="Self.user_badge_relation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user_hunt_relation" EntityType="Self.user_hunt_relation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user_setting" EntityType="Self.user_setting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user_setting_relation" EntityType="Self.user_setting_relation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user_treasure_relation" EntityType="Self.user_treasure_relation" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="award_treasure" Association="Self.award_treasure">
-            <End Role="treasure" EntitySet="treasure" />
-            <End Role="award" EntitySet="award" />
-          </AssociationSet>
-          <AssociationSet Name="badge_award" Association="Self.badge_award">
-            <End Role="award" EntitySet="award" />
-            <End Role="badge" EntitySet="badge" />
-          </AssociationSet>
           <AssociationSet Name="badge_hunt" Association="Self.badge_hunt">
             <End Role="hunt" EntitySet="hunt" />
             <End Role="badge" EntitySet="badge" />
@@ -375,14 +297,6 @@
           <AssociationSet Name="treasure_hunt" Association="Self.treasure_hunt">
             <End Role="hunt" EntitySet="hunt" />
             <End Role="treasure" EntitySet="treasure" />
-          </AssociationSet>
-          <AssociationSet Name="user_award_relation_award" Association="Self.user_award_relation_award">
-            <End Role="award" EntitySet="award" />
-            <End Role="user_award_relation" EntitySet="user_award_relation" />
-          </AssociationSet>
-          <AssociationSet Name="user_award_relation_user" Association="Self.user_award_relation_user">
-            <End Role="user" EntitySet="user" />
-            <End Role="user_award_relation" EntitySet="user_award_relation" />
           </AssociationSet>
           <AssociationSet Name="user_badge_relation_badge" Association="Self.user_badge_relation_badge">
             <End Role="badge" EntitySet="badge" />
@@ -414,30 +328,16 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FindTheBooty_prodModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="award">
-          <Key>
-            <PropertyRef Name="award_id" />
-          </Key>
-          <Property Name="award_id" Type="Int32" Nullable="false" />
-          <Property Name="treasure_treasure_id" Type="Int32" Nullable="false" />
-          <Property Name="treasure_hunt_hunt_id" Type="Int32" Nullable="false" />
-          <Property Name="points" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="treasure" Relationship="Self.award_treasure" FromRole="award" ToRole="treasure" />
-          <NavigationProperty Name="badges" Relationship="Self.badge_award" FromRole="award" ToRole="badge" />
-          <NavigationProperty Name="user_award_relation" Relationship="Self.user_award_relation_award" FromRole="award" ToRole="user_award_relation" />
-        </EntityType>
         <EntityType Name="badge">
           <Key>
             <PropertyRef Name="badge_id" />
           </Key>
           <Property Name="badge_id" Type="Int32" Nullable="false" />
-          <Property Name="award_award_id" Type="Int32" Nullable="false" />
-          <Property Name="hunt_hunt_id" Type="Int32" Nullable="false" />
-          <Property Name="treasure_treasure_id" Type="Int32" Nullable="false" />
-          <Property Name="treasure_hunt_hunt_id" Type="Int32" Nullable="false" />
+          <Property Name="hunt_hunt_id" Type="Int32" />
+          <Property Name="treasure_treasure_id" Type="Int32" />
+          <Property Name="treasure_hunt_hunt_id" Type="Int32" />
           <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="award" Relationship="Self.badge_award" FromRole="badge" ToRole="award" />
           <NavigationProperty Name="hunt" Relationship="Self.badge_hunt" FromRole="badge" ToRole="hunt" />
           <NavigationProperty Name="treasure" Relationship="Self.badge_treasure" FromRole="badge" ToRole="treasure" />
           <NavigationProperty Name="user_badge_relation" Relationship="Self.user_badge_relation_badge" FromRole="badge" ToRole="user_badge_relation" />
@@ -454,6 +354,7 @@
           <Property Name="time_expire" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="max_users" Type="Int32" Nullable="false" />
           <Property Name="multi_single" Type="Int32" Nullable="false" />
+          <Property Name="seq_ffa" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="badges" Relationship="Self.badge_hunt" FromRole="hunt" ToRole="badge" />
           <NavigationProperty Name="sponsor" Relationship="Self.hunt_sponsor" FromRole="hunt" ToRole="sponsor" />
           <NavigationProperty Name="treasures" Relationship="Self.treasure_hunt" FromRole="hunt" ToRole="treasure" />
@@ -478,10 +379,9 @@
           <Property Name="treasure_id" Type="Int32" Nullable="false" />
           <Property Name="hunt_hunt_id" Type="Int32" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="seq_ffa" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="seq_order" Type="Int32" />
           <Property Name="confirmation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="points" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="awards" Relationship="Self.award_treasure" FromRole="treasure" ToRole="award" />
           <NavigationProperty Name="badges" Relationship="Self.badge_treasure" FromRole="treasure" ToRole="badge" />
           <NavigationProperty Name="hunt" Relationship="Self.treasure_hunt" FromRole="treasure" ToRole="hunt" />
           <NavigationProperty Name="user_treasure_relation" Relationship="Self.Table_11_treasure" FromRole="treasure" ToRole="user_treasure_relation" />
@@ -504,21 +404,9 @@
           <Property Name="num_treasures" Type="Int32" Nullable="false" />
           <Property Name="user_type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="user_treasure_relation" Relationship="Self.Table_11_user" FromRole="user" ToRole="user_treasure_relation" />
-          <NavigationProperty Name="user_award_relation" Relationship="Self.user_award_relation_user" FromRole="user" ToRole="user_award_relation" />
           <NavigationProperty Name="user_badge_relation" Relationship="Self.user_badge_relation_user" FromRole="user" ToRole="user_badge_relation" />
           <NavigationProperty Name="user_hunt_relation" Relationship="Self.user_hunt_relation_user" FromRole="user" ToRole="user_hunt_relation" />
           <NavigationProperty Name="user_setting_relation" Relationship="Self.user_setting_relation_user" FromRole="user" ToRole="user_setting_relation" />
-        </EntityType>
-        <EntityType Name="user_award_relation">
-          <Key>
-            <PropertyRef Name="user_user_id" />
-            <PropertyRef Name="award_award_id" />
-          </Key>
-          <Property Name="user_user_id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="award_award_id" Type="Int32" Nullable="false" />
-          <Property Name="completed" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="award" Relationship="Self.user_award_relation_award" FromRole="user_award_relation" ToRole="award" />
-          <NavigationProperty Name="user" Relationship="Self.user_award_relation_user" FromRole="user_award_relation" ToRole="user" />
         </EntityType>
         <EntityType Name="user_badge_relation">
           <Key>
@@ -574,46 +462,8 @@
           <NavigationProperty Name="treasure" Relationship="Self.Table_11_treasure" FromRole="user_treasure_relation" ToRole="treasure" />
           <NavigationProperty Name="user" Relationship="Self.Table_11_user" FromRole="user_treasure_relation" ToRole="user" />
         </EntityType>
-        <Association Name="award_treasure">
-          <End Role="treasure" Type="Self.treasure" Multiplicity="1" />
-          <End Role="award" Type="Self.award" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="treasure">
-              <PropertyRef Name="treasure_id" />
-              <PropertyRef Name="hunt_hunt_id" />
-            </Principal>
-            <Dependent Role="award">
-              <PropertyRef Name="treasure_treasure_id" />
-              <PropertyRef Name="treasure_hunt_hunt_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="badge_award">
-          <End Role="award" Type="Self.award" Multiplicity="1" />
-          <End Role="badge" Type="Self.badge" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="award">
-              <PropertyRef Name="award_id" />
-            </Principal>
-            <Dependent Role="badge">
-              <PropertyRef Name="award_award_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="user_award_relation_award">
-          <End Role="award" Type="Self.award" Multiplicity="1" />
-          <End Role="user_award_relation" Type="Self.user_award_relation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="award">
-              <PropertyRef Name="award_id" />
-            </Principal>
-            <Dependent Role="user_award_relation">
-              <PropertyRef Name="award_award_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="badge_hunt">
-          <End Role="hunt" Type="Self.hunt" Multiplicity="1" />
+          <End Role="hunt" Type="Self.hunt" Multiplicity="0..1" />
           <End Role="badge" Type="Self.badge" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="hunt">
@@ -625,7 +475,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="badge_treasure">
-          <End Role="treasure" Type="Self.treasure" Multiplicity="1" />
+          <End Role="treasure" Type="Self.treasure" Multiplicity="0..1" />
           <End Role="badge" Type="Self.badge" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="treasure">
@@ -712,18 +562,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="user_award_relation_user">
-          <End Role="user" Type="Self.user" Multiplicity="1" />
-          <End Role="user_award_relation" Type="Self.user_award_relation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="user_award_relation">
-              <PropertyRef Name="user_user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="user_badge_relation_user">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="user_badge_relation" Type="Self.user_badge_relation" Multiplicity="*" />
@@ -773,30 +611,16 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FindTheBooty_prodEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="awards" EntityType="Self.award" />
           <EntitySet Name="badges" EntityType="Self.badge" />
           <EntitySet Name="hunts" EntityType="Self.hunt" />
           <EntitySet Name="sponsors" EntityType="Self.sponsor" />
           <EntitySet Name="treasures" EntityType="Self.treasure" />
           <EntitySet Name="users" EntityType="Self.user" />
-          <EntitySet Name="user_award_relation" EntityType="Self.user_award_relation" />
           <EntitySet Name="user_badge_relation" EntityType="Self.user_badge_relation" />
           <EntitySet Name="user_hunt_relation" EntityType="Self.user_hunt_relation" />
           <EntitySet Name="user_setting" EntityType="Self.user_setting" />
           <EntitySet Name="user_setting_relation" EntityType="Self.user_setting_relation" />
           <EntitySet Name="user_treasure_relation" EntityType="Self.user_treasure_relation" />
-          <AssociationSet Name="award_treasure" Association="Self.award_treasure">
-            <End Role="treasure" EntitySet="treasures" />
-            <End Role="award" EntitySet="awards" />
-          </AssociationSet>
-          <AssociationSet Name="badge_award" Association="Self.badge_award">
-            <End Role="award" EntitySet="awards" />
-            <End Role="badge" EntitySet="badges" />
-          </AssociationSet>
-          <AssociationSet Name="user_award_relation_award" Association="Self.user_award_relation_award">
-            <End Role="award" EntitySet="awards" />
-            <End Role="user_award_relation" EntitySet="user_award_relation" />
-          </AssociationSet>
           <AssociationSet Name="badge_hunt" Association="Self.badge_hunt">
             <End Role="hunt" EntitySet="hunts" />
             <End Role="badge" EntitySet="badges" />
@@ -829,10 +653,6 @@
             <End Role="user" EntitySet="users" />
             <End Role="user_treasure_relation" EntitySet="user_treasure_relation" />
           </AssociationSet>
-          <AssociationSet Name="user_award_relation_user" Association="Self.user_award_relation_user">
-            <End Role="user" EntitySet="users" />
-            <End Role="user_award_relation" EntitySet="user_award_relation" />
-          </AssociationSet>
           <AssociationSet Name="user_badge_relation_user" Association="Self.user_badge_relation_user">
             <End Role="user" EntitySet="users" />
             <End Role="user_badge_relation" EntitySet="user_badge_relation" />
@@ -856,21 +676,10 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FindTheBooty_prodModelStoreContainer" CdmEntityContainer="FindTheBooty_prodEntities">
-          <EntitySetMapping Name="awards">
-            <EntityTypeMapping TypeName="FindTheBooty_prodModel.award">
-              <MappingFragment StoreEntitySet="award">
-                <ScalarProperty Name="award_id" ColumnName="award_id" />
-                <ScalarProperty Name="treasure_treasure_id" ColumnName="treasure_treasure_id" />
-                <ScalarProperty Name="treasure_hunt_hunt_id" ColumnName="treasure_hunt_hunt_id" />
-                <ScalarProperty Name="points" ColumnName="points" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="badges">
             <EntityTypeMapping TypeName="FindTheBooty_prodModel.badge">
               <MappingFragment StoreEntitySet="badge">
                 <ScalarProperty Name="badge_id" ColumnName="badge_id" />
-                <ScalarProperty Name="award_award_id" ColumnName="award_award_id" />
                 <ScalarProperty Name="hunt_hunt_id" ColumnName="hunt_hunt_id" />
                 <ScalarProperty Name="treasure_treasure_id" ColumnName="treasure_treasure_id" />
                 <ScalarProperty Name="treasure_hunt_hunt_id" ColumnName="treasure_hunt_hunt_id" />
@@ -890,6 +699,7 @@
                 <ScalarProperty Name="time_expire" ColumnName="time_expire" />
                 <ScalarProperty Name="max_users" ColumnName="max_users" />
                 <ScalarProperty Name="multi_single" ColumnName="multi_single" />
+                <ScalarProperty Name="seq_ffa" ColumnName="seq_ffa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -910,7 +720,7 @@
                 <ScalarProperty Name="treasure_id" ColumnName="treasure_id" />
                 <ScalarProperty Name="hunt_hunt_id" ColumnName="hunt_hunt_id" />
                 <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="seq_ffa" ColumnName="seq_ffa" />
+                <ScalarProperty Name="seq_order" ColumnName="seq_order" />
                 <ScalarProperty Name="confirmation" ColumnName="confirmation" />
                 <ScalarProperty Name="points" ColumnName="points" />
               </MappingFragment>
@@ -932,15 +742,6 @@
                 <ScalarProperty Name="num_hunts" ColumnName="num_hunts" />
                 <ScalarProperty Name="num_treasures" ColumnName="num_treasures" />
                 <ScalarProperty Name="user_type" ColumnName="user_type" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="user_award_relation">
-            <EntityTypeMapping TypeName="FindTheBooty_prodModel.user_award_relation">
-              <MappingFragment StoreEntitySet="user_award_relation">
-                <ScalarProperty Name="user_user_id" ColumnName="user_user_id" />
-                <ScalarProperty Name="award_award_id" ColumnName="award_award_id" />
-                <ScalarProperty Name="completed" ColumnName="completed" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

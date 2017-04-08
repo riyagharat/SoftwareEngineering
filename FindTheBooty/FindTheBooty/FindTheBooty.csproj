@@ -207,14 +207,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ParticipatingController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\GeneratedModels\award.cs">
-      <DependentUpon>FindTheBootyModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\GeneratedModels\badge.cs">
       <DependentUpon>FindTheBootyModel.tt</DependentUpon>
     </Compile>
@@ -243,9 +239,6 @@
       <DependentUpon>FindTheBootyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GeneratedModels\user.cs">
-      <DependentUpon>FindTheBootyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GeneratedModels\user_award_relation.cs">
       <DependentUpon>FindTheBootyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GeneratedModels\user_badge_relation.cs">
@@ -363,11 +356,6 @@
     <Content Include="Views\Participating\JoinHunt.cshtml" />
     <Content Include="Views\Participating\DoHunt.cshtml" />
     <Content Include="Views\Participating\Index.cshtml" />
-    <Content Include="Views\Users\Create.cshtml" />
-    <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

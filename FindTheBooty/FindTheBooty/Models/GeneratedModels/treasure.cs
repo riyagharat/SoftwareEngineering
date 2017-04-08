@@ -17,7 +17,6 @@ namespace FindTheBooty.Models.GeneratedModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public treasure()
         {
-            this.awards = new HashSet<award>();
             this.badges = new HashSet<badge>();
             this.user_treasure_relation = new HashSet<user_treasure_relation>();
         }
@@ -25,12 +24,10 @@ namespace FindTheBooty.Models.GeneratedModels
         public int treasure_id { get; set; }
         public int hunt_hunt_id { get; set; }
         public string description { get; set; }
-        public string seq_ffa { get; set; }
+        public Nullable<int> seq_order { get; set; }
         public string confirmation { get; set; }
         public int points { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<award> awards { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<badge> badges { get; set; }
         public virtual hunt hunt { get; set; }
