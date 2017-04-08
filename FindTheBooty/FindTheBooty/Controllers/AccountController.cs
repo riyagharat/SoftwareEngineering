@@ -1,4 +1,5 @@
 ﻿using FindTheBooty.Models;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace FindTheBooty.Controllers
@@ -31,6 +32,13 @@ namespace FindTheBooty.Controllers
             {
                 return View(model);
             }
+            else if (!this.checkLogin(model))
+            {
+                // Login doesn't exist
+                ModelState.AddModelError("", "Invalid Login");
+                return View(model);
+            }
+
             // Model is valid successful login
             return RedirectToAction("Index", "Home");
         }
@@ -57,6 +65,11 @@ namespace FindTheBooty.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        protected bool checkLogin(LoginViewModel model)
+        {
+            return (database.users.Any(user => user.email == model.Email && user.password == model.Password));
         }
 
         protected override void Dispose(bool disposing)

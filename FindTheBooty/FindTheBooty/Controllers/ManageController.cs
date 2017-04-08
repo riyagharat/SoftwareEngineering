@@ -11,6 +11,7 @@ using FindTheBooty.Models;
 namespace FindTheBooty.Controllers
 {
     [Authorize]
+    // DO NOT USE THIS CLASS OR ANY VIEWS
     public class ManageController : DataController
     {
         private ApplicationSignInManager _signInManager;

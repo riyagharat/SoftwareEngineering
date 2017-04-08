@@ -5,6 +5,7 @@ using Microsoft.Owin.Security;
 
 namespace FindTheBooty.Models
 {
+    // DO NOT USE THIS FILE
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }
