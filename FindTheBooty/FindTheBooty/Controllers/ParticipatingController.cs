@@ -8,7 +8,6 @@ namespace FindTheBooty.Controllers
 {
     public class ParticipatingController : Controller
     {
-        private string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["FTBConnection"].ConnectionString;
 
         // GET: Participating
         public ActionResult Index()
@@ -19,22 +18,8 @@ namespace FindTheBooty.Controllers
         // GET: Participating/JoinedHunts
         public ActionResult JoinedHunts(bool error = false)
         {
-            using (System.Data.SqlClient.SqlConnection db = new System.Data.SqlClient.SqlConnection(connectionString))
-            using (System.Data.SqlClient.SqlCommand command = new System.Data.SqlClient.SqlCommand("", db))
-            {
-                db.Open();
-                command.CommandText = "SELECT * FROM dbo.user_hunt_relation WHERE user_user_id=@Id";
-                command.Parameters.AddWithValue("@Id", 1);
-                System.Data.SqlClient.SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    //TODO: loop, building list of Hunts for JoinedHuntList model
-                    string val1 = reader["user_user_id"].ToString(); // grab first column value
-                    string val2 = reader["hunt_hunt_id"].ToString();
-                    string val3 = reader["active"].ToString();
-                    string val4 = reader["completed"].ToString();
-                }
-            }
+
+            // build model for JoinedHunts view
             Models.JoinedHuntList joined = new Models.JoinedHuntList();
             if (error)
                 joined.DoHuntError = true;

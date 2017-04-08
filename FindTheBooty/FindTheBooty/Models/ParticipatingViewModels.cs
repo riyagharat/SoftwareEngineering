@@ -13,8 +13,8 @@ namespace FindTheBooty.Models
 
         // hunt type information
         public string HuntType { get; set; } 
-        public int TimeCreate { get; set; }
-        public int TimeExpire { get; set; }
+        public System.DateTime TimeCreate { get; set; }
+        public System.DateTime TimeExpire { get; set; }
         public int MaxNumOfUsers { get; set; }
         public bool MultiOrSingle { get; set; }
 
@@ -39,43 +39,38 @@ namespace FindTheBooty.Models
         public bool DoHuntError { get; set; }   // used for invalid hunt access
         public List<Hunt> HuntList { get; set; }
 
-        //TODO: Remove after obtaining DB Connection
+        // Poll DB for hunts joined and participating
         public List<Hunt> GetJoinedHunts()
         {
-            // hunts joined and participating
+            HuntList = new List<Models.Hunt>();
+            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["FTBConnection"].ConnectionString;
 
-            // START SAMPLE POPULATION
-            List<Hunt> huntList = new List<Hunt>();
-            Hunt huntItem = new Hunt();
-            huntItem.HuntID = 1;
-            huntItem.HuntName = "Bootylicious";
-            huntItem.HuntType = "Timed Free-for-all";
-            huntItem.TimeCreate = 1490376653;
-            huntItem.TimeExpire = 1494547200;
+            // open db connection and build list of hunts
+            using (System.Data.SqlClient.SqlConnection db = new System.Data.SqlClient.SqlConnection(connectionString))
+            using (System.Data.SqlClient.SqlCommand command = new System.Data.SqlClient.SqlCommand("", db))
+            {
+                db.Open();
+                command.CommandText = 
+                    "SELECT hunt.hunt_id, hunt.hunt_name, hunt.hunt_type, hunt.time_expire " +
+                    "FROM dbo.hunt hunt, dbo.user_hunt_relation relation " + 
+                    "WHERE(relation.hunt_hunt_id = hunt.hunt_id AND relation.user_user_id = @Id); ";
+                command.Parameters.AddWithValue("@Id", 1); //TODO: Replace with user ID from Session/Cookie
+                System.Data.SqlClient.SqlDataReader reader = command.ExecuteReader();
 
-            System.DateTime dtDateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            dtDateTime = dtDateTime.AddSeconds(huntItem.TimeExpire).ToLocalTime();
+                while (reader.Read())
+                {
+                    FindTheBooty.Models.Hunt hunt = new FindTheBooty.Models.Hunt();
+                    //TODO: loop, building list of Hunts for JoinedHuntList model
+                    hunt.HuntID = System.Convert.ToInt32(reader["hunt_id"]);
+                    hunt.HuntName = reader["hunt_name"].ToString();
+                    hunt.HuntType = reader["hunt_type"].ToString();
+                    hunt.TimeExpire = System.Convert.ToDateTime(reader["time_expire"].ToString());
+                    HuntList.Add(hunt);
+                }
+            }
 
-            huntItem.EndDateTime = dtDateTime.ToString("MM/dd/yyyy HH:mm");
-
-            huntList.Add(huntItem);
-
-            Hunt huntItem2 = new Hunt();
-            huntItem2.HuntID = 2;
-            huntItem2.HuntName = "Bootylicious 2.0";
-            huntItem2.HuntType = "Timed Sequential";
-            huntItem2.TimeCreate = 1490376653;
-            huntItem2.TimeExpire = 1494547260;
-
-            System.DateTime dtDateTime2 = new System.DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            dtDateTime = dtDateTime2.AddSeconds(huntItem2.TimeExpire).ToLocalTime();
-
-            huntItem2.EndDateTime = dtDateTime.ToString("MM/dd/yyyy HH:mm");
-
-            huntList.Add(huntItem2);
-            // END SAMPLE POPULATION
-
-            return huntList;
+            // return list of hunts the user has joined
+            return HuntList;
 
         }
     }
@@ -97,30 +92,20 @@ namespace FindTheBooty.Models
             // START SAMPLE POPULATION
             List<Hunt> huntList = new List<Hunt>();
             Hunt huntItem = new Hunt();
-            huntItem.HuntID = 3;
+            huntItem.HuntID = 1;
             huntItem.HuntName = "Bootylicious 3.0";
             huntItem.HuntType = "Timed Free-for-all";
-            huntItem.TimeCreate = 1490376653;
-            huntItem.TimeExpire = 1494547320;
-
-            System.DateTime dtDateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            dtDateTime = dtDateTime.AddSeconds(huntItem.TimeExpire).ToLocalTime();
-
-            huntItem.EndDateTime = dtDateTime.ToString("MM/dd/yyyy HH:mm");
+            huntItem.TimeCreate = new System.DateTime(2017, 04, 08);
+            huntItem.TimeExpire = new System.DateTime(2017, 04, 20);
 
             huntList.Add(huntItem);
 
             Hunt huntItem2 = new Hunt();
-            huntItem2.HuntID = 4;
+            huntItem2.HuntID = 2;
             huntItem2.HuntName = "Bootylicious 4.0";
             huntItem2.HuntType = "Timed Sequential";
-            huntItem2.TimeCreate = 1490376653;
-            huntItem2.TimeExpire = 1494547380;
-
-            System.DateTime dtDateTime2 = new System.DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            dtDateTime = dtDateTime2.AddSeconds(huntItem2.TimeExpire).ToLocalTime();
-
-            huntItem2.EndDateTime = dtDateTime.ToString("MM/dd/yyyy HH:mm");
+            huntItem2.TimeCreate = new System.DateTime(2017, 04, 08);
+            huntItem2.TimeExpire = new System.DateTime(2017, 04, 20);
 
             huntList.Add(huntItem2);
             // END SAMPLE POPULATION
