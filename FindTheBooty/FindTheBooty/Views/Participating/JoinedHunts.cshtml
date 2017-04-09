@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "View Joined Hunts";
+    @model FindTheBooty.Models.JoinedHuntList
+}
+
+<a href="/Participating/JoinableHunts" class="btn btn-default">
+    <span class="glyphicon glyphicon-plus"></span>
+    Join a New Hunt
+</a>
+
+<h2>View Joined Hunts</h2>
+<h4><i>Click Hunt Name to Continue Hunting!</i></h4>
+
+@if (Model.DoHuntError)
+{
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>ERROR:</strong> An error has occurred while trying to continue the hunt! Please try again later.
+    </div>
+}
+
+@*if there are Joined hunts to show.. show them*@
+@if (Model.HuntList.Count > 0)
+{
+
+    <table class="table table-striped" style="background-color: #FFF;">
+        <tr>
+            <th>Hunt Name</th>
+            <th>Type of Hunt</th>
+            <th>End Time</th>
+            @*<th>Actions</th>*@
+        </tr>
+
+        @*This is where you would iterate for X number of results in the model (loaded on page fire)*@
+
+    
+
+        @* May need to change the format of this and the model down the road *@
+        @Html.DisplayFor(Model => Model.HuntList)
+    </table>
+
+    <script>
+        // alter each name link to DoHunt/{HuntID}
+        $("[id$=-name-link]").each(function () {
+            var huntID = this.id.replace('-name-link', '');
+            $(this).attr("href", "/Participating/DoHunt/" + huntID);
+        });
+    </script>
+}else
+{
+    <div class="alert alert-warning">
+        <p>Looks like you haven't joined any hunts! Let's fix that! <a href="/Participating/JoinableHunts">Click here to Join a Hunt</a></p>
+    </div>
+}

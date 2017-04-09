@@ -1,0 +1,23 @@
+﻿
+@{
+    var HuntName = "<<HUNT NAME>>";
+    ViewBag.Title = "You have joined a hunt!";
+}
+
+<div class="row">
+    <div class="md-col-12 col-sm-12 col-xs-12">
+
+        <h2>You've joined a hunt!</h2>
+
+       @{
+           var HuntID = Request.RequestContext.RouteData.Values["id"];
+        }
+
+        <p>You have joined the "@HuntName" Hunt!</p>
+
+        <h3>What's next?</h3>
+        <a href="/Participating/DoHunt/@HuntID" class="btn btn-success">Continue to Hunt</a>
+        <a href="/" class="btn btn-default">Return to Dashboard</a>
+
+    </div>
+</div>

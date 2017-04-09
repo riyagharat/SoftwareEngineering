@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    function submitForm() {
+        var form = $('#form');
+        form.submit();
+    }
+</script>
+<!-- Use this view as a scratch board for code -->
+<div class="row">
+    <div class="col-xs-12">
+        <form id="form" action="/home/Test" method="post" enctype="multipart/form-data">
+            <label for="inputFile">Picture Upload</label>
+            <input name="inputFile" type="file" accept="image/*;capture=camera*" />
+            <label for="inputString">QR Code Generate</label>
+            <input name="inputString" type="text"/>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <button type="submit" class="btn btn-success" onclick="submitForm()">Submit</button>
+    </div>
+</div>

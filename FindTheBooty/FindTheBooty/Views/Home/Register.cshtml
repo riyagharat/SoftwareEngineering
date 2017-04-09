@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewBag.Title = "Come Aboard!";
+}
+
+<h3>Come Aboard, Matey!</h3>
+<form>
+    <div class="form-group">
+        <label for="">First Name</label>
+        <input id="userFirstName" class="form-control" placeholder="Enter your first name" />
+    </div>
+    <div class="form-group">
+        <label for="">Last Name</label>
+        <input id="userLastName" class="form-control" placeholder="Enter your last name" />
+    </div>
+    <div class="form-group">
+        <label for="">Email</label>
+        <input id="userEmail" class="form-control" placeholder="Enter your email address" />
+        <span id="emailFeedback" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+    </div>
+    <div class="form-group">
+        <label for="">Confirm Email</label>
+        <input id="userEmailConf" class="form-control" placeholder="Re-enter your email address" />
+        <p id="emailMatchError" class="text-danger hidden">The entered emails do not match and can't be left empty!</p>
+        <span id="emailConfFeedback" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+    </div>
+    <div class="form-group">
+        <label for="">Password</label>
+        <input type="password" id="userPassword" class="form-control" placeholder="Enter a password" />
+        <span id="passFeedback" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+    </div>
+    <div class="form-group">
+        <label for="">Confirm Password</label>
+        <input type="password" id="userPasswordConf" class="form-control" placeholder="Re-enter your password" />
+        <p id="passMatchError" class="text-danger hidden">The entered passwords do not match and can't be left empty!</p>
+        <span id="passConfFeedback" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+    </div>
+    <hr />
+    <div class="form-group">
+        <label for="">Display Name</label>
+        <input id="userDispName" class="form-control" placeholder="Enter a public display name" />
+    </div>
+    <div class="form-group">
+        <label for="">Gender</label>
+        <select id="userGender" class="form-control">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="">Phone Number</label>
+        <input id="userPhoneNum" class="form-control" placeholder="Enter your phone number: (XXX) XXX-XXXX" />
+    </div>
+    <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="reset" class="btn btn-danger">Clear Form</button>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+
+        function validateEmailMatch() {
+            var userEmail = $("#userEmail").val();
+            var userEmailConf = $("#userEmailConf").val();
+
+            if (userEmail != userEmailConf
+                || userEmail == ""
+                || userEmailConf == "") {
+                // error case
+                $("#emailMatchError").removeClass('hidden');
+
+                $("#userEmail").parent().addClass('has-error');
+                $("#userEmail").parent().addClass('has-feedback');
+                $("#userEmailConf").parent().addClass('has-error');
+                $("#userEmailConf").parent().addClass('has-feedback');
+
+                $("#emailFeedback").removeClass('glyphicon-ok');
+                $("#emailConfFeedback").removeClass('glyphicon-ok');
+                $("#emailFeedback").addClass('glyphicon-remove');
+                $("#emailConfFeedback").addClass('glyphicon-remove');
+            } else {
+                // success case
+                $("#emailMatchError").addClass('hidden');
+
+                $("#userEmail").parent().removeClass('has-error');
+                $("#userEmailConf").parent().removeClass('has-error');
+
+                $("#userEmail").parent().addClass('has-success');
+                $("#userEmailConf").parent().addClass('has-success');
+
+                $("#emailFeedback").removeClass('glyphicon-remove');
+                $("#emailConfFeedback").removeClass('glyphicon-remove');
+                $("#emailFeedback").addClass('glyphicon-ok');
+                $("#emailConfFeedback").addClass('glyphicon-ok');
+            }
+        }
+
+        function validatePassMatch() {
+            var userPass = $("#userPassword").val();
+            var userPassConf = $("#userPasswordConf").val();
+
+            if (userPass != userPassConf
+                || userPass == ""
+                || userPassConf == "") {
+                // error case
+                $("#passMatchError").removeClass('hidden');
+
+                $("#userPassword").parent().addClass('has-error');
+                $("#userPassword").parent().addClass('has-feedback');
+                $("#userPasswordConf").parent().addClass('has-error');
+                $("#userPasswordConf").parent().addClass('has-feedback');
+
+                $("#passFeedback").removeClass('glyphicon-ok');
+                $("#passConfFeedback").removeClass('glyphicon-ok');
+                $("#passFeedback").addClass('glyphicon-remove');
+                $("#passConfFeedback").addClass('glyphicon-remove');
+            } else {
+                // success case
+                $("#passMatchError").addClass('hidden');
+
+                $("#userPassword").parent().removeClass('has-error');
+                $("#userPasswordConf").parent().removeClass('has-error');
+
+                $("#userPassword").parent().addClass('has-success');
+                $("#userPasswordConf").parent().addClass('has-success');
+
+                $("#passFeedback").removeClass('glyphicon-remove');
+                $("#passConfFeedback").removeClass('glyphicon-remove');
+                $("#passFeedback").addClass('glyphicon-ok');
+                $("#passConfFeedback").addClass('glyphicon-ok');
+            }
+        }
+
+        $("#userEmail").on('change', validateEmailMatch);
+        $("#userEmailConf").on('change', validateEmailMatch);
+
+        $("#userPassword").on('change', validatePassMatch);
+        $("#userPasswordConf").on('change', validatePassMatch);
+
+    });
+</script>
