@@ -1,0 +1,817 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FindTheBooty_prodModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="badge">
+          <Key>
+            <PropertyRef Name="badge_id" />
+          </Key>
+          <Property Name="badge_id" Type="int" Nullable="false" />
+          <Property Name="hunt_hunt_id" Type="int" />
+          <Property Name="treasure_treasure_id" Type="int" />
+          <Property Name="treasure_hunt_hunt_id" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hunt">
+          <Key>
+            <PropertyRef Name="hunt_id" />
+          </Key>
+          <Property Name="hunt_id" Type="int" Nullable="false" />
+          <Property Name="sponsor_sponsor_id" Type="int" />
+          <Property Name="hunt_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="hunt_type" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="time_create" Type="datetime" Nullable="false" />
+          <Property Name="time_expire" Type="datetime" Nullable="false" />
+          <Property Name="max_users" Type="int" Nullable="false" />
+          <Property Name="multi_single" Type="int" Nullable="false" />
+          <Property Name="seq_ffa" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sponsor">
+          <Key>
+            <PropertyRef Name="sponsor_id" />
+          </Key>
+          <Property Name="sponsor_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="phone" Type="bigint" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="80" Nullable="false" />
+        </EntityType>
+        <EntityType Name="treasure">
+          <Key>
+            <PropertyRef Name="treasure_id" />
+            <PropertyRef Name="hunt_hunt_id" />
+          </Key>
+          <Property Name="treasure_id" Type="int" Nullable="false" />
+          <Property Name="hunt_hunt_id" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="seq_order" Type="int" />
+          <Property Name="confirmation" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="points" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="display_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="gender" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="phone" Type="bigint" Nullable="false" />
+          <Property Name="points" Type="bigint" Nullable="false" />
+          <Property Name="rank" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="num_hunts" Type="int" Nullable="false" />
+          <Property Name="num_treasures" Type="int" Nullable="false" />
+          <Property Name="user_type" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_badge_relation">
+          <Key>
+            <PropertyRef Name="user_user_id" />
+            <PropertyRef Name="badge_badge_id" />
+          </Key>
+          <Property Name="user_user_id" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="badge_badge_id" Type="int" Nullable="false" />
+          <Property Name="completed" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_hunt_relation">
+          <Key>
+            <PropertyRef Name="user_user_id" />
+            <PropertyRef Name="hunt_hunt_id" />
+          </Key>
+          <Property Name="user_user_id" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="hunt_hunt_id" Type="int" Nullable="false" />
+          <Property Name="active" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="completed" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_setting">
+          <Key>
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_setting_relation">
+          <Key>
+            <PropertyRef Name="user_user_id" />
+            <PropertyRef Name="user_setting_name" />
+          </Key>
+          <Property Name="user_user_id" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="user_setting_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="setting_value" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_treasure_relation">
+          <Key>
+            <PropertyRef Name="user_user_id" />
+            <PropertyRef Name="treasure_treasure_id" />
+          </Key>
+          <Property Name="user_user_id" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="treasure_treasure_id" Type="int" Nullable="false" />
+          <Property Name="treasure_hunt_hunt_id" Type="int" Nullable="false" />
+          <Property Name="found" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="badge_hunt">
+          <End Role="hunt" Type="Self.hunt" Multiplicity="0..1" />
+          <End Role="badge" Type="Self.badge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hunt">
+              <PropertyRef Name="hunt_id" />
+            </Principal>
+            <Dependent Role="badge">
+              <PropertyRef Name="hunt_hunt_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="badge_treasure">
+          <End Role="treasure" Type="Self.treasure" Multiplicity="0..1" />
+          <End Role="badge" Type="Self.badge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treasure">
+              <PropertyRef Name="treasure_id" />
+              <PropertyRef Name="hunt_hunt_id" />
+            </Principal>
+            <Dependent Role="badge">
+              <PropertyRef Name="treasure_treasure_id" />
+              <PropertyRef Name="treasure_hunt_hunt_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="hunt_sponsor">
+          <End Role="sponsor" Type="Self.sponsor" Multiplicity="0..1" />
+          <End Role="hunt" Type="Self.hunt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sponsor">
+              <PropertyRef Name="sponsor_id" />
+            </Principal>
+            <Dependent Role="hunt">
+              <PropertyRef Name="sponsor_sponsor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Table_11_treasure">
+          <End Role="treasure" Type="Self.treasure" Multiplicity="1" />
+          <End Role="user_treasure_relation" Type="Self.user_treasure_relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treasure">
+              <PropertyRef Name="treasure_id" />
+              <PropertyRef Name="hunt_hunt_id" />
+            </Principal>
+            <Dependent Role="user_treasure_relation">
+              <PropertyRef Name="treasure_treasure_id" />
+              <PropertyRef Name="treasure_hunt_hunt_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Table_11_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="user_treasure_relation" Type="Self.user_treasure_relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_treasure_relation">
+              <PropertyRef Name="user_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="treasure_hunt">
+          <End Role="hunt" Type="Self.hunt" Multiplicity="1" />
+          <End Role="treasure" Type="Self.treasure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hunt">
+              <PropertyRef Name="hunt_id" />
+            </Principal>
+            <Dependent Role="treasure">
+              <PropertyRef Name="hunt_hunt_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_badge_relation_badge">
+          <End Role="badge" Type="Self.badge" Multiplicity="1" />
+          <End Role="user_badge_relation" Type="Self.user_badge_relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="badge">
+              <PropertyRef Name="badge_id" />
+            </Principal>
+            <Dependent Role="user_badge_relation">
+              <PropertyRef Name="badge_badge_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_badge_relation_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="user_badge_relation" Type="Self.user_badge_relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_badge_relation">
+              <PropertyRef Name="user_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_hunt_relation_hunt">
+          <End Role="hunt" Type="Self.hunt" Multiplicity="1" />
+          <End Role="user_hunt_relation" Type="Self.user_hunt_relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hunt">
+              <PropertyRef Name="hunt_id" />
+            </Principal>
+            <Dependent Role="user_hunt_relation">
+              <PropertyRef Name="hunt_hunt_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_hunt_relation_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="user_hunt_relation" Type="Self.user_hunt_relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_hunt_relation">
+              <PropertyRef Name="user_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_setting_relation_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="user_setting_relation" Type="Self.user_setting_relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_setting_relation">
+              <PropertyRef Name="user_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_setting_relation_user_setting">
+          <End Role="user_setting" Type="Self.user_setting" Multiplicity="1" />
+          <End Role="user_setting_relation" Type="Self.user_setting_relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_setting">
+              <PropertyRef Name="name" />
+            </Principal>
+            <Dependent Role="user_setting_relation">
+              <PropertyRef Name="user_setting_name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FindTheBooty_prodModelStoreContainer">
+          <EntitySet Name="badge" EntityType="Self.badge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hunt" EntityType="Self.hunt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sponsor" EntityType="Self.sponsor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="treasure" EntityType="Self.treasure" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_badge_relation" EntityType="Self.user_badge_relation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_hunt_relation" EntityType="Self.user_hunt_relation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_setting" EntityType="Self.user_setting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_setting_relation" EntityType="Self.user_setting_relation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_treasure_relation" EntityType="Self.user_treasure_relation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="badge_hunt" Association="Self.badge_hunt">
+            <End Role="hunt" EntitySet="hunt" />
+            <End Role="badge" EntitySet="badge" />
+          </AssociationSet>
+          <AssociationSet Name="badge_treasure" Association="Self.badge_treasure">
+            <End Role="treasure" EntitySet="treasure" />
+            <End Role="badge" EntitySet="badge" />
+          </AssociationSet>
+          <AssociationSet Name="hunt_sponsor" Association="Self.hunt_sponsor">
+            <End Role="sponsor" EntitySet="sponsor" />
+            <End Role="hunt" EntitySet="hunt" />
+          </AssociationSet>
+          <AssociationSet Name="Table_11_treasure" Association="Self.Table_11_treasure">
+            <End Role="treasure" EntitySet="treasure" />
+            <End Role="user_treasure_relation" EntitySet="user_treasure_relation" />
+          </AssociationSet>
+          <AssociationSet Name="Table_11_user" Association="Self.Table_11_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="user_treasure_relation" EntitySet="user_treasure_relation" />
+          </AssociationSet>
+          <AssociationSet Name="treasure_hunt" Association="Self.treasure_hunt">
+            <End Role="hunt" EntitySet="hunt" />
+            <End Role="treasure" EntitySet="treasure" />
+          </AssociationSet>
+          <AssociationSet Name="user_badge_relation_badge" Association="Self.user_badge_relation_badge">
+            <End Role="badge" EntitySet="badge" />
+            <End Role="user_badge_relation" EntitySet="user_badge_relation" />
+          </AssociationSet>
+          <AssociationSet Name="user_badge_relation_user" Association="Self.user_badge_relation_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="user_badge_relation" EntitySet="user_badge_relation" />
+          </AssociationSet>
+          <AssociationSet Name="user_hunt_relation_hunt" Association="Self.user_hunt_relation_hunt">
+            <End Role="hunt" EntitySet="hunt" />
+            <End Role="user_hunt_relation" EntitySet="user_hunt_relation" />
+          </AssociationSet>
+          <AssociationSet Name="user_hunt_relation_user" Association="Self.user_hunt_relation_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="user_hunt_relation" EntitySet="user_hunt_relation" />
+          </AssociationSet>
+          <AssociationSet Name="user_setting_relation_user" Association="Self.user_setting_relation_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="user_setting_relation" EntitySet="user_setting_relation" />
+          </AssociationSet>
+          <AssociationSet Name="user_setting_relation_user_setting" Association="Self.user_setting_relation_user_setting">
+            <End Role="user_setting" EntitySet="user_setting" />
+            <End Role="user_setting_relation" EntitySet="user_setting_relation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FindTheBooty_prodModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="badge">
+          <Key>
+            <PropertyRef Name="badge_id" />
+          </Key>
+          <Property Name="badge_id" Type="Int32" Nullable="false" />
+          <Property Name="hunt_hunt_id" Type="Int32" />
+          <Property Name="treasure_treasure_id" Type="Int32" />
+          <Property Name="treasure_hunt_hunt_id" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="hunt" Relationship="Self.badge_hunt" FromRole="badge" ToRole="hunt" />
+          <NavigationProperty Name="treasure" Relationship="Self.badge_treasure" FromRole="badge" ToRole="treasure" />
+          <NavigationProperty Name="user_badge_relation" Relationship="Self.user_badge_relation_badge" FromRole="badge" ToRole="user_badge_relation" />
+        </EntityType>
+        <EntityType Name="hunt">
+          <Key>
+            <PropertyRef Name="hunt_id" />
+          </Key>
+          <Property Name="hunt_id" Type="Int32" Nullable="false" />
+          <Property Name="sponsor_sponsor_id" Type="Int32" />
+          <Property Name="hunt_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="hunt_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="time_create" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="time_expire" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="max_users" Type="Int32" Nullable="false" />
+          <Property Name="multi_single" Type="Int32" Nullable="false" />
+          <Property Name="seq_ffa" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="badges" Relationship="Self.badge_hunt" FromRole="hunt" ToRole="badge" />
+          <NavigationProperty Name="sponsor" Relationship="Self.hunt_sponsor" FromRole="hunt" ToRole="sponsor" />
+          <NavigationProperty Name="treasures" Relationship="Self.treasure_hunt" FromRole="hunt" ToRole="treasure" />
+          <NavigationProperty Name="user_hunt_relation" Relationship="Self.user_hunt_relation_hunt" FromRole="hunt" ToRole="user_hunt_relation" />
+        </EntityType>
+        <EntityType Name="sponsor">
+          <Key>
+            <PropertyRef Name="sponsor_id" />
+          </Key>
+          <Property Name="sponsor_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="Int64" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="hunts" Relationship="Self.hunt_sponsor" FromRole="sponsor" ToRole="hunt" />
+        </EntityType>
+        <EntityType Name="treasure">
+          <Key>
+            <PropertyRef Name="treasure_id" />
+            <PropertyRef Name="hunt_hunt_id" />
+          </Key>
+          <Property Name="treasure_id" Type="Int32" Nullable="false" />
+          <Property Name="hunt_hunt_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="seq_order" Type="Int32" />
+          <Property Name="confirmation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="points" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="badges" Relationship="Self.badge_treasure" FromRole="treasure" ToRole="badge" />
+          <NavigationProperty Name="hunt" Relationship="Self.treasure_hunt" FromRole="treasure" ToRole="hunt" />
+          <NavigationProperty Name="user_treasure_relation" Relationship="Self.Table_11_treasure" FromRole="treasure" ToRole="user_treasure_relation" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="display_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="Int64" Nullable="false" />
+          <Property Name="points" Type="Int64" Nullable="false" />
+          <Property Name="rank" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="num_hunts" Type="Int32" Nullable="false" />
+          <Property Name="num_treasures" Type="Int32" Nullable="false" />
+          <Property Name="user_type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="user_treasure_relation" Relationship="Self.Table_11_user" FromRole="user" ToRole="user_treasure_relation" />
+          <NavigationProperty Name="user_badge_relation" Relationship="Self.user_badge_relation_user" FromRole="user" ToRole="user_badge_relation" />
+          <NavigationProperty Name="user_hunt_relation" Relationship="Self.user_hunt_relation_user" FromRole="user" ToRole="user_hunt_relation" />
+          <NavigationProperty Name="user_setting_relation" Relationship="Self.user_setting_relation_user" FromRole="user" ToRole="user_setting_relation" />
+        </EntityType>
+        <EntityType Name="user_badge_relation">
+          <Key>
+            <PropertyRef Name="user_user_id" />
+            <PropertyRef Name="badge_badge_id" />
+          </Key>
+          <Property Name="user_user_id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="badge_badge_id" Type="Int32" Nullable="false" />
+          <Property Name="completed" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="badge" Relationship="Self.user_badge_relation_badge" FromRole="user_badge_relation" ToRole="badge" />
+          <NavigationProperty Name="user" Relationship="Self.user_badge_relation_user" FromRole="user_badge_relation" ToRole="user" />
+        </EntityType>
+        <EntityType Name="user_hunt_relation">
+          <Key>
+            <PropertyRef Name="user_user_id" />
+            <PropertyRef Name="hunt_hunt_id" />
+          </Key>
+          <Property Name="user_user_id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="hunt_hunt_id" Type="Int32" Nullable="false" />
+          <Property Name="active" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="completed" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="hunt" Relationship="Self.user_hunt_relation_hunt" FromRole="user_hunt_relation" ToRole="hunt" />
+          <NavigationProperty Name="user" Relationship="Self.user_hunt_relation_user" FromRole="user_hunt_relation" ToRole="user" />
+        </EntityType>
+        <EntityType Name="user_setting">
+          <Key>
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="user_setting_relation" Relationship="Self.user_setting_relation_user_setting" FromRole="user_setting" ToRole="user_setting_relation" />
+        </EntityType>
+        <EntityType Name="user_setting_relation">
+          <Key>
+            <PropertyRef Name="user_user_id" />
+            <PropertyRef Name="user_setting_name" />
+          </Key>
+          <Property Name="user_user_id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_setting_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="setting_value" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.user_setting_relation_user" FromRole="user_setting_relation" ToRole="user" />
+          <NavigationProperty Name="user_setting" Relationship="Self.user_setting_relation_user_setting" FromRole="user_setting_relation" ToRole="user_setting" />
+        </EntityType>
+        <EntityType Name="user_treasure_relation">
+          <Key>
+            <PropertyRef Name="user_user_id" />
+            <PropertyRef Name="treasure_treasure_id" />
+          </Key>
+          <Property Name="user_user_id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="treasure_treasure_id" Type="Int32" Nullable="false" />
+          <Property Name="treasure_hunt_hunt_id" Type="Int32" Nullable="false" />
+          <Property Name="found" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="treasure" Relationship="Self.Table_11_treasure" FromRole="user_treasure_relation" ToRole="treasure" />
+          <NavigationProperty Name="user" Relationship="Self.Table_11_user" FromRole="user_treasure_relation" ToRole="user" />
+        </EntityType>
+        <Association Name="badge_hunt">
+          <End Role="hunt" Type="Self.hunt" Multiplicity="0..1" />
+          <End Role="badge" Type="Self.badge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hunt">
+              <PropertyRef Name="hunt_id" />
+            </Principal>
+            <Dependent Role="badge">
+              <PropertyRef Name="hunt_hunt_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="badge_treasure">
+          <End Role="treasure" Type="Self.treasure" Multiplicity="0..1" />
+          <End Role="badge" Type="Self.badge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treasure">
+              <PropertyRef Name="treasure_id" />
+              <PropertyRef Name="hunt_hunt_id" />
+            </Principal>
+            <Dependent Role="badge">
+              <PropertyRef Name="treasure_treasure_id" />
+              <PropertyRef Name="treasure_hunt_hunt_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_badge_relation_badge">
+          <End Role="badge" Type="Self.badge" Multiplicity="1" />
+          <End Role="user_badge_relation" Type="Self.user_badge_relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="badge">
+              <PropertyRef Name="badge_id" />
+            </Principal>
+            <Dependent Role="user_badge_relation">
+              <PropertyRef Name="badge_badge_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="hunt_sponsor">
+          <End Role="sponsor" Type="Self.sponsor" Multiplicity="0..1" />
+          <End Role="hunt" Type="Self.hunt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sponsor">
+              <PropertyRef Name="sponsor_id" />
+            </Principal>
+            <Dependent Role="hunt">
+              <PropertyRef Name="sponsor_sponsor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="treasure_hunt">
+          <End Role="hunt" Type="Self.hunt" Multiplicity="1" />
+          <End Role="treasure" Type="Self.treasure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hunt">
+              <PropertyRef Name="hunt_id" />
+            </Principal>
+            <Dependent Role="treasure">
+              <PropertyRef Name="hunt_hunt_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_hunt_relation_hunt">
+          <End Role="hunt" Type="Self.hunt" Multiplicity="1" />
+          <End Role="user_hunt_relation" Type="Self.user_hunt_relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hunt">
+              <PropertyRef Name="hunt_id" />
+            </Principal>
+            <Dependent Role="user_hunt_relation">
+              <PropertyRef Name="hunt_hunt_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Table_11_treasure">
+          <End Role="treasure" Type="Self.treasure" Multiplicity="1" />
+          <End Role="user_treasure_relation" Type="Self.user_treasure_relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treasure">
+              <PropertyRef Name="treasure_id" />
+              <PropertyRef Name="hunt_hunt_id" />
+            </Principal>
+            <Dependent Role="user_treasure_relation">
+              <PropertyRef Name="treasure_treasure_id" />
+              <PropertyRef Name="treasure_hunt_hunt_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Table_11_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="user_treasure_relation" Type="Self.user_treasure_relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_treasure_relation">
+              <PropertyRef Name="user_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_badge_relation_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="user_badge_relation" Type="Self.user_badge_relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_badge_relation">
+              <PropertyRef Name="user_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_hunt_relation_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="user_hunt_relation" Type="Self.user_hunt_relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_hunt_relation">
+              <PropertyRef Name="user_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_setting_relation_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="user_setting_relation" Type="Self.user_setting_relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_setting_relation">
+              <PropertyRef Name="user_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_setting_relation_user_setting">
+          <End Role="user_setting" Type="Self.user_setting" Multiplicity="1" />
+          <End Role="user_setting_relation" Type="Self.user_setting_relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_setting">
+              <PropertyRef Name="name" />
+            </Principal>
+            <Dependent Role="user_setting_relation">
+              <PropertyRef Name="user_setting_name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FindTheBooty_prodEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="badges" EntityType="Self.badge" />
+          <EntitySet Name="hunts" EntityType="Self.hunt" />
+          <EntitySet Name="sponsors" EntityType="Self.sponsor" />
+          <EntitySet Name="treasures" EntityType="Self.treasure" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="user_badge_relation" EntityType="Self.user_badge_relation" />
+          <EntitySet Name="user_hunt_relation" EntityType="Self.user_hunt_relation" />
+          <EntitySet Name="user_setting" EntityType="Self.user_setting" />
+          <EntitySet Name="user_setting_relation" EntityType="Self.user_setting_relation" />
+          <EntitySet Name="user_treasure_relation" EntityType="Self.user_treasure_relation" />
+          <AssociationSet Name="badge_hunt" Association="Self.badge_hunt">
+            <End Role="hunt" EntitySet="hunts" />
+            <End Role="badge" EntitySet="badges" />
+          </AssociationSet>
+          <AssociationSet Name="badge_treasure" Association="Self.badge_treasure">
+            <End Role="treasure" EntitySet="treasures" />
+            <End Role="badge" EntitySet="badges" />
+          </AssociationSet>
+          <AssociationSet Name="user_badge_relation_badge" Association="Self.user_badge_relation_badge">
+            <End Role="badge" EntitySet="badges" />
+            <End Role="user_badge_relation" EntitySet="user_badge_relation" />
+          </AssociationSet>
+          <AssociationSet Name="hunt_sponsor" Association="Self.hunt_sponsor">
+            <End Role="sponsor" EntitySet="sponsors" />
+            <End Role="hunt" EntitySet="hunts" />
+          </AssociationSet>
+          <AssociationSet Name="treasure_hunt" Association="Self.treasure_hunt">
+            <End Role="hunt" EntitySet="hunts" />
+            <End Role="treasure" EntitySet="treasures" />
+          </AssociationSet>
+          <AssociationSet Name="user_hunt_relation_hunt" Association="Self.user_hunt_relation_hunt">
+            <End Role="hunt" EntitySet="hunts" />
+            <End Role="user_hunt_relation" EntitySet="user_hunt_relation" />
+          </AssociationSet>
+          <AssociationSet Name="Table_11_treasure" Association="Self.Table_11_treasure">
+            <End Role="treasure" EntitySet="treasures" />
+            <End Role="user_treasure_relation" EntitySet="user_treasure_relation" />
+          </AssociationSet>
+          <AssociationSet Name="Table_11_user" Association="Self.Table_11_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="user_treasure_relation" EntitySet="user_treasure_relation" />
+          </AssociationSet>
+          <AssociationSet Name="user_badge_relation_user" Association="Self.user_badge_relation_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="user_badge_relation" EntitySet="user_badge_relation" />
+          </AssociationSet>
+          <AssociationSet Name="user_hunt_relation_user" Association="Self.user_hunt_relation_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="user_hunt_relation" EntitySet="user_hunt_relation" />
+          </AssociationSet>
+          <AssociationSet Name="user_setting_relation_user" Association="Self.user_setting_relation_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="user_setting_relation" EntitySet="user_setting_relation" />
+          </AssociationSet>
+          <AssociationSet Name="user_setting_relation_user_setting" Association="Self.user_setting_relation_user_setting">
+            <End Role="user_setting" EntitySet="user_setting" />
+            <End Role="user_setting_relation" EntitySet="user_setting_relation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FindTheBooty_prodModelStoreContainer" CdmEntityContainer="FindTheBooty_prodEntities">
+          <EntitySetMapping Name="badges">
+            <EntityTypeMapping TypeName="FindTheBooty_prodModel.badge">
+              <MappingFragment StoreEntitySet="badge">
+                <ScalarProperty Name="badge_id" ColumnName="badge_id" />
+                <ScalarProperty Name="hunt_hunt_id" ColumnName="hunt_hunt_id" />
+                <ScalarProperty Name="treasure_treasure_id" ColumnName="treasure_treasure_id" />
+                <ScalarProperty Name="treasure_hunt_hunt_id" ColumnName="treasure_hunt_hunt_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hunts">
+            <EntityTypeMapping TypeName="FindTheBooty_prodModel.hunt">
+              <MappingFragment StoreEntitySet="hunt">
+                <ScalarProperty Name="hunt_id" ColumnName="hunt_id" />
+                <ScalarProperty Name="sponsor_sponsor_id" ColumnName="sponsor_sponsor_id" />
+                <ScalarProperty Name="hunt_name" ColumnName="hunt_name" />
+                <ScalarProperty Name="hunt_type" ColumnName="hunt_type" />
+                <ScalarProperty Name="time_create" ColumnName="time_create" />
+                <ScalarProperty Name="time_expire" ColumnName="time_expire" />
+                <ScalarProperty Name="max_users" ColumnName="max_users" />
+                <ScalarProperty Name="multi_single" ColumnName="multi_single" />
+                <ScalarProperty Name="seq_ffa" ColumnName="seq_ffa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sponsors">
+            <EntityTypeMapping TypeName="FindTheBooty_prodModel.sponsor">
+              <MappingFragment StoreEntitySet="sponsor">
+                <ScalarProperty Name="sponsor_id" ColumnName="sponsor_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="treasures">
+            <EntityTypeMapping TypeName="FindTheBooty_prodModel.treasure">
+              <MappingFragment StoreEntitySet="treasure">
+                <ScalarProperty Name="treasure_id" ColumnName="treasure_id" />
+                <ScalarProperty Name="hunt_hunt_id" ColumnName="hunt_hunt_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="seq_order" ColumnName="seq_order" />
+                <ScalarProperty Name="confirmation" ColumnName="confirmation" />
+                <ScalarProperty Name="points" ColumnName="points" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="FindTheBooty_prodModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="display_name" ColumnName="display_name" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="rank" ColumnName="rank" />
+                <ScalarProperty Name="num_hunts" ColumnName="num_hunts" />
+                <ScalarProperty Name="num_treasures" ColumnName="num_treasures" />
+                <ScalarProperty Name="user_type" ColumnName="user_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_badge_relation">
+            <EntityTypeMapping TypeName="FindTheBooty_prodModel.user_badge_relation">
+              <MappingFragment StoreEntitySet="user_badge_relation">
+                <ScalarProperty Name="user_user_id" ColumnName="user_user_id" />
+                <ScalarProperty Name="badge_badge_id" ColumnName="badge_badge_id" />
+                <ScalarProperty Name="completed" ColumnName="completed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_hunt_relation">
+            <EntityTypeMapping TypeName="FindTheBooty_prodModel.user_hunt_relation">
+              <MappingFragment StoreEntitySet="user_hunt_relation">
+                <ScalarProperty Name="user_user_id" ColumnName="user_user_id" />
+                <ScalarProperty Name="hunt_hunt_id" ColumnName="hunt_hunt_id" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="completed" ColumnName="completed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_setting">
+            <EntityTypeMapping TypeName="FindTheBooty_prodModel.user_setting">
+              <MappingFragment StoreEntitySet="user_setting">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_setting_relation">
+            <EntityTypeMapping TypeName="FindTheBooty_prodModel.user_setting_relation">
+              <MappingFragment StoreEntitySet="user_setting_relation">
+                <ScalarProperty Name="user_user_id" ColumnName="user_user_id" />
+                <ScalarProperty Name="user_setting_name" ColumnName="user_setting_name" />
+                <ScalarProperty Name="setting_value" ColumnName="setting_value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_treasure_relation">
+            <EntityTypeMapping TypeName="FindTheBooty_prodModel.user_treasure_relation">
+              <MappingFragment StoreEntitySet="user_treasure_relation">
+                <ScalarProperty Name="user_user_id" ColumnName="user_user_id" />
+                <ScalarProperty Name="treasure_treasure_id" ColumnName="treasure_treasure_id" />
+                <ScalarProperty Name="treasure_hunt_hunt_id" ColumnName="treasure_hunt_hunt_id" />
+                <ScalarProperty Name="found" ColumnName="found" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

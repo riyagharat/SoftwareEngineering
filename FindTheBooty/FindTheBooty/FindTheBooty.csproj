@@ -84,6 +84,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -201,6 +203,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ParticipatingController.cs" />
@@ -208,6 +211,51 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\GeneratedModels\badge.cs">
+      <DependentUpon>FindTheBootyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeneratedModels\FindTheBootyModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FindTheBootyModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeneratedModels\FindTheBootyModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FindTheBootyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeneratedModels\FindTheBootyModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FindTheBootyModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeneratedModels\hunt.cs">
+      <DependentUpon>FindTheBootyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeneratedModels\sponsor.cs">
+      <DependentUpon>FindTheBootyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeneratedModels\treasure.cs">
+      <DependentUpon>FindTheBootyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeneratedModels\user.cs">
+      <DependentUpon>FindTheBootyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeneratedModels\user_badge_relation.cs">
+      <DependentUpon>FindTheBootyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeneratedModels\user_hunt_relation.cs">
+      <DependentUpon>FindTheBootyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeneratedModels\user_setting.cs">
+      <DependentUpon>FindTheBootyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeneratedModels\user_setting_relation.cs">
+      <DependentUpon>FindTheBootyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeneratedModels\user_treasure_relation.cs">
+      <DependentUpon>FindTheBootyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ParticipatingViewModels.cs" />
@@ -231,12 +279,29 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Models\GeneratedModels\FindTheBootyModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FindTheBootyModel.edmx</DependentUpon>
+      <LastGenOutput>FindTheBootyModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\GeneratedModels\FindTheBootyModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FindTheBootyModel.edmx</DependentUpon>
+      <LastGenOutput>FindTheBootyModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <EntityDeploy Include="Models\GeneratedModels\FindTheBootyModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FindTheBootyModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\GeneratedModels\FindTheBootyModel.edmx.diagram">
+      <DependentUpon>FindTheBootyModel.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -266,18 +331,8 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
@@ -299,6 +354,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -309,6 +365,9 @@
     </Content>
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

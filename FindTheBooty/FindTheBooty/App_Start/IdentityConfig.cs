@@ -54,10 +54,10 @@ namespace FindTheBooty
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
+                //RequireNonLetterOrDigit = true,
+                //RequireDigit = true,
+                //RequireLowercase = true,
+                //RequireUppercase = true,
             };
 
             // Configure user lockout defaults
@@ -85,6 +85,14 @@ namespace FindTheBooty
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
+        }
+
+        internal bool IsValid(string email, string password)
+        {
+            using (var db = new FindTheBooty.Models.GeneratedModels.FindTheBooty_prodEntities())
+            {
+                return (db.users.Any(user => user.email == email && user.password == password));
+            }
         }
     }
 

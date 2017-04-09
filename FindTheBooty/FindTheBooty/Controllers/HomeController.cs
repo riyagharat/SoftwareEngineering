@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace FindTheBooty.Controllers
 {
 
-    public class HomeController : Controller
+    public class HomeController : DataController
     {
 
         public ActionResult Index()
