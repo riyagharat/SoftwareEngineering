@@ -19,6 +19,9 @@ namespace FindTheBooty.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Player Name")]
+        public string DisplayName { get; set; }
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
