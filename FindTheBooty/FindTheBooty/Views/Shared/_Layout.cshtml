@@ -9,6 +9,17 @@
         Response.Redirect("~/");
     }*/
     //TODO: !!!PRODUCTION!!! Uncomment block of code above for production
+
+    var userFullName = "";
+    if(Session["LoggedUser"] != null)
+    {
+        var user = (FindTheBooty.Models.GeneratedModels.user)Session["LoggedUser"];
+        userFullName = user.first_name + " " + user.last_name;
+    }
+    else
+    {
+        userFullName = "Captain Leas";
+    }
 }
 
 <!DOCTYPE html>
@@ -32,7 +43,7 @@
                 <a id="left-menu" class="btn btn-inverse" href="#sidr">
                     <span id="menu-icon" class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
                 </a>
-                <span id="nav-logo">Find the Booty</span>
+                <span id="nav-logo"><a href="/" style="color:#FFF; text-decoration: none;">Find the Booty</a></span>
             </div>
         </nav>
 
@@ -48,7 +59,7 @@
         @* Menu sidebar information *@
         <div id="sidr">
             <ul>
-                <li id="homeNavLink"><a href="/">&lt;&lt;Captain Leas&gt;&gt;</a></li>
+                <li id="homeNavLink"><a href="/">@userFullName</a></li>
                 <li id="huntsNavLink"><a href="/Participating/"><span class="glyphicon glyphicon-search"></span> Hunts</a></li>
                 <li id="profileNavLink"><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                 <li id="leaderboardsNavLink"><a href="#"><span class="glyphicon glyphicon-th-list"></span> Leaderboards</a></li>
