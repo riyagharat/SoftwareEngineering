@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace FindTheBooty.Controllers
 {
 
-    public class HomeController : Controller
+    public class HomeController : DataController
     {
 
         public ActionResult Index()
@@ -31,18 +31,6 @@ namespace FindTheBooty.Controllers
         }
 
         // Anything below this line is added for placeholder purposes
-
-        public ActionResult Login()
-        {
-            ViewBag.Message = "Unnecessary";
-
-            return View();
-        }
-
-        public ActionResult Register()
-        {
-            return View();
-        }
 
         /// <summary>
         /// Use this Page for testing Back-end Code
