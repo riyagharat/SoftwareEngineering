@@ -1,4 +1,17 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    // check if the user is not logged in and accessing an unauthorized location
+    var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+    if (Session["LoggedUser"] == null
+    && (controller != "Home" && controller != "Error" && controller != "Account")
+    )
+    {
+        Session.Abandon();
+        Response.Redirect("~/");
+    }
+    //TODO: !!!PRODUCTION!!! Uncomment block of code above for production
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -24,6 +37,7 @@
         </nav>
 
         <div class="container body-content">
+
             @RenderBody()
             <hr />
             <footer>
@@ -40,7 +54,7 @@
                 <li id="leaderboardsNavLink"><a href="#"><span class="glyphicon glyphicon-th-list"></span> Leaderboards</a></li>
                 <li id="statisticsNavLink"><a href="#"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
                 <li id="adminSettingsNavLink"><a href="#"><span class="glyphicon glyphicon-cog"></span> Admin Settings</a></li>
-                <li id="logoutNavLink" class="danger"><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                <li id="logoutNavLink" class="danger"><a href="/Account/LogOut"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div>
 

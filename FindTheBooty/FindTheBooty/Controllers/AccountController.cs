@@ -91,6 +91,14 @@ namespace FindTheBooty.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
+        public ActionResult LogOut()
+        {
+            // tear down session info and redirect to splash screen
+            Session.Abandon();
+            return RedirectToAction("Index", "Home", new { LoggedOut = true });
+        }
+
         protected bool checkLogin(LoginViewModel model)
         {
             return (database.users.Any(user => user.email == model.Email && user.password == model.Password));

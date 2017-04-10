@@ -26,6 +26,17 @@
 </script>
 <!-- end parallax wumbotron -->
 
+@if (Request["LoggedOut"] == "True")
+{
+    <div class="alert alert-success">
+        <p>
+            <span class="glyphicon glyphicon-info-sign"></span>
+            You have successfully logged out!
+        </p>
+    </div>
+}
+
+
 <div class="row">
     <!-- template test column -->
     <div class="col-md-4">
