@@ -49,7 +49,6 @@ namespace FindTheBooty.Controllers
                 var tmpHuntId = huntRelation.hunt_hunt_id;
                 tmpHuntList.Add(
                     database.hunts.Where(h => h.hunt_id == tmpHuntId)
-                        .ToList()
                         .First()
                 );
             }
@@ -107,8 +106,61 @@ namespace FindTheBooty.Controllers
             Models.JoinableHuntList joinable = new Models.JoinableHuntList();
             if (error)
                 joinable.JoinHuntError = true;
-            joinable.HuntList = joinable.GetJoinableHunts();
+            joinable.HuntList = this.GetJoinableHunts( (Models.GeneratedModels.user)Session["LoggedUser"] );
             return View(joinable);
+        }
+
+        // Get list of Joinable hunts
+        public List<Models.Hunt> GetJoinableHunts(Models.GeneratedModels.user session = null)
+        {
+            List<Models.Hunt> huntList = new List<Models.Hunt>();
+            List<Models.GeneratedModels.hunt> joinableHuntList = new List<Models.GeneratedModels.hunt>();
+
+            // if user is not logged in, return empty list
+            if (session == null)
+                return huntList;
+
+            List<Models.GeneratedModels.user_hunt_relation> relations = database.user_hunt_relation.Where(u => u.user_user_id == session.user_id).ToList();
+            List<Models.GeneratedModels.hunt> hunts = database.hunts.OrderBy(h => h.hunt_id).ToList();
+
+            //TODO: find hunts that are not joined
+
+            foreach( var hunt in hunts)
+            {
+                Models.Hunt tmpHunt = new Models.Hunt();
+                tmpHunt.HuntID = hunt.hunt_id;
+                tmpHunt.HuntName = hunt.hunt_name;
+                tmpHunt.HuntType = hunt.hunt_type;
+                tmpHunt.MaxNumOfUsers = hunt.max_users;
+                //tmpHunt.MultiOrSingle = hunt.multi_single;
+                tmpHunt.SponsorID = Convert.ToInt64(hunt.sponsor_sponsor_id);
+                tmpHunt.TimeCreate = hunt.time_create;
+                tmpHunt.TimeExpire = hunt.time_expire;
+                tmpHunt.SeqOrFFA = hunt.seq_ffa;
+                huntList.Add(tmpHunt);
+
+            }
+
+            //Hunt huntItem = new Hunt();
+            //huntItem.HuntID = 1;
+            //huntItem.HuntName = "Bootylicious 3.0";
+            //huntItem.HuntType = "Timed Free-for-all";
+            //huntItem.TimeCreate = new System.DateTime(2017, 04, 08);
+            //huntItem.TimeExpire = new System.DateTime(2017, 04, 20);
+
+            //huntList.Add(huntItem);
+
+            //Hunt huntItem2 = new Hunt();
+            //huntItem2.HuntID = 2;
+            //huntItem2.HuntName = "Bootylicious 4.0";
+            //huntItem2.HuntType = "Timed Sequential";
+            //huntItem2.TimeCreate = new System.DateTime(2017, 04, 08);
+            //huntItem2.TimeExpire = new System.DateTime(2017, 04, 20);
+
+            //huntList.Add(huntItem2);
+
+            return huntList;
+
         }
 
         // GET: Participating/JoinHunt/{id of hunt to join}
