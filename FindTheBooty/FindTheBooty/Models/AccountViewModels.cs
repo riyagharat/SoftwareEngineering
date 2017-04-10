@@ -6,7 +6,7 @@ namespace FindTheBooty.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Email Address")]
         [EmailAddress]
         public string Email { get; set; }
 
