@@ -16,8 +16,16 @@ namespace FindTheBooty
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }/*,
+                constraints: new { controller = "Home|Account|Admin|Data|Manage|Participating" }*/
+                //TODO: !!!PRODUCTION!!! Uncomment lines above for production
             );
+            /*routes.MapRoute(
+                name: "404",
+                url: "{*url}",
+                defaults: new { controller = "Error", action = "NotFound" }
+            );*/
+            //TODO: !!!PRODUCTION!!! Uncomment lines above for production
         }
     }
 }
