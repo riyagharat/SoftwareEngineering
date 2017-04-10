@@ -114,11 +114,35 @@ namespace FindTheBooty.Controllers
         // GET: Participating/JoinHunt/{id of hunt to join}
         public ActionResult JoinHunt(int id = -1)
         {
-            if (id < 0)
+            Models.GeneratedModels.user userSession = (Models.GeneratedModels.user)Session["LoggedUser"];
+            Models.GeneratedModels.hunt hunt;
+
+            // check if id is invalid, user is not logged in or the hunt id doesn't exist
+            if (id < 0 
+                || Session["LoggedUser"] == null 
+                || database.hunts.Where(h => h.hunt_id == id).Count() <= 0 
+                || database.user_hunt_relation.Where(u => u.hunt_hunt_id == id 
+                    && u.user_user_id == userSession.user_id).Count() > 0
+                )
             {
                 return RedirectToAction("JoinableHunts", new { error = true});
             }
-            return View();
+            else
+            {
+                // add relation in table
+                Models.GeneratedModels.user_hunt_relation relation = new Models.GeneratedModels.user_hunt_relation();
+
+                relation.hunt_hunt_id = id;
+                relation.user_user_id = userSession.user_id;
+                relation.completed = Convert.ToString(false);
+                relation.active = Convert.ToString(true);
+
+                database.user_hunt_relation.Add(relation);
+                database.SaveChanges();
+
+                hunt = database.hunts.Where(h => h.hunt_id == id).First();
+            }
+            return View(hunt);
         }
 
         // GET: Participating/DoHunt{id of hunt to continue in}
