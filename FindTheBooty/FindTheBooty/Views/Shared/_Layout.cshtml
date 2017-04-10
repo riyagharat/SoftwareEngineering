@@ -1,13 +1,13 @@
 ﻿@{ 
     // check if the user is not logged in and accessing an unauthorized location
-    var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+    /*var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
     if (Session["LoggedUser"] == null
     && (controller != "Home" && controller != "Error" && controller != "Account")
     )
     {
         Session.Abandon();
         Response.Redirect("~/");
-    }
+    }*/
     //TODO: !!!PRODUCTION!!! Uncomment block of code above for production
 }
 
