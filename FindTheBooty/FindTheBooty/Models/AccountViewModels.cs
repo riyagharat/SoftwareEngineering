@@ -19,12 +19,22 @@ namespace FindTheBooty.Models
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "Player Name")]
-        public string DisplayName { get; set; }
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [EmailAddress]
+        [Display(Name = "Confirm Email")]
+        [Compare("Email", ErrorMessage = "The email and confirmation email do not match.")]
+        public string ConfirmEmail { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -33,8 +43,22 @@ namespace FindTheBooty.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Password")]
+        [Compare("Password", ErrorMessage ="The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Display Name")]
+        public string DisplayName { get; set; }
+
+        // may not use this?
+        [Display(Name = "Gender")]
+        public string Gender { get; set; }
+
+        [Display(Name = "Phone Number")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
+        public string PhoneNumber { get; set; }
+        
     }
 }

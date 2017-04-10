@@ -31,11 +31,6 @@ namespace FindTheBooty.Controllers
         }
 
         // Anything below this line is added for placeholder purposes
-        
-        public ActionResult Register()
-        {
-            return View();
-        }
 
         /// <summary>
         /// Use this Page for testing Back-end Code

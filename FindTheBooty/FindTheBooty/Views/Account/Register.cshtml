@@ -1,46 +1,181 @@
 ﻿@model FindTheBooty.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Come Aboard!";
 }
 
-<h2>@ViewBag.Title.</h2>
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
+<h3>Come Aboard, Matey!</h3>
+<form action="/Account/Register" method="post">
     @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(m => m.DisplayName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control" })
-        </div>
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "Enter your first name" })
+        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+
+        @*<label for="">First Name</label>
+        <input id="userFirstName" class="form-control" placeholder="Enter your first name" />*@
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Enter your last name" })
+        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+
+        @*<label for="">Last Name</label>
+        <input id="userLastName" class="form-control" placeholder="Enter your last name" />*@
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Enter your email address" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+        @*<label for="">Email</label>
+        <input id="userEmail" class="form-control" placeholder="Enter your email address" />
+        <span id="emailFeedback" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>*@
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
+        @Html.LabelFor(m => m.ConfirmEmail)
+        @Html.TextBoxFor(m => m.ConfirmEmail, new { @class = "form-control", @placeholder = "Re-enter your email address" })
+        @Html.ValidationMessageFor(m => m.ConfirmEmail, "", new { @class = "text-danger" })
+
+        @*<label for="">Confirm Email</label>
+        <input id="userEmailConf" class="form-control" placeholder="Re-enter your email address" />
+        <p id="emailMatchError" class="text-danger hidden">The entered emails do not match and can't be left empty!</p>
+        <span id="emailConfFeedback" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>*@
     </div>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter a password" })
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+        @*<label for="">Password</label>
+        <input type="password" id="userPassword" class="form-control" placeholder="Enter a password" />
+        <span id="passFeedback" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>*@
     </div>
-}
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword)
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Re-enter your password" })
+        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+
+        @*<label for="">Confirm Password</label>
+        <input type="password" id="userPasswordConf" class="form-control" placeholder="Re-enter your password" />
+        <p id="passMatchError" class="text-danger hidden">The entered passwords do not match and can't be left empty!</p>
+        <span id="passConfFeedback" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>*@
+    </div>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.DisplayName)
+        @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control", @placeholder = "Enter a public display name" })
+        @Html.ValidationMessageFor(m => m.DisplayName, "", new { @class = "text-danger" })
+
+        @*<label for="">Display Name</label>
+        <input id="userDispName" class="form-control" placeholder="Enter a public display name" />*@
+    </div>
+    @*//TODO: link gender with RegisterViewModel*@
+    <div class="form-group">
+        <label for="">Gender</label>
+        <select id="userGender" class="form-control">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber)
+        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "Enter your phone number: (XXX) XXX-XXXX" })
+        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+
+        @*<label for="">Phone Number</label>
+        <input id="userPhoneNum" class="form-control" placeholder="Enter your phone number: (XXX) XXX-XXXX" />*@
+    </div>
+    <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="reset" class="btn btn-danger">Clear Form</button>
+    </div>
+</form>
+
+@*<script>
+    $(document).ready(function () {
+
+        function validateEmailMatch() {
+            var userEmail = $("#userEmail").val();
+            var userEmailConf = $("#userEmailConf").val();
+
+            if (userEmail != userEmailConf
+                || userEmail == ""
+                || userEmailConf == "") {
+                // error case
+                $("#emailMatchError").removeClass('hidden');
+
+                $("#userEmail").parent().addClass('has-error');
+                $("#userEmail").parent().addClass('has-feedback');
+                $("#userEmailConf").parent().addClass('has-error');
+                $("#userEmailConf").parent().addClass('has-feedback');
+
+                $("#emailFeedback").removeClass('glyphicon-ok');
+                $("#emailConfFeedback").removeClass('glyphicon-ok');
+                $("#emailFeedback").addClass('glyphicon-remove');
+                $("#emailConfFeedback").addClass('glyphicon-remove');
+            } else {
+                // success case
+                $("#emailMatchError").addClass('hidden');
+
+                $("#userEmail").parent().removeClass('has-error');
+                $("#userEmailConf").parent().removeClass('has-error');
+
+                $("#userEmail").parent().addClass('has-success');
+                $("#userEmailConf").parent().addClass('has-success');
+
+                $("#emailFeedback").removeClass('glyphicon-remove');
+                $("#emailConfFeedback").removeClass('glyphicon-remove');
+                $("#emailFeedback").addClass('glyphicon-ok');
+                $("#emailConfFeedback").addClass('glyphicon-ok');
+            }
+        }
+
+        function validatePassMatch() {
+            var userPass = $("#userPassword").val();
+            var userPassConf = $("#userPasswordConf").val();
+
+            if (userPass != userPassConf
+                || userPass == ""
+                || userPassConf == "") {
+                // error case
+                $("#passMatchError").removeClass('hidden');
+
+                $("#userPassword").parent().addClass('has-error');
+                $("#userPassword").parent().addClass('has-feedback');
+                $("#userPasswordConf").parent().addClass('has-error');
+                $("#userPasswordConf").parent().addClass('has-feedback');
+
+                $("#passFeedback").removeClass('glyphicon-ok');
+                $("#passConfFeedback").removeClass('glyphicon-ok');
+                $("#passFeedback").addClass('glyphicon-remove');
+                $("#passConfFeedback").addClass('glyphicon-remove');
+            } else {
+                // success case
+                $("#passMatchError").addClass('hidden');
+
+                $("#userPassword").parent().removeClass('has-error');
+                $("#userPasswordConf").parent().removeClass('has-error');
+
+                $("#userPassword").parent().addClass('has-success');
+                $("#userPasswordConf").parent().addClass('has-success');
+
+                $("#passFeedback").removeClass('glyphicon-remove');
+                $("#passConfFeedback").removeClass('glyphicon-remove');
+                $("#passFeedback").addClass('glyphicon-ok');
+                $("#passConfFeedback").addClass('glyphicon-ok');
+            }
+        }
+
+        $("#userEmail").on('change', validateEmailMatch);
+        $("#userEmailConf").on('change', validateEmailMatch);
+
+        $("#userPassword").on('change', validatePassMatch);
+        $("#userPasswordConf").on('change', validatePassMatch);
+
+    });
+</script>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

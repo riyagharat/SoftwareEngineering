@@ -332,8 +332,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
@@ -342,7 +340,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Home\TestPage.cshtml" />
     <Content Include="Views\Admin\Admin.cshtml" />
     <Content Include="Views\Participating\JoinedHunts.cshtml" />
@@ -352,6 +350,7 @@
     <Content Include="Views\Participating\DoHunt.cshtml" />
     <Content Include="Views\Participating\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -65,10 +65,10 @@ namespace FindTheBooty.Controllers
                 newUser.display_name = model.DisplayName;
                 newUser.password = model.Password;
                 //Initialize Model with null items
-                newUser.first_name = "";
-                newUser.last_name = "";
+                newUser.first_name = model.FirstName;
+                newUser.last_name = model.LastName;
                 newUser.gender = "";
-                newUser.phone = 0;
+                newUser.phone = System.Convert.ToInt64(model.PhoneNumber);
                 newUser.points = 0;
                 newUser.rank = "";
                 newUser.num_hunts = 0;
@@ -76,7 +76,7 @@ namespace FindTheBooty.Controllers
                 newUser.user_type = "User";
 
                 // Add User to database by adding primary key
-                var latestUser = database.users.OrderBy(u => u.user_id ?? int.MaxValue.ToString()).First();
+                var latestUser = database.users.OrderBy(u => u.user_id ?? int.MaxValue.ToString()).ToList().Last();
                 newUser.user_id = (int.Parse(latestUser.user_id) + 1).ToString();
 
                 // Log user in and commit to database
@@ -95,6 +95,7 @@ namespace FindTheBooty.Controllers
         public ActionResult LogOut()
         {
             // tear down session info and redirect to splash screen
+            Session["LoggedUser"] = null;
             Session.Abandon();
             return RedirectToAction("Index", "Home", new { LoggedOut = true });
         }
