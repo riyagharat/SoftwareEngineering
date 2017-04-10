@@ -7,19 +7,17 @@ namespace FindTheBooty.Models
     public class Hunt
     {
         // hunt identifier information
-        public int HuntID { get; set; }
-        public int SponsorID { get; set; }
+        public long HuntID { get; set; }
+        public long SponsorID { get; set; }
         public string HuntName { get; set; }
 
         // hunt type information
         public string HuntType { get; set; } 
+        public string SeqOrFFA { get; set; }
         public System.DateTime TimeCreate { get; set; }
         public System.DateTime TimeExpire { get; set; }
         public int MaxNumOfUsers { get; set; }
         public bool MultiOrSingle { get; set; }
-
-        // calculated timeLeft in seconds
-        public string EndDateTime { get; set; }
     }
 
     // Generic Treasure Model
@@ -39,40 +37,6 @@ namespace FindTheBooty.Models
         public bool DoHuntError { get; set; }   // used for invalid hunt access
         public List<Hunt> HuntList { get; set; }
 
-        // Poll DB for hunts joined and participating
-        public List<Hunt> GetJoinedHunts()
-        {
-            HuntList = new List<Models.Hunt>();
-            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["FTBConnection"].ConnectionString;
-
-            // open db connection and build list of hunts
-            using (System.Data.SqlClient.SqlConnection db = new System.Data.SqlClient.SqlConnection(connectionString))
-            using (System.Data.SqlClient.SqlCommand command = new System.Data.SqlClient.SqlCommand("", db))
-            {
-                db.Open();
-                command.CommandText = 
-                    "SELECT hunt.hunt_id, hunt.hunt_name, hunt.hunt_type, hunt.time_expire " +
-                    "FROM dbo.hunt hunt, dbo.user_hunt_relation relation " + 
-                    "WHERE(relation.hunt_hunt_id = hunt.hunt_id AND relation.user_user_id = @Id); ";
-                command.Parameters.AddWithValue("@Id", 1); //TODO: Replace with user ID from Session/Cookie
-                System.Data.SqlClient.SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    FindTheBooty.Models.Hunt hunt = new FindTheBooty.Models.Hunt();
-                    //TODO: loop, building list of Hunts for JoinedHuntList model
-                    hunt.HuntID = System.Convert.ToInt32(reader["hunt_id"]);
-                    hunt.HuntName = reader["hunt_name"].ToString();
-                    hunt.HuntType = reader["hunt_type"].ToString();
-                    hunt.TimeExpire = System.Convert.ToDateTime(reader["time_expire"].ToString());
-                    HuntList.Add(hunt);
-                }
-            }
-
-            // return list of hunts the user has joined
-            return HuntList;
-
-        }
     }
 
     public class JoinableHuntList

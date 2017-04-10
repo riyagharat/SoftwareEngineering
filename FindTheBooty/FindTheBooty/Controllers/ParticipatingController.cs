@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace FindTheBooty.Controllers
 {
-    public class ParticipatingController : Controller
+    public class ParticipatingController : DataController
     {
 
         // GET: Participating
@@ -23,9 +23,82 @@ namespace FindTheBooty.Controllers
             Models.JoinedHuntList joined = new Models.JoinedHuntList();
             if (error)
                 joined.DoHuntError = true;
-            joined.HuntList = joined.GetJoinedHunts();
+            joined.HuntList = this.GetJoinedHunts( (Models.GeneratedModels.user)Session["LoggedUser"] );
 
             return View(joined);
+        }
+
+        // Poll DB for hunts joined and participating
+        public List<Models.Hunt> GetJoinedHunts(Models.GeneratedModels.user session = null)
+        {
+            List<Models.Hunt> HuntList = new List<Models.Hunt>();
+            List<Models.GeneratedModels.hunt> tmpHuntList = new List<Models.GeneratedModels.hunt>();
+
+            // if no session was passed, return empty list
+            if (session == null)
+                return HuntList;
+
+            // snag user hunt relation for logged in user
+            List<Models.GeneratedModels.user_hunt_relation> joinedHuntRelation = database.user_hunt_relation.Where(u => u.user_user_id == session.user_id)
+                .OrderBy(h => h.hunt_hunt_id)
+                .ToList();
+
+            // pull hunt data for each joined hunt
+            foreach (var huntRelation in joinedHuntRelation)
+            {
+                var tmpHuntId = huntRelation.hunt_hunt_id;
+                tmpHuntList.Add(
+                    database.hunts.Where(h => h.hunt_id == tmpHuntId)
+                        .ToList()
+                        .First()
+                );
+            }
+
+            // build Hunt list using Participating model
+            foreach(var hunt in tmpHuntList)
+            {
+                Models.Hunt tmpHunt = new Models.Hunt();
+                tmpHunt.HuntID = hunt.hunt_id;
+                tmpHunt.HuntName = hunt.hunt_name;
+                tmpHunt.HuntType = hunt.hunt_type;
+                tmpHunt.MaxNumOfUsers = hunt.max_users;
+                //tmpHunt.MultiOrSingle = hunt.multi_single;
+                tmpHunt.SponsorID = Convert.ToInt64(hunt.sponsor_sponsor_id);
+                tmpHunt.TimeCreate = hunt.time_create;
+                tmpHunt.TimeExpire = hunt.time_expire;
+                tmpHunt.SeqOrFFA = hunt.seq_ffa;
+                HuntList.Add(tmpHunt);
+            }
+
+            //string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["FTBConnection"].ConnectionString;
+
+            //// open db connection and build list of hunts
+            //using (System.Data.SqlClient.SqlConnection db = new System.Data.SqlClient.SqlConnection(connectionString))
+            //using (System.Data.SqlClient.SqlCommand command = new System.Data.SqlClient.SqlCommand("", db))
+            //{
+            //    db.Open();
+            //    command.CommandText = 
+            //        "SELECT hunt.hunt_id, hunt.hunt_name, hunt.hunt_type, hunt.time_expire " +
+            //        "FROM dbo.hunt hunt, dbo.user_hunt_relation relation " + 
+            //        "WHERE(relation.hunt_hunt_id = hunt.hunt_id AND relation.user_user_id = @Id); ";
+            //    command.Parameters.AddWithValue("@Id", session.user_id); //TODO: Replace with user ID from Session/Cookie
+            //    System.Data.SqlClient.SqlDataReader reader = command.ExecuteReader();
+
+            //    while (reader.Read())
+            //    {
+            //        FindTheBooty.Models.Hunt hunt = new FindTheBooty.Models.Hunt();
+            //        //TODO: loop, building list of Hunts for JoinedHuntList model
+            //        hunt.HuntID = System.Convert.ToInt32(reader["hunt_id"]);
+            //        hunt.HuntName = reader["hunt_name"].ToString();
+            //        hunt.HuntType = reader["hunt_type"].ToString();
+            //        hunt.TimeExpire = System.Convert.ToDateTime(reader["time_expire"].ToString());
+            //        HuntList.Add(hunt);
+            //    }
+            //}
+
+            // return list of hunts the user has joined
+            return HuntList;
+
         }
 
         // GET: Participating/JoinableHunts
