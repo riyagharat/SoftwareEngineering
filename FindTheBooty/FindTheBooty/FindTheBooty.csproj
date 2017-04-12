@@ -206,6 +206,7 @@
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LeaderboardController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ParticipatingController.cs" />
     <Compile Include="Global.asax.cs">
@@ -351,6 +352,11 @@
     <Content Include="Views\Participating\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Leaderboard\Index.cshtml" />
+    <Content Include="Views\Leaderboard\Points.cshtml" />
+    <Content Include="Views\Leaderboard\Treasures.cshtml" />
+    <Content Include="Views\Leaderboard\Rank.cshtml" />
+    <Content Include="Views\Leaderboard\Hunts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
