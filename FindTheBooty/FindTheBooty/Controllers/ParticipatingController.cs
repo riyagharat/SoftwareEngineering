@@ -190,6 +190,20 @@ namespace FindTheBooty.Controllers
                 relation.active = Convert.ToString(true);
 
                 database.user_hunt_relation.Add(relation);
+
+                // lookup all treasures and build relations
+                List<Models.GeneratedModels.treasure> huntTreasures = database.treasures.Where(t => t.hunt_hunt_id == id).ToList();
+                foreach(Models.GeneratedModels.treasure treasure in huntTreasures)
+                {
+                    Models.GeneratedModels.user_treasure_relation tmpRelation = new Models.GeneratedModels.user_treasure_relation();
+                    tmpRelation.user_user_id = userSession.user_id;
+                    tmpRelation.treasure_hunt_hunt_id = id;
+                    tmpRelation.treasure_treasure_id = treasure.treasure_id;
+                    tmpRelation.found = false.ToString();
+                    database.user_treasure_relation.Add(tmpRelation);
+                }
+
+                // commit relation changes to the db
                 database.SaveChanges();
 
                 hunt = database.hunts.Where(h => h.hunt_id == id).First();
@@ -204,7 +218,37 @@ namespace FindTheBooty.Controllers
             {
                 return RedirectToAction("JoinedHunts", new { error = true });
             }
-            return View();
+            Models.GeneratedModels.hunt hunt = database.hunts.Where(h => h.hunt_id == id).First();
+            if (hunt == null)
+            {
+                return RedirectToAction("JoinedHunts", new { error = true });
+            }
+
+            // initialize variables and grab/assign hunt, treasure and treasure relation data
+            Models.GeneratedModels.user session = (Models.GeneratedModels.user)Session["LoggedUser"];
+            List<Models.Treasure> actualTreasureList = new List<Models.Treasure>();
+
+            List<Models.GeneratedModels.treasure> treasureDetailList = database.treasures.Where(r => r.hunt_hunt_id == id).ToList();
+            List<Models.GeneratedModels.user_treasure_relation> treasureRelationList = database.user_treasure_relation
+                .Where(r => r.treasure_hunt_hunt_id == id && r.user_user_id == session.user_id).ToList();
+
+            foreach(Models.GeneratedModels.treasure treasure in treasureDetailList)
+            {
+                Models.Treasure tmpTreasure = new Models.Treasure();
+                tmpTreasure.Id = treasure.treasure_id;
+                tmpTreasure.Points = treasure.points;
+                tmpTreasure.Description = treasure.description;
+                tmpTreasure.Found = Convert.ToBoolean(treasureRelationList.Where(r => r.treasure_treasure_id == treasure.treasure_id).First().found);
+                tmpTreasure.Image = "/Content/Images/" + treasure.hunt_hunt_id + "/" + treasure.treasure_id + ".jpg";
+                actualTreasureList.Add(tmpTreasure);
+            }
+
+            // build ViewModel
+            Models.DoHuntList doHuntList = new Models.DoHuntList();
+            doHuntList.Hunt = hunt; // assign associated hunt info
+            doHuntList.TreasureList = actualTreasureList;
+
+            return View(doHuntList);
         }
 
         // POST: Participating/UploadQR
@@ -246,6 +290,10 @@ namespace FindTheBooty.Controllers
                 QRTreasureId = QRValueSplit[1];
 
                 //TODO: Connect to DB to link treasure found for hunt
+                //TODO: Add treasure points to user points
+                //TODO: Update found treasure count in users
+                //TODO: Check conditionals for award/badge
+
                 response["huntId"] =  QRHuntId;
                 response["treasureId"] = QRTreasureId;
                 response["success"] = 1;

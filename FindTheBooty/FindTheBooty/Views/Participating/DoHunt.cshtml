@@ -1,6 +1,6 @@
-﻿
+﻿@model FindTheBooty.Models.DoHuntList
 @{
-    var HuntName = "<<HUNT NAME>>";
+    var HuntName = Model.Hunt.hunt_name;
     var HuntID = Request.RequestContext.RouteData.Values["id"];
 
     ViewBag.Title = HuntName;
@@ -62,6 +62,8 @@
         </p>
 
         <hr />
+
+        @Html.DisplayFor(Model => Model.TreasureList)
 
         <div class="row">
             <div id="1-found" class="col-md-4 col-sm-12 col-xs-12">

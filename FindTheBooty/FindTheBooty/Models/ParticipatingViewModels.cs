@@ -51,7 +51,8 @@ namespace FindTheBooty.Models
     // used in the DoHunt action
     public class DoHuntList
     {
-        public Hunt Hunt { get; set; }  // hunt information
+        public Models.GeneratedModels.hunt Hunt { get; set; }  // hunt information
         public List<Treasure> TreasureList { get; set; } // list of treasures for the hunt
     }
+
 }
