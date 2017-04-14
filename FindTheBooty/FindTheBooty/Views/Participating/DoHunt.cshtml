@@ -41,9 +41,9 @@
         <h3>Your Hunt Progress</h3>
         <em>How much progress have you made in @HuntName?</em>
         <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 66%;">
-                66%
-                <span class="sr-only">66% Complete</span>
+            <div class="progress-bar" role="progressbar" style="min-width: 2em; width: @Model.PercentageComplete%;">
+                @Model.PercentageComplete%
+                <span class="sr-only">@Model.PercentageComplete% Complete</span>
             </div>
         </div>
         @*
@@ -63,9 +63,11 @@
 
         <hr />
 
-        @Html.DisplayFor(Model => Model.TreasureList)
+        <div class="row"></div>
+            @Html.DisplayFor(Model => Model.TreasureList)
+        </div>
 
-        <div class="row">
+        @*<div class="row">
             <div id="1-found" class="col-md-4 col-sm-12 col-xs-12">
                 <p><strong>Name: </strong> Treasure 1</p>
                 <p>
@@ -114,7 +116,7 @@
                 <div class="clearfix"></div>
                 <img class="img-responsive" src="http://placehold.it/400x400" />
             </div>
-        </div>
+        </div>*@
 
         <script>
             // START filter button listeners

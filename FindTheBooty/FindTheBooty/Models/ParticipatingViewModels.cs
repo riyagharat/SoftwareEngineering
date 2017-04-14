@@ -53,6 +53,7 @@ namespace FindTheBooty.Models
     {
         public Models.GeneratedModels.hunt Hunt { get; set; }  // hunt information
         public List<Treasure> TreasureList { get; set; } // list of treasures for the hunt
+        public int PercentageComplete { get; set; } // percentage of the hunt complete
     }
 
 }

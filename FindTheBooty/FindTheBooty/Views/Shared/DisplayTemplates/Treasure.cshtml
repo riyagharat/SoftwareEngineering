@@ -1,5 +1,66 @@
 ﻿@model FindTheBooty.Models.Treasure
 
-Treasure ID: @Model.Id
-Treasure Description: @Model.Description
-Treasure Points: @Model.Points
+@{ 
+    string foundString;
+    if (Model.Found == true)
+    {
+        foundString = "found";
+    }
+    else
+    {
+        foundString = "missing";
+    }
+
+    if(Model.Description == "")
+    {
+        Model.Description = "No Description Set";
+    }
+}
+
+
+<div id="@Model.Id-@foundString" class="col-md-4 col-sm-12 col-xs-12 treasure-box">
+
+    <table class="table borderless no-padding">
+        <tr>
+            <td>
+                <p><strong>Name: </strong> @Model.Description</p>
+                <p>
+                    <strong>Status: </strong>
+                    @{
+                        if (Model.Found)
+                        {
+                            <span style="color: green;">
+                                Found <span class="glyphicon glyphicon-ok"></span>
+                            </span>
+                        }
+                        else
+                        {
+                            <span style="color: darkred;">
+                                Missing <span class="glyphicon glyphicon-remove"></span>
+                            </span>
+                        }
+                    }
+                </p>
+            </td>
+
+
+            <td style="text-align: right;">
+                @if (!Model.Found)
+                {
+                    <button id="@Model.Id-scan" class="btn btn-default"><span class="glyphicon glyphicon-qrcode"></span> Scan Treasure</button>
+                }
+            </td>
+        </tr>
+    </table>
+
+    <div class="clearfix"></div>
+    <img class="img-responsive" src="@Model.Image" />
+
+
+
+    <div class="col-sm-12 col-xs-12 visible-sm visible-xs hidden-md hidden-lg">
+        <hr />
+    </div>
+
+
+</div>
