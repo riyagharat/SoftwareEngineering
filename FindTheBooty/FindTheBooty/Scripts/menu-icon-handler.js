@@ -1,10 +1,8 @@
 ﻿// on page load, assign handler functions
 $(document).ready(function () {
-    $('#left-menu').sidr();
 
-    // menu icon handler
     var menuFlag = false;
-    $('#left-menu').bind('touchstart click', function () {
+    $('#left-menu').sidr().bind('touchstart click', function () {
         var iconObj = $('#menu-icon');
         const hamburger = 'glyphicon-menu-hamburger';
         const close = 'glyphicon-arrow-left';
