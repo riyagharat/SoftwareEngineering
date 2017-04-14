@@ -288,11 +288,13 @@ namespace FindTheBooty.Controllers
                 QRValueSplit = QRValue.Split('-');
                 QRHuntId = QRValueSplit[0];
                 QRTreasureId = QRValueSplit[1];
+                long QRHuntIdLong = Convert.ToInt64(QRHuntId);
+                long QRTreasureIdLong = Convert.ToInt64(QRTreasureId);
 
                 // Connect to DB to link treasure found for hunt
                 Models.GeneratedModels.user_treasure_relation relation = database.user_treasure_relation
-                    .Where(r => r.treasure_treasure_id == Convert.ToInt64(QRTreasureId)
-                        && r.treasure_hunt_hunt_id == Convert.ToInt64(QRHuntId)
+                    .Where(r => r.treasure_treasure_id == QRTreasureIdLong
+                        && r.treasure_hunt_hunt_id == QRHuntIdLong
                         && r.user_user_id == session.user_id)
                     .First();
 
