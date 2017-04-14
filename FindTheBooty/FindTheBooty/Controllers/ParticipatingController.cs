@@ -69,32 +69,6 @@ namespace FindTheBooty.Controllers
                 HuntList.Add(tmpHunt);
             }
 
-            //string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["FTBConnection"].ConnectionString;
-
-            //// open db connection and build list of hunts
-            //using (System.Data.SqlClient.SqlConnection db = new System.Data.SqlClient.SqlConnection(connectionString))
-            //using (System.Data.SqlClient.SqlCommand command = new System.Data.SqlClient.SqlCommand("", db))
-            //{
-            //    db.Open();
-            //    command.CommandText = 
-            //        "SELECT hunt.hunt_id, hunt.hunt_name, hunt.hunt_type, hunt.time_expire " +
-            //        "FROM dbo.hunt hunt, dbo.user_hunt_relation relation " + 
-            //        "WHERE(relation.hunt_hunt_id = hunt.hunt_id AND relation.user_user_id = @Id); ";
-            //    command.Parameters.AddWithValue("@Id", session.user_id); //TODO: Replace with user ID from Session/Cookie
-            //    System.Data.SqlClient.SqlDataReader reader = command.ExecuteReader();
-
-            //    while (reader.Read())
-            //    {
-            //        FindTheBooty.Models.Hunt hunt = new FindTheBooty.Models.Hunt();
-            //        //TODO: loop, building list of Hunts for JoinedHuntList model
-            //        hunt.HuntID = System.Convert.ToInt32(reader["hunt_id"]);
-            //        hunt.HuntName = reader["hunt_name"].ToString();
-            //        hunt.HuntType = reader["hunt_type"].ToString();
-            //        hunt.TimeExpire = System.Convert.ToDateTime(reader["time_expire"].ToString());
-            //        HuntList.Add(hunt);
-            //    }
-            //}
-
             // return list of hunts the user has joined
             return HuntList;
 
@@ -133,13 +107,13 @@ namespace FindTheBooty.Controllers
             using (System.Data.SqlClient.SqlCommand command = new System.Data.SqlClient.SqlCommand(query, db))
             {
                 db.Open();
-                command.Parameters.AddWithValue("@Id", session.user_id); //TODO: Replace with user ID from Session/Cookie
+                command.Parameters.AddWithValue("@Id", session.user_id);
                 System.Data.SqlClient.SqlDataReader reader = command.ExecuteReader();
 
+                // loop and build huntList for joinable hunts
                 while (reader.Read())
                 {
                     FindTheBooty.Models.Hunt hunt = new FindTheBooty.Models.Hunt();
-                    //TODO: loop, building list of Hunts for JoinedHuntList model
                     hunt.HuntID = System.Convert.ToInt32(reader["hunt_id"]);
                     hunt.HuntName = reader["hunt_name"].ToString();
                     hunt.HuntType = reader["hunt_type"].ToString();
@@ -215,10 +189,13 @@ namespace FindTheBooty.Controllers
         // GET: Participating/DoHunt{id of hunt to continue in}
         public ActionResult DoHunt(int id = -1)
         {
+            // check if hunt ID is in a valid format
             if (id < 0)
             {
                 return RedirectToAction("JoinedHunts", new { error = true });
             }
+
+            // check if hunt exists
             Models.GeneratedModels.hunt hunt = database.hunts.Where(h => h.hunt_id == id).First();
             if (hunt == null)
             {
@@ -249,6 +226,7 @@ namespace FindTheBooty.Controllers
                 if(tmpTreasure.Found == true)
                     ++found;
 
+                // assign creator uploaded image file, if exists, otherwise placeholder image
                 if (System.IO.File.Exists("/Content/Images/" + treasure.hunt_hunt_id + "/" + treasure.treasure_id + ".jpg"))
                 {
                     tmpTreasure.Image = "/Content/Images/" + treasure.hunt_hunt_id + "/" + treasure.treasure_id + ".jpg";
@@ -282,6 +260,7 @@ namespace FindTheBooty.Controllers
                 0  -- Image failed to upload
                 1  -- Upload/processing success
             */
+            Models.GeneratedModels.user session = (Models.GeneratedModels.user)Session["LoggedUser"];
             var response = new Dictionary<string, object>();
             response.Add("huntId", -1);
             response.Add("treasureId", -1);
@@ -310,10 +289,31 @@ namespace FindTheBooty.Controllers
                 QRHuntId = QRValueSplit[0];
                 QRTreasureId = QRValueSplit[1];
 
-                //TODO: Connect to DB to link treasure found for hunt
-                //TODO: Add treasure points to user points
-                //TODO: Update found treasure count in users
-                //TODO: Check conditionals for award/badge
+                // Connect to DB to link treasure found for hunt
+                Models.GeneratedModels.user_treasure_relation relation = database.user_treasure_relation
+                    .Where(r => r.treasure_treasure_id == Convert.ToInt64(QRTreasureId)
+                        && r.treasure_hunt_hunt_id == Convert.ToInt64(QRHuntId)
+                        && r.user_user_id == session.user_id)
+                    .First();
+
+                // if the treasure has not been found, mark as found and update user points accordingly
+                if (relation.found == "False")
+                {
+                    relation.found = true.ToString();
+
+                    Models.GeneratedModels.treasure treasure = database.treasures
+                        .Where(t => t.treasure_id == relation.treasure_treasure_id)
+                        .First();
+
+                    Models.GeneratedModels.user currentUser = database.users.Where(u => u.user_id == session.user_id).First();
+                    currentUser.points += treasure.points; 
+                    currentUser.num_treasures += 1;
+
+                    //TODO: Check conditionals for award/badge
+
+                }
+
+                database.SaveChanges();
 
                 response["huntId"] =  QRHuntId;
                 response["treasureId"] = QRTreasureId;
