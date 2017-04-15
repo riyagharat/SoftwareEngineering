@@ -26,5 +26,35 @@ namespace FindTheBooty.Controllers
             ViewBag.RandomCharacter = (char)('A' + ViewBag.RandomNumber);
             return View();
         }
+
+        public ActionResult BulkImport()
+        {
+            return View();
+        }
+        public ActionResult BulkExport()
+        {
+            return View();
+        }
+        public ActionResult TreasuresFound()
+        {
+            return View();
+        }
+        public ActionResult SystemEngagement()
+        {
+            return View();
+        }
+        public ActionResult TotalPlayTime()
+        {
+            return View();
+        }
+        public ActionResult TypesOfHunt()
+        {
+            return View();
+        }
+        public ActionResult UpgradeUser()
+        {
+            return View();
+        }
+
     }
 }

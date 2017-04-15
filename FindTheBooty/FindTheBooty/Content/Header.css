@@ -108,3 +108,43 @@ hr {
 .danger .glyphicon {
   color: #DD0000 !important;
 }
+
+.great-vibes{
+    font-family: 'Great Vibes', cursive;
+}
+
+.tangerine{
+    font-family: 'Tangerine', cursive;
+}
+
+.italianno{
+    font-family: 'Italianno', cursive;
+}
+
+.la-belle-aurore{
+    font-family: 'La Belle Aurore', cursive;
+}
+
+.bilbo-swash-caps{
+    font-family: 'Bilbo Swash Caps', cursive;
+}
+
+.dawning-of-a-new-day{
+    font-family: 'Dawning of a New Day', cursive; 
+}
+
+
+/* --- SEARCH BAR --- */
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+/* --- END SEARCH BAR --- */
