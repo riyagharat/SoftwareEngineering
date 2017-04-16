@@ -56,6 +56,7 @@ namespace FindTheBooty.Controllers
         {
             return View();
         }
+        [HttpPost]
         public ActionResult UpgradeUser(UpgradeUserViewModel model)
         {
             return View(model);
