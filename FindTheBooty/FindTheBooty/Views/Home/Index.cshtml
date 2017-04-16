@@ -5,7 +5,7 @@
 <!-- Start parallax wumbotron -->
 
 <div class="splashbg"></div>
-<div class="wumbotron">
+<div class="wumbotron1">
     <div class="row">
         <div class="col-md-4">
             <center>
@@ -18,7 +18,7 @@
 </div>
 
 <script>
-    var jumboHeight = $('.wumbotron').outerHeight();
+    var jumboHeight = $('.wumbotron1').outerHeight();
     function parallax() {
         var scrolled = $(window).scrollTop();
         $('.splashbg').css('height', (jumboHeight - scrolled) + 'px');
@@ -38,15 +38,21 @@
         <a class="btn btn-primary btn-lg outline kaushanScript" href="/Home/Register">Register</a>
     </p>
     <div class="col-lg-12">
-    <p>
+        <p>
         Find The Booty is a free, web-based treasure hunting game created by Javalanche Studios.
         All you need is a camera and an internet connection! Login and start playing now!
-        <a href="/Home/About">Learn More >></a>
-    </p>
         
-        
+        </p>
+        <a href="/Home/About">Learn More >></a>  
+    </div>
 </div>
-</div>
+
+
+
+
+
+
+    
 
 
 
