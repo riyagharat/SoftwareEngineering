@@ -29,11 +29,11 @@ font-family: 'Dawning of a New Day', cursive; */
   z-index: -1;
 }
 
-.wumbobg1 {
+.wumbobg2 {
   background: url('./Images/schooner.jpg') no-repeat center center;
   position: fixed;
   width: 100%;
-  height: 350px; 
+  height: 200px; 
   top:0;
   left:0;
   z-index: -1;
@@ -41,7 +41,7 @@ font-family: 'Dawning of a New Day', cursive; */
 
 .wumbotron1 {
   margin-bottom: 0px;
-  height: 300px;
+  height: 350px;
   color: white;
   
   text-shadow: black 0.1em 0.1em 0.1em;
