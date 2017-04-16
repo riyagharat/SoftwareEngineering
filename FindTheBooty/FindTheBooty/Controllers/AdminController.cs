@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using FindTheBooty.Models;
 
 namespace FindTheBooty.Controllers
 {
@@ -54,6 +55,10 @@ namespace FindTheBooty.Controllers
         public ActionResult UpgradeUser()
         {
             return View();
+        }
+        public ActionResult UpgradeUser(UpgradeUserViewModel model)
+        {
+            return View(model);
         }
 
     }
