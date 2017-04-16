@@ -1,30 +1,3 @@
-﻿@{
-    ViewBag.Title = "Splash Page";
-}
-
-<!-- Start parallax wumbotron i hope this shit works -->
-
-<div class="splashbg"></div>
-<div class="wumbotron">
-    
-    <img src="~/Content/Images/ms-icon-150x150.png" />
-    <h1 class="kaushanScript">Splash Page</h1>
-    <p class="lead">Arr matey! Let's find some booty!</p>
-    
-</div>
-
-<script>
-    var jumboHeight = $('.wumbotron').outerHeight();
-    function parallax() {
-        var scrolled = $(window).scrollTop();
-        $('.splashbg').css('height', (jumboHeight - scrolled) + 'px');
-    }
-
-    $(window).scroll(function (e) {
-        parallax();
-    });
-</script>
-<!-- end parallax wumbotron -->
 
 @if (Request["LoggedOut"] == "True")
 {
@@ -47,12 +20,25 @@
         <p><a class="btn btn-default" href="/Account/Login">Check it out &raquo;</a></p>
     </div>
     <!-- end template test column -->
-
-    <div class="col-md-4">
-        <h2>Register Test Page</h2>
+@if (Request["LoggedOut"] == "True")
+{
+    <div class="alert alert-success">
         <p>
-            This here is a link to the register placeholder test page. Click the button below to check it out!
+            <span class="glyphicon glyphicon-info-sign"></span>
+            You have successfully logged out!
         </p>
-        <p><a class="btn btn-default" href="/Account/Register">Check it out &raquo;</a></p>
     </div>
-</div>
+}
+
+
+<div class="row">
+    <!-- template test column -->
+    <div class="col-md-4">
+        <h2>Login Test Page</h2>
+        <p>
+            This here is a link to the login placeholder test page. Click the button below to check it out!
+        </p>
+        <p><a class="btn btn-default" href="/Account/Login">Check it out &raquo;</a></p>
+    </div>
+    <!-- end template test column -->
+        <a href="/Home/About">Learn More >></a>  
