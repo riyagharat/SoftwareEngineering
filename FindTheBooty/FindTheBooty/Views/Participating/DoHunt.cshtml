@@ -184,6 +184,13 @@
                         setTimeout(function () {
                             $("#scan-progress").hide()
                         }, 1000);
+                        if (e.responseJSON.success == -2) {
+                            statusMsg = "You are not currently participating in the hunt provided!";
+                            $("#modal-alert").removeClass('alert-info');
+                            $("#modal-alert").removeClass('alert-success');
+                            $("#modal-alert").addClass('alert-danger');
+                            $("#modal-alert-content").html(statusMsg);
+                        }
                         if (e.responseJSON.success == -1) {
                             statusMsg = "QR Code did not match format.";
                             $("#modal-alert").removeClass('alert-info');

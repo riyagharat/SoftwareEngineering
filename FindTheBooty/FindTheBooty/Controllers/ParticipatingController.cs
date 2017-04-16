@@ -256,6 +256,7 @@ namespace FindTheBooty.Controllers
         {
             // initialize response object
             /* success value description:
+                -2 -- No relation found --> user not participating in this hunt
                 -1 -- Invalid format/QR Code not found
                 0  -- Image failed to upload
                 1  -- Upload/processing success
@@ -291,12 +292,25 @@ namespace FindTheBooty.Controllers
                 long QRHuntIdLong = Convert.ToInt64(QRHuntId);
                 long QRTreasureIdLong = Convert.ToInt64(QRTreasureId);
 
+                Models.GeneratedModels.user_treasure_relation relation;
+
                 // Connect to DB to link treasure found for hunt
-                Models.GeneratedModels.user_treasure_relation relation = database.user_treasure_relation
+                List<Models.GeneratedModels.user_treasure_relation> relations = database.user_treasure_relation
                     .Where(r => r.treasure_treasure_id == QRTreasureIdLong
                         && r.treasure_hunt_hunt_id == QRHuntIdLong
                         && r.user_user_id == session.user_id)
-                    .First();
+                    .ToList();
+
+                if (relations.Count < 1)
+                {
+                    response["success"] = -2;
+                    return Json(response);
+                }
+                else
+                {
+                    relation = relations.First();
+                }
+
 
                 // if the treasure has not been found, mark as found and update user points accordingly
                 if (relation.found == "False")
