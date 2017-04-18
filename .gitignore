@@ -12,3 +12,84 @@ FindTheBooty/\.vs/config/applicationhost\.config
 
 FindTheBooty/\.vs/FindTheBooty/v14/\.suo
 /FindTheBooty/FindTheBooty/Properties/PublishProfiles
+
+
+# Everything below here is copied from:
+# https://gist.github.com/indyfromoz/4109296
+# With the path to the solution appended
+
+###################
+# compiled source #
+###################
+FindTheBooty/*.com
+FindTheBooty/*.class
+FindTheBooty/*.dll
+FindTheBooty/*.exe
+FindTheBooty/*.pdb
+FindTheBooty/*.dll.config
+FindTheBooty/*.cache
+FindTheBooty/*.suo
+# Include dlls if they’re in the NuGet packages directory
+!FindTheBooty//packages/*/lib/*.dll
+!FindTheBooty//packages/*/lib/*/*.dll
+# Include dlls if they're in the CommonReferences directory
+!FindTheBooty/*CommonReferences/*.dll
+####################
+# VS Upgrade stuff #
+####################
+FindTheBooty/UpgradeLog.XML
+FindTheBooty/_UpgradeReport_Files/
+###############
+# Directories #
+###############
+FindTheBooty/bin/
+FindTheBooty/obj/
+FindTheBooty/TestResults/
+###################
+# Web publish log #
+###################
+FindTheBooty/*.Publish.xml
+#############
+# Resharper #
+#############
+FindTheBooty//_ReSharper.*
+FindTheBooty/*.ReSharper.*
+############
+# Packages #
+############
+# it’s better to unpack these files and commit the raw source
+# git has its own built in compression methods
+FindTheBooty/*.7z
+FindTheBooty/*.dmg
+FindTheBooty/*.gz
+FindTheBooty/*.iso
+FindTheBooty/*.jar
+FindTheBooty/*.rar
+FindTheBooty/*.tar
+FindTheBooty/*.zip
+######################
+# Logs and databases #
+######################
+FindTheBooty/*.log
+FindTheBooty/*.sqlite
+# OS generated files #
+######################
+FindTheBooty/.DS_Store?
+FindTheBooty/ehthumbs.db
+FindTheBooty/Icon?
+FindTheBooty/Thumbs.db
+FindTheBooty/[Bb]in
+FindTheBooty/[Oo]bj
+FindTheBooty/[Tt]est[Rr]esults
+FindTheBooty/*.suo
+FindTheBooty/*.user
+FindTheBooty/*.[Cc]ache
+FindTheBooty/*[Rr]esharper*
+FindTheBooty/packages
+FindTheBooty/NuGet.exe
+FindTheBooty/_[Ss]cripts
+FindTheBooty/*.exe
+FindTheBooty/*.dll
+FindTheBooty/*.nupkg
+FindTheBooty/*.ncrunchsolution
+FindTheBooty/*.dot[Cc]over
