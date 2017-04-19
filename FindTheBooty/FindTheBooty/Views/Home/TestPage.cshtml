@@ -27,12 +27,17 @@
     if (ViewBag.treasureList != null)
     {
         List<FindTheBooty.Models.GeneratedModels.treasure> treausreList = (List<FindTheBooty.Models.GeneratedModels.treasure>)ViewBag.treasureList;
-        <ul>
+        <div class="row">
             @foreach (FindTheBooty.Models.GeneratedModels.treasure treasure in treausreList)
             {
-                string temp = treasure.hunt_hunt_id.ToString() + "-" + treasure.treasure_id.ToString();
-                <li>@temp</li>   
+                <div class="col-xs-6 col-md-4 col-lg-3 text-center">
+                    <div class="qr-print-border">
+                        <div class="visible-print">FindTheBooty &trade;</div>
+                        <img src="@Url.Content("~/Content/Codes/" + treasure.hunt_hunt_id.ToString() + "/" + treasure.hunt_hunt_id.ToString() + "-" + treasure.treasure_id.ToString() + ".png")" alt="treasureId" class="padding good-image" />
+                        <div class="visible-print">FindTheBooty &trade;</div>
+                    </div>
+                </div>
             }
-        </ul>
+        </div>
     }
 }

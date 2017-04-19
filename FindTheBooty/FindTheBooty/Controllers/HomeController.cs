@@ -52,10 +52,10 @@ namespace FindTheBooty.Controllers
                 string outputPath;
                 foreach (Models.GeneratedModels.treasure treasure in treasures)
                 {
-                    if (!System.IO.File.Exists(Server.MapPath("~/Content/Codes/" + HuntId.ToString() + "/") + HuntId.ToString() + "-" + treasure.hunt_hunt_id + ".png"))
+                    if (!System.IO.File.Exists(Server.MapPath("~/Content/Codes/" + HuntId.ToString() + "/") + HuntId.ToString() + "-" + treasure.treasure_id + ".png"))
                     {
                         System.Drawing.Bitmap image = QRGenerator.generateQRCode(HuntId.ToString() + "-" + treasure.hunt_hunt_id);
-                        outputPath = Server.MapPath("~/Content/Codes/" + HuntId.ToString() + "/") + HuntId.ToString() + "-" + treasure.hunt_hunt_id + ".png";
+                        outputPath = Server.MapPath("~/Content/Codes/" + HuntId.ToString() + "/") + HuntId.ToString() + "-" + treasure.treasure_id + ".png";
                         image.Save(outputPath, System.Drawing.Imaging.ImageFormat.Png);
                     }
                     treasureList.Add(treasure);

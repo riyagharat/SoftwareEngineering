@@ -188,3 +188,62 @@ hr {
     color: white;
     box-shadow: none;
 }
+
+/* Generic Padding classes */
+
+.padding {
+    padding: 1em;
+}
+
+.padding-left {
+    padding-left: 1em;
+}
+
+.padding-right {
+    padding-right: 1em;
+}
+
+.padding-bottom {
+    padding-bottom: 1em;
+}
+
+.padding-top {
+    padding-top: 1em;
+}
+
+.padding-2 {
+    padding: 2em;
+}
+
+.padding-left-2 {
+    padding-left: 2em;
+}
+
+.padding-right-2 {
+    padding-right: 2em;
+}
+
+.padding-bottom-2 {
+    padding-bottom: 2em;
+}
+
+.padding-top-2 {
+    padding-top: 2em;
+}
+
+/* For good images, use this css class. Make the container the correct size not the image */
+
+.good-image {
+    width: 100%;
+}
+
+/* For print border */
+
+.qr-print-border {
+    border: .5em solid black;
+    margin: .5em;
+}
+
+.pagebreak {
+    page-break-before: always;
+}
