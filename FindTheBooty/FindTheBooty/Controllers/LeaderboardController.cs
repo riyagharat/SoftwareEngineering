@@ -15,21 +15,21 @@ namespace FindTheBooty.Controllers
         // GET: Leaderboard Page
         public ActionResult Index()
         {
-            return RedirectToAction("Rank");// View(database.users.OrderByDescending(x => x.points).ToList());
+            return RedirectToAction("Points");// View(database.users.OrderByDescending(x => x.points).ToList());
         }
 
         // GET: Points Leaderboard
         public ActionResult Points()
         {
-            return View(database.users.OrderByDescending(x => x.points).ToList());
+                return View(database.users.OrderByDescending(x => x.points).ToList());  
         }
-
+        /*
         // GET: Rank Leaderboard
         public ActionResult Rank()
         {
             return View(database.users.OrderByDescending(x => x.rank).ToList());
         }
-
+        */
         // GET: Hunts Leaderboard
         public ActionResult Hunts()
         {
