@@ -122,10 +122,16 @@ namespace FindTheBooty.Controllers
         {
             if (disposing)
             {
-                
+               
             }
 
             base.Dispose(disposing);
+        }
+
+        [AllowAnonymous]
+        public ActionResult UserProfile()
+        {
+            return View();
         }
     }
 }
