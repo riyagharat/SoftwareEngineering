@@ -1,6 +1,7 @@
-﻿
+﻿@model FindTheBooty.Models.GeneratedModels.hunt
 @{
-    var HuntName = "<<HUNT NAME>>";
+    var HuntID = Model.hunt_id;
+    var HuntName = Model.hunt_name;
     ViewBag.Title = "You have joined a hunt!";
 }
 
@@ -8,10 +9,6 @@
     <div class="md-col-12 col-sm-12 col-xs-12">
 
         <h2>You've joined a hunt!</h2>
-
-       @{
-           var HuntID = Request.RequestContext.RouteData.Values["id"];
-        }
 
         <p>You have joined the "@HuntName" Hunt!</p>
 

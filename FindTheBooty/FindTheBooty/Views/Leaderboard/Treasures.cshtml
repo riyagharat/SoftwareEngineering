@@ -1,0 +1,42 @@
+﻿@model IEnumerable<FindTheBooty.Models.GeneratedModels.user>
+
+@{
+    ViewBag.Title = "Leaderboard";
+}
+
+<h2>Leaderboard</h2>
+<h4><i>The most feared pirates on the seas!</i></h4>
+
+<div style="margin-top: 1em;">
+    <!--<a href="/Leaderboard/Rank" class="btn btn-default">Famous Pirates</a>-->
+    <p>
+        <strong>Filter: </strong>
+        <a href="/Leaderboard/Points" class="btn btn-default">Gold Claimed</a>
+        <a href="/Leaderboard/Hunts" class="btn btn-default">Seas Pillaged</a>
+        <a href="/Leaderboard/Treasures" class="btn btn-success">Booty Collection</a>
+    </p>
+</div>
+
+<br />
+
+<table class="table">
+    <tr>
+        <th>Pirate</th>
+        <th>Rank</th>
+        <th>Gold Pieces</th>
+        <th>Hunts Mastered</th>
+        <th>Booty Claimed</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.display_name)</td>
+            <td>@Html.DisplayFor(modelItem => item.rank)</td>
+            <td>@Html.DisplayFor(modelItem => item.points)</td>
+            <td>@Html.DisplayFor(modelItem => item.num_hunts)</td>
+            <td>@Html.DisplayFor(modelItem => item.num_treasures)</td>
+        </tr>
+    }
+
+</table>
