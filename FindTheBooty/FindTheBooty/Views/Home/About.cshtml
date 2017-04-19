@@ -1,7 +1,21 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+
+<script>
+    var jumboHeight = $('.wumbotron1').outerHeight();
+    function parallax() {
+        var scrolled = $(window).scrollTop();
+        $('.splashbg').css('height', (jumboHeight - scrolled) + 'px');
+    }
+
+    $(window).scroll(function (e) {
+        parallax();
+    });
+</script>
+<div class="splashbg"></div>
+<div class="wumbotron1">
+    <h1>@ViewBag.Title</h1>
+    <h3 class="kaushanScript">Swiggity swooty I'm comin' for tha booty</h3class="kaushanScript">
+</div>
