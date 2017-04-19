@@ -23,3 +23,16 @@
         <button type="submit" class="btn btn-success" onclick="submitForm()">Submit</button>
     </div>
 </div>
+@{
+    if (ViewBag.treasureList != null)
+    {
+        List<FindTheBooty.Models.GeneratedModels.treasure> treausreList = (List<FindTheBooty.Models.GeneratedModels.treasure>)ViewBag.treasureList;
+        <ul>
+            @foreach (FindTheBooty.Models.GeneratedModels.treasure treasure in treausreList)
+            {
+                string temp = treasure.hunt_hunt_id.ToString() + "-" + treasure.treasure_id.ToString();
+                <li>@temp</li>   
+            }
+        </ul>
+    }
+}

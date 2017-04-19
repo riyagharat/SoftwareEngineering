@@ -36,8 +36,36 @@ namespace FindTheBooty.Controllers
         /// Use this Page for testing Back-end Code
         /// </summary>
         /// <returns></returns>
-        public ActionResult TestPage()
+        [HttpGet]
+        [ActionName("TestPage")]
+        public ActionResult Testing(int? HuntId)
         {
+            if (HuntId != null && this.database.treasures.Any(x => x.hunt_hunt_id == HuntId))
+            {
+                if (!System.IO.File.Exists(Server.MapPath("~/Content/Codes/" + HuntId.ToString())))
+                {
+                    System.IO.Directory.CreateDirectory(Server.MapPath("~/Content/Codes/" + HuntId.ToString()));
+                }
+
+                IQueryable<FindTheBooty.Models.GeneratedModels.treasure> treasures = this.database.treasures.Where(x => x.hunt_hunt_id == HuntId);
+                List<Models.GeneratedModels.treasure> treasureList = new List<Models.GeneratedModels.treasure>();
+                string outputPath;
+                foreach (Models.GeneratedModels.treasure treasure in treasures)
+                {
+                    if (!System.IO.File.Exists(Server.MapPath("~/Content/Codes/" + HuntId.ToString() + "/") + HuntId.ToString() + "-" + treasure.hunt_hunt_id + ".png"))
+                    {
+                        System.Drawing.Bitmap image = QRGenerator.generateQRCode(HuntId.ToString() + "-" + treasure.hunt_hunt_id);
+                        outputPath = Server.MapPath("~/Content/Codes/" + HuntId.ToString() + "/") + HuntId.ToString() + "-" + treasure.hunt_hunt_id + ".png";
+                        image.Save(outputPath, System.Drawing.Imaging.ImageFormat.Png);
+                    }
+                    treasureList.Add(treasure);
+                }
+                
+                if (treasureList.Count > 0)
+                {
+                    ViewBag.treasureList = treasureList;
+                }
+            }
             return View();
         }
 
@@ -60,7 +88,7 @@ namespace FindTheBooty.Controllers
             else if (inputString.Length > 0)
             {
                 System.Drawing.Bitmap image = QRGenerator.generateQRCode(inputString);
-                string outputPath = Server.MapPath("~/") + "output.png";
+                string outputPath = Server.MapPath("~/Content/Codes") + "output.png";
                 image.Save(outputPath, System.Drawing.Imaging.ImageFormat.Png);
             }
             
