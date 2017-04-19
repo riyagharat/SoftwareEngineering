@@ -325,7 +325,10 @@ namespace FindTheBooty.Controllers
                     currentUser.points += treasure.points; 
                     currentUser.num_treasures += 1;
 
-                    //TODO: Check conditionals for award/badge/rank
+                    // Check conditionals for award/badge/rank
+                    BadgeController tmpController = new BadgeController();
+                    tmpController.checkBadges();
+                    tmpController.Dispose();
 
                 }
 
