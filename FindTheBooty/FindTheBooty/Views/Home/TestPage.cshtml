@@ -26,6 +26,7 @@
 @{
     if (ViewBag.treasureList != null)
     {
+        int count = 0;
         List<FindTheBooty.Models.GeneratedModels.treasure> treausreList = (List<FindTheBooty.Models.GeneratedModels.treasure>)ViewBag.treasureList;
         <div class="row">
             @foreach (FindTheBooty.Models.GeneratedModels.treasure treasure in treausreList)
@@ -34,9 +35,12 @@
                     <div class="qr-print-border">
                         <div class="visible-print">FindTheBooty &trade;</div>
                         <img src="@Url.Content("~/Content/Codes/" + treasure.hunt_hunt_id.ToString() + "/" + treasure.hunt_hunt_id.ToString() + "-" + treasure.treasure_id.ToString() + ".png")" alt="treasureId" class="padding good-image" />
+                        
                         <div class="visible-print">FindTheBooty &trade;</div>
                     </div>
                 </div>
+                count++;
+                if (count % 4 == 0) { <div class="visible-print pagebreak"> </div>}
             }
         </div>
     }
