@@ -363,6 +363,13 @@
     <Content Include="Views\Badge\Details.cshtml" />
     <Content Include="Views\Badge\Edit.cshtml" />
     <Content Include="Views\Badge\Index.cshtml" />
+    <Content Include="Views\Admin\BulkImport.cshtml" />
+    <Content Include="Views\Admin\BulkExport.cshtml" />
+    <Content Include="Views\Admin\TreasuresFound.cshtml" />
+    <Content Include="Views\Admin\SystemEngagement.cshtml" />
+    <Content Include="Views\Admin\TotalPlayTime.cshtml" />
+    <Content Include="Views\Admin\TypesOfHunt.cshtml" />
+    <Content Include="Views\Admin\UpgradeUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

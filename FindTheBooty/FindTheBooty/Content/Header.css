@@ -23,17 +23,35 @@ font-family: 'Dawning of a New Day', cursive; */
   background: url('./Images/ship.jpg') no-repeat center center;
   position: fixed;
   width: 100%;
-  height: 350px; /*same height as jumbotron */
+  height: 350px;  
   top:0;
   left:0;
   z-index: -1;
 }
 
-.wumbotron {
+.wumbobg2 {
+  background: url('./Images/schooner.jpg') no-repeat center center;
+  position: fixed;
+  width: 100%;
+  height: 200px; 
+  top:0;
+  left:0;
+  z-index: -1;
+}
+
+.wumbotron1 {
   margin-bottom: 0px;
   height: 350px;
   color: white;
-  
+  text-shadow: black 0.1em 0.1em 0.1em;
+  background:transparent;
+}
+
+.wumbotron2 {
+  margin-bottom: 0px;
+  height: 200px;
+  color: white;
+  background-image: url('./Images/schooner.jpg');
   text-shadow: black 0.1em 0.1em 0.1em;
       
   background:transparent;
@@ -107,4 +125,64 @@ hr {
 
 .danger .glyphicon {
   color: #DD0000 !important;
+}
+
+.great-vibes{
+    font-family: 'Great Vibes', cursive;
+}
+
+.tangerine{
+    font-family: 'Tangerine', cursive;
+}
+
+.italianno{
+    font-family: 'Italianno', cursive;
+}
+
+.la-belle-aurore{
+    font-family: 'La Belle Aurore', cursive;
+}
+
+.bilbo-swash-caps{
+    font-family: 'Bilbo Swash Caps', cursive;
+}
+
+.dawning-of-a-new-day{
+    font-family: 'Dawning of a New Day', cursive; 
+}
+
+
+/* --- SEARCH BAR --- */
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+/* --- END SEARCH BAR --- */
+
+/*button outline*/
+.btn.outline {
+	background: none;
+	padding: 10px 25px;
+}
+.btn-primary.outline {
+    border: 2px solid #000000;
+    color: #000000;
+    width: 150px;
+}
+.btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
+    color: #7bdcf1;
+    border-color: #33a6cc;
+}
+.btn-primary.outline:active, .btn-primary.outline.active {
+    border-color: #a6e6ff;
+    color: white;
+    box-shadow: none;
 }
