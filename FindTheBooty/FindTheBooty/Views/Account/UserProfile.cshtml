@@ -1,7 +1,81 @@
 ﻿
 @{
-    ViewBag.Title = "UserProfile";
+    ViewBag.Title = "User Profile";
+
+    // check if the user is not logged in and accessing an unauthorized location
+    /*var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+    if (Session["LoggedUser"] == null
+    && (controller != "Home" && controller != "Error" && controller != "Account")
+    )
+    {
+        Session.Abandon();
+        Response.Redirect("~/");
+    }*/
+    //TODO: !!!PRODUCTION!!! Uncomment block of code above for production
+
+    var userFullName = "";
+    var userName = "";
+    var userRank = "";
+    var gender = "";
+    long userPoints = 0;
+    int numHunts = 0;
+    int numTreasures = 0;
+    if (Session["LoggedUser"] != null)
+    {
+        var user = (FindTheBooty.Models.GeneratedModels.user)Session["LoggedUser"];
+        userName = user.display_name;
+        userFullName = user.first_name + " " + user.last_name;
+        userPoints = user.points;
+        userRank = user.rank;
+        gender = user.gender;
+        numHunts = user.num_hunts;
+        numTreasures = user.num_treasures;
+    }
+    else
+    {
+        //default so we don't have to keep logging in
+        userName = "CaptianLeas";
+        userFullName = "Sir Douglas Leas of the Northern Seas";
+        userPoints = 666;
+        userRank = "Doug Leas";
+        gender = "M";
+        numHunts = 9001;
+        numTreasures = 1000000;
+    }
+    if (gender == "M" || gender == "Male")
+    {
+        gender = "Male";
+    }
+    else { gender = "Female"; }
 }
+<div class="wumbobg2"></div>
+<div class="wumbotron1">
+    <div class="row">
+        <div class="col-md-12">
+            <center>
+                <h1 class="kaushanScript">@userName</h1>
+                <p class="lead">Rank: @userRank</p>
+            </center>
+        </div>
+    </div>
+</div>
+<script>
+    var jumboHeight = $('.wumbotron1').outerHeight();
+    function parallax() {
+        var scrolled = $(window).scrollTop();
+        $('.wumbobg2').css('height', (jumboHeight - scrolled) + 'px');
+    }
 
-<h2>UserProfile</h2>
-
+    $(window).scroll(function (e) {
+        parallax();
+    });
+</script>
+<div class="row">
+    <div class="col-md-12" >
+        <h2 class="kaushanScript">@userFullName</h2>
+        <p class="lead">User Statistics </p>
+        <p>Hunts Completed: @numHunts</p>
+        <p>Treasures Completed: @numTreasures</p>
+        <a class="btn btn-primary btn-lg outline kaushanScript">Edit Profile</a>
+        </div>
+    </div>
