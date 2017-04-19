@@ -10,20 +10,25 @@ using FindTheBooty.Models.GeneratedModels;
 
 namespace FindTheBooty.Controllers
 {
+    //controllers badge creation for users
     public class BadgeController : DataController
     {
+        //creates a list of already obtained badges for the current user
         public void checkBadges()
         {
+            //creates the session variable for the current user
             Models.GeneratedModels.user session = (Models.GeneratedModels.user)Session["LoggedUser"];
             List<Models.GeneratedModels.user_badge_relation> badgeList = database.user_badge_relation.Where(u => u.user_user_id == session.user_id)
                 .OrderBy(x => x.badge_badge_id)
                 .ToList();
 
+            //calls methods to check for new badges
             checkRank(badgeList, session);
             checkHunts(badgeList, session);
             checkTreasures(badgeList, session);
         }
 
+        //checks the current rank of the user and awards badges
         public void checkRank(List<Models.GeneratedModels.user_badge_relation> badgeList, Models.GeneratedModels.user session)
         {
             long points = database.users.Where(u => u.user_id == session.user_id).First().points;
@@ -154,6 +159,7 @@ namespace FindTheBooty.Controllers
             }
         }
 
+        //checks the number of hunts completed by the user and awards new badges
         public void checkHunts(List<Models.GeneratedModels.user_badge_relation> badgeList, Models.GeneratedModels.user session)
         {
             int hunts = database.users.Where(u => u.user_id == session.user_id).First().num_hunts;
@@ -191,6 +197,7 @@ namespace FindTheBooty.Controllers
             }
         }
 
+        //checks the current user's treasures and awards new badges
         public void checkTreasures(List<Models.GeneratedModels.user_badge_relation> badgeList, Models.GeneratedModels.user session)
         {
             int treasures = database.users.Where(u => u.user_id == session.user_id).First().num_treasures;
