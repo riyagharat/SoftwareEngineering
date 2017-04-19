@@ -5,7 +5,7 @@
 
 <div class="title">
 <h1 class="bilbo-swash-caps">Welcome to the Upgrade User Page </h1>
-  @*@<div class="container">
+  @*<div class="container">
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
             <div id="imaginary_container">
@@ -21,7 +21,7 @@
         </div>
     </div>
 </div>*@
-    <form action="/Admin/UpgradeUser" method="post">
+    <form action="/Admin/UpgradeUser" id="userSearch" method="post">
         @Html.AntiForgeryToken()
         @Html.ValidationSummary("", new { @class = "text-danger" })
         <div class="form-group">
@@ -30,8 +30,22 @@
             @Html.ValidationMessageFor(m => m.AdminInput, "", new { @class = "text-danger" })
         </div>
     </form>
+    <button class="btn btn-primary" type="submit" onclick="formSubmit()">
+        <span class="glyphicon glyphicon-search"></span>
+    </button>
+    <div>
+        
+    </div>
 </div>
 <br />
 <div>
     <a href="/Admin/Admin" class="btn btn-info" role="button">Back</a>
 </div>
+
+<script>
+    function formSubmit() {
+        var grabForm;
+        grabForm = $('#userSearch');
+        grabForm.submit();
+    }
+</script>

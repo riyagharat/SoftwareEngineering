@@ -1,4 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 using FindTheBooty.Models;
 
 namespace FindTheBooty.Controllers
@@ -59,7 +63,12 @@ namespace FindTheBooty.Controllers
         [HttpPost]
         public ActionResult UpgradeUser(UpgradeUserViewModel model)
         {
-            return View(model);
+            if (ModelState.IsValid)
+            {
+               var usersList = database.users.Where(test => test.display_name == model.AdminInput).ToList().First();
+            }
+
+            return View();
         }
 
     }
