@@ -133,6 +133,7 @@ namespace FindTheBooty.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
         public ActionResult EditProfile()
         {
             return View();

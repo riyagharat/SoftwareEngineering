@@ -20,7 +20,7 @@
     long userPoints = 0;
     int numHunts = 0;
     int numTreasures = 0;
-    int test = 0;
+
     if (Session["LoggedUser"] != null)
     {
         var user = (FindTheBooty.Models.GeneratedModels.user)Session["LoggedUser"];
@@ -82,5 +82,7 @@
             <dt>Total Points:</dt><dd>@userPoints</dd>
         </dl>
     </div>
-    <center><a class="btn btn-primary btn-lg outline kaushanScript" href="/Account/EditProfile">Edit Profile</a></center>
+    <center><a class="btn btn-primary btn-lg outline kaushanScript" href="/Account/EditProfile">
+        Edit Profile</a></center>
+    
 </div>
