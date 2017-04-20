@@ -133,5 +133,33 @@ namespace FindTheBooty.Controllers
         {
             return View();
         }
+
+        public ActionResult EditUserProfile()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditUserProfile(EditProfileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Pull your model object
+                var UserId = (FindTheBooty.Models.GeneratedModels.user)Session["LoggedUser"];
+                Models.GeneratedModels.user user = database.users.Where(x => x.user_id == UserId.ToString()).ToList().First();
+                // Make assignnment on field value
+                user.display_name = model.DisplayName;
+                user.email = model.Email;
+                user.first_name = model.FirstName;
+                user.last_name = model.LastName;
+                user.phone = model.PhoneNumber;
+                database.SaveChanges();
+            }
+            return RedirectToAction("UserProfile", "Account");
+        }
+
+
     }
 }
