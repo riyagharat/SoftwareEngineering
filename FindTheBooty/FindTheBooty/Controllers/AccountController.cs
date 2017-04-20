@@ -141,21 +141,22 @@ namespace FindTheBooty.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult EditProfile(EditProfileViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var UserID = (FindTheBooty.Models.GeneratedModels.user)Session["LoggedUser"];
-                Models.GeneratedModels.user user = database.users.Where(x => x.display_name == UserID.ToString()).ToList().First();
+                var UserID = (Models.GeneratedModels.user)Session["LoggedUser"];
+                Models.GeneratedModels.user user = database.users.Where(x => x.user_id == UserID.user_id).ToList().First();
                 user.email = model.Email;
-                user.display_name = model.DisplayName;
+                user.display_name = model.ConfirmEmail;
                 //Initialize Model with null items
                 user.first_name = model.FirstName;
                 user.last_name = model.LastName;
                 user.phone = System.Convert.ToInt64(model.PhoneNumber);
                 user.user_type = "User";
-
+                // save to database
+                setUser(user);
                 database.SaveChanges();
 
                 return RedirectToAction("UserProfile", "Account");

@@ -1,8 +1,8 @@
 ﻿@model FindTheBooty.Models.EditProfileViewModel
 @{
-    ViewBag.Title = "Come Aboard!";
+    ViewBag.Title = "EditProfile";
 }
-<h3>Come Aboard, Matey!</h3>
+<h3 class="kaushanScript">Edit Profile</h3>
 <form action="/Account/EditProfile" method="post">
     @Html.AntiForgeryToken()
     @Html.ValidationSummary("", new { @class = "text-danger" })
@@ -49,9 +49,9 @@
             <input id="userPhoneNum" class="form-control" placeholder="Enter your phone number: (XXX) XXX-XXXX" />*@
     </div>
     <center>
-        <a class="btn btn-primary btn-lg outline kaushanScript" href="/Account/UserProfile">
+        <button type="submit" class="btn btn-primary btn-lg outline kaushanScript">
             Submit
-        </a>
+        </button>
     </center>
 </form>
 

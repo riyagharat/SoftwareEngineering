@@ -20,6 +20,7 @@
     long userPoints = 0;
     int numHunts = 0;
     int numTreasures = 0;
+    int huntCount = 0;
 
     if (Session["LoggedUser"] != null)
     {
@@ -31,7 +32,7 @@
         gender = user.gender;
         numHunts = user.num_hunts;
         numTreasures = user.num_treasures;
-        
+        huntCount = user.user_hunt_relation.Count;
     }
     else
     {
@@ -74,12 +75,13 @@
 </script>
 <div class="row">
     <div class="col-md-12" >
-        <h2 class="kaushanScript">@userFullName</h2>
-        <h3 class="lead">User Statistics</h3>
+        <center><h2 class="kaushanScript">@userFullName</h2></center>
+        <h2>User Statistics</h2>
         <dl class="dl-horizontal">
             <dt>Hunts Completed:    </dt><dd>@numHunts</dd>
             <dt>Treasures Found:</dt><dd>@numTreasures</dd>
             <dt>Total Points:</dt><dd>@userPoints</dd>
+            @*should add badges list below*@
         </dl>
     </div>
     <center><a class="btn btn-primary btn-lg outline kaushanScript" href="/Account/EditProfile">
