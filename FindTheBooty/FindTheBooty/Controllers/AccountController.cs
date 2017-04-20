@@ -131,7 +131,7 @@ namespace FindTheBooty.Controllers
         [AllowAnonymous]
         public ActionResult UserProfile()
         {
-            return View();
+            return View(database.user_badge_relation.Where(x => x.user_user_id == session.).ToList());
         }
     }
 }
