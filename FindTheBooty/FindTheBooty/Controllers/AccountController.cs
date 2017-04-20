@@ -70,7 +70,7 @@ namespace FindTheBooty.Controllers
                 newUser.gender = "";
                 newUser.phone = System.Convert.ToInt64(model.PhoneNumber);
                 newUser.points = 0;
-                newUser.rank = "";
+                newUser.rank = "Land Lubber";
                 newUser.num_hunts = 0;
                 newUser.num_treasures = 0;
                 newUser.user_type = "User";
@@ -149,7 +149,7 @@ namespace FindTheBooty.Controllers
                 var UserID = (Models.GeneratedModels.user)Session["LoggedUser"];
                 Models.GeneratedModels.user user = database.users.Where(x => x.user_id == UserID.user_id).ToList().First();
                 user.email = model.Email;
-                user.display_name = model.ConfirmEmail;
+                user.display_name = model.DisplayName;
                 //Initialize Model with null items
                 user.first_name = model.FirstName;
                 user.last_name = model.LastName;
