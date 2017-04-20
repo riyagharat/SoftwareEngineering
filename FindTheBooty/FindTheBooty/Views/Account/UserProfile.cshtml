@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<FindTheBooty.Models.GeneratedModels.user_badge_relation>
 @{
     ViewBag.Title = "User Profile";
 
@@ -84,6 +84,26 @@
             @*should add badges list below*@
         </dl>
     </div>
+
+    <div class="col-md-12" >
+        <h3 class="lead">Completed Badges</h3>
+        <table class="table">
+            <tr>
+                <th>Badge</th>
+                <th>Description</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.badge.name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.badge.description)</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <center><a class="btn btn-primary btn-lg outline kaushanScript">Edit Profile</a></center>
     <center><a class="btn btn-primary btn-lg outline kaushanScript" href="/Account/EditProfile">
         Edit Profile</a></center>
     
