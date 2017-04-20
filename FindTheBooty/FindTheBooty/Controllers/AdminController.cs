@@ -67,7 +67,6 @@ namespace FindTheBooty.Controllers
             {
                var usersList = database.users.Where(test => test.display_name == model.AdminInput).ToList().First();
             }
-
             return View();
         }
 

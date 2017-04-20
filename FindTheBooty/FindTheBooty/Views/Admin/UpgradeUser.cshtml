@@ -33,6 +33,15 @@
     <button class="btn btn-primary" type="submit" onclick="formSubmit()">
         <span class="glyphicon glyphicon-search"></span>
     </button>
+    <div>
+        @if (@Model.ReturnedUser.display_name != null)
+        {
+            <p>Username: @Model.ReturnedUser.display_name</p>
+        }else
+        {
+            <p>The User does not exist.</p>
+        }
+    </div>
 </div>
 <br />
 <div>
