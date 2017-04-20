@@ -63,9 +63,10 @@ namespace FindTheBooty.Controllers
         [HttpPost]
         public ActionResult UpgradeUser(UpgradeUserViewModel model)
         {
+            var usersList = new Models.GeneratedModels.user();
             if (ModelState.IsValid)
             {
-               var usersList = database.users.Where(test => test.display_name == model.AdminInput).ToList().First();
+               usersList = database.users.Where(test => test.display_name == model.AdminInput).ToList().First();
             }
             return View();
         }

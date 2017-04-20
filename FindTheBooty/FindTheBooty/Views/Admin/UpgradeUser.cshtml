@@ -34,9 +34,9 @@
         <span class="glyphicon glyphicon-search"></span>
     </button>
     <div>
-        @if (@Model.ReturnedUser.display_name != null)
+        @if (@Model.ReturnedUser != null)
         {
-            <p>Username: @Model.ReturnedUser.display_name</p>
+            <p>Username: @Model.ReturnedUser</p>
         }else
         {
             <p>The User does not exist.</p>

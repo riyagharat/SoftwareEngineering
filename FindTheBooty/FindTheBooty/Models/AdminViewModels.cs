@@ -8,6 +8,6 @@ namespace FindTheBooty.Models
         [Display(Name = "Find a First Mate:")]
         public string AdminInput { get; }
 
-        public Models.GeneratedModels.user ReturnedUser { get; set; }
+        public GeneratedModels.user ReturnedUser { get; set; }
     }
 }
