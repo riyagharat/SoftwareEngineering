@@ -11,7 +11,7 @@ namespace FindTheBooty.Controllers
         public AccountController()
         {
         }
-        
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -42,7 +42,7 @@ namespace FindTheBooty.Controllers
             // Model is valid successful login
             return RedirectToAction("Index", "Home");
         }
-        
+
         //
         // GET: /Account/Register
         [AllowAnonymous]
@@ -122,7 +122,7 @@ namespace FindTheBooty.Controllers
         {
             if (disposing)
             {
-               
+
             }
 
             base.Dispose(disposing);
@@ -137,6 +137,32 @@ namespace FindTheBooty.Controllers
         public ActionResult EditProfile()
         {
             return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProfile(EditProfileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var UserID = (FindTheBooty.Models.GeneratedModels.user)Session["LoggedUser"];
+                Models.GeneratedModels.user currentUser = database.users.Where(x => x.display_name == UserID.ToString()).ToList().First();
+                user.email = model.Email;
+                user.display_name = model.DisplayName;
+                //Initialize Model with null items
+                user.first_name = model.FirstName;
+                user.last_name = model.LastName;
+                user.phone = System.Convert.ToInt64(model.PhoneNumber);
+                user.user_type = "User";
+
+                // Log user in and commit to database
+                setUser(user);
+                database.users.Add(user);
+                database.SaveChanges();
+
+                return RedirectToAction("UserProfile", "Account");
+            }
         }
     }
 }
