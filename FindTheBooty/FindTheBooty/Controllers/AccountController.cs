@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FindTheBooty.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using FindTheBooty.Models;
+
 namespace FindTheBooty.Controllers
 {
     [Authorize]
@@ -148,17 +146,15 @@ namespace FindTheBooty.Controllers
         {
             if (ModelState.IsValid)
             {
-                var currentUser = (FindTheBooty.Models.GeneratedModels.user)Session["LoggedUser"];
-                var displayName = currentUser.display_name;
-                var UserID = database.users.Where(test => test.display_name == displayName).ToList().First();
-                Models.GeneratedModels.user ed = database.users.Where(x => x.display_name == UserID.ToString()).ToList().First();
-                ed.email = model.Email;
-                ed.display_name = model.DisplayName;
+                var UserID = (FindTheBooty.Models.GeneratedModels.user)Session["LoggedUser"];
+                Models.GeneratedModels.user user = database.users.Where(x => x.display_name == UserID.ToString()).ToList().First();
+                user.email = model.Email;
+                user.display_name = model.DisplayName;
                 //Initialize Model with null items
-                ed.first_name = model.FirstName;
-                ed.last_name = model.LastName;
-                ed.phone = System.Convert.ToInt64(model.PhoneNumber);
-                ed.user_type = "User";
+                user.first_name = model.FirstName;
+                user.last_name = model.LastName;
+                user.phone = System.Convert.ToInt64(model.PhoneNumber);
+                user.user_type = "User";
 
                 database.SaveChanges();
 
