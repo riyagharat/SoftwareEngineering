@@ -150,7 +150,8 @@ namespace FindTheBooty.Controllers
             {
                 var currentUser = (FindTheBooty.Models.GeneratedModels.user)Session["LoggedUser"];
                 var displayName = currentUser.display_name;
-                Models.GeneratedModels.user ed = database.users.Where(x => x.display_name == currentUser.ToString()).ToList().First();
+                var UserID = database.users.Where(test => test.display_name == displayName).ToList().First();
+                Models.GeneratedModels.user ed = database.users.Where(x => x.display_name == UserID.ToString()).ToList().First();
                 ed.email = model.Email;
                 ed.display_name = model.DisplayName;
                 //Initialize Model with null items
@@ -158,7 +159,7 @@ namespace FindTheBooty.Controllers
                 ed.last_name = model.LastName;
                 ed.phone = System.Convert.ToInt64(model.PhoneNumber);
                 ed.user_type = "User";
-                //database.users.u
+
                 database.SaveChanges();
 
                 return RedirectToAction("UserProfile", "Account");
