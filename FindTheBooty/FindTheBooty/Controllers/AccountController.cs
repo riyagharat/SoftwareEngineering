@@ -133,5 +133,9 @@ namespace FindTheBooty.Controllers
         {
             return View();
         }
+        public ActionResult EditProfile()
+        {
+            return View();
+        }
     }
 }
