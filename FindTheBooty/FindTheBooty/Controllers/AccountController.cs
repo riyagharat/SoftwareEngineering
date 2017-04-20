@@ -1,4 +1,5 @@
 ﻿using FindTheBooty.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -132,9 +133,10 @@ namespace FindTheBooty.Controllers
         public ActionResult UserProfile()
         {
             Models.GeneratedModels.user session = (Models.GeneratedModels.user)Session["LoggedUser"];
-            List<
-            ViewBag(database.user_badge_relation.Where(x => x.user_user_id == session.user_id).ToList());
-            return View();
+            /*List<Models.GeneratedModels.user_badge_relation> userBadges = database.user_badge_relation.Where(u => u.user_user_id == session.user_id)
+                .ToList();
+            ViewBag.user_badge_relation = userBadges;*/
+            return View(database.user_badge_relation.Where(u => u.user_user_id == "1" /*session.user_id*/).ToList());
         }
     }
 }
