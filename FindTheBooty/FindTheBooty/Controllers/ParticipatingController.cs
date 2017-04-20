@@ -87,52 +87,9 @@ namespace FindTheBooty.Controllers
         // Get list of Joinable hunts
         public List<Models.Hunt> GetJoinableHunts(Models.GeneratedModels.user session = null)
         {
-            //List<Models.Hunt> huntList = new List<Models.Hunt>();
-            //List<Models.GeneratedModels.hunt> joinableHuntList = new List<Models.GeneratedModels.hunt>();
-
             // if user is not logged in, return empty list
             if (session == null)
                 return new List<Models.Hunt>();
-
-            //string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["FTBConnection"].ConnectionString;
-
-            //string query = "SELECT * " +
-            //"FROM dbo.hunt as h " +
-            //"LEFT JOIN dbo.user_hunt_relation as r " +
-            //"ON r.hunt_hunt_id = h.hunt_id " +
-            //"WHERE r.user_user_id IS NULL OR r.user_user_id != @Id;";
-
-            //// open db connection and build list of hunts
-            //using (System.Data.SqlClient.SqlConnection db = new System.Data.SqlClient.SqlConnection(connectionString))
-            //using (System.Data.SqlClient.SqlCommand command = new System.Data.SqlClient.SqlCommand(query, db))
-            //{
-            //    db.Open();
-            //    command.Parameters.AddWithValue("@Id", session.user_id);
-            //    System.Data.SqlClient.SqlDataReader reader = command.ExecuteReader();
-
-            //    // loop and build huntList for joinable hunts
-            //    while (reader.Read())
-            //    {
-            //        FindTheBooty.Models.Hunt hunt = new FindTheBooty.Models.Hunt();
-            //        hunt.HuntID = System.Convert.ToInt32(reader["hunt_id"]);
-            //        hunt.HuntName = reader["hunt_name"].ToString();
-            //        hunt.HuntType = reader["hunt_type"].ToString();
-            //        hunt.TimeExpire = System.Convert.ToDateTime(reader["time_expire"].ToString());
-
-
-            //        Models.Hunt tmpHunt = new Models.Hunt();
-            //        tmpHunt.HuntID = Convert.ToInt64(reader["hunt_id"]);
-            //        tmpHunt.HuntName = (string)reader["hunt_name"];
-            //        tmpHunt.HuntType = (string)reader["hunt_type"];
-            //        tmpHunt.MaxNumOfUsers = (int)reader["max_users"];
-            //        //tmpHunt.MultiOrSingle = hunt.multi_single;
-            //        tmpHunt.SponsorID = reader["sponsor_sponsor_id"] as long? ?? -1;
-            //        tmpHunt.TimeCreate = (DateTime) reader["time_create"];
-            //        tmpHunt.TimeExpire = (DateTime) reader["time_expire"];
-            //        tmpHunt.SeqOrFFA = (string)reader["seq_ffa"];
-            //        huntList.Add(tmpHunt);
-            //    }
-            //}
 
             List<Models.GeneratedModels.hunt> huntList = new List<Models.GeneratedModels.hunt>();
             List<Models.Hunt> returnHuntList = new List<Models.Hunt>();
