@@ -204,6 +204,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BadgeController.cs" />
+    <Compile Include="Controllers\CreateHuntController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -214,6 +215,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CreateHuntViewModels.cs" />
     <Compile Include="Models\GeneratedModels\badge.cs">
       <DependentUpon>FindTheBootyModel.tt</DependentUpon>
     </Compile>
@@ -370,6 +372,8 @@
     <Content Include="Views\Admin\TotalPlayTime.cshtml" />
     <Content Include="Views\Admin\TypesOfHunt.cshtml" />
     <Content Include="Views\Admin\UpgradeUser.cshtml" />
+    <Content Include="Views\CreateHunt\HuntSettings.cshtml" />
+    <Content Include="Views\CreateHunt\AddTreasure.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
