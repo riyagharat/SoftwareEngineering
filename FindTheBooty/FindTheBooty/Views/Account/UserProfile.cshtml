@@ -82,5 +82,21 @@
             <dt>Total Points:</dt><dd>@userPoints</dd>
         </dl>
     </div>
+
+    <table class="table">
+        <tr>
+            <th>Badge</th>
+            <th>Description</th>
+        </tr>
+
+        @foreach (var item in ViewBag.)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.name)</td>
+                <td>@Html.DisplayFor(modelItem => item.description)</td>
+            </tr>
+        }
+
+    </table>
     <center><a class="btn btn-primary btn-lg outline kaushanScript">Edit Profile</a></center>
 </div>
