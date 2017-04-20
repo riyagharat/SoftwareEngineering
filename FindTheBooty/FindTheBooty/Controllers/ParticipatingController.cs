@@ -163,6 +163,7 @@ namespace FindTheBooty.Controllers
                 relation.user_user_id = userSession.user_id;
                 relation.completed = Convert.ToString(false);
                 relation.active = Convert.ToString(true);
+                relation.completed = "No";
 
                 database.user_hunt_relation.Add(relation);
 
@@ -327,12 +328,29 @@ namespace FindTheBooty.Controllers
 
                     // Check conditionals for award/badge/rank
                     BadgeController tmpController = new BadgeController();
-                    tmpController.checkBadges();
+                    tmpController.checkBadges(session);
                     tmpController.Dispose();
 
                 }
-
                 database.SaveChanges();
+
+                //TODO: Treasure reation count treasures completed for hunt to complete hunt
+                //      if found for all is equal to total increment user.num_hunts
+                List<Models.GeneratedModels.user_treasure_relation> completedTreasures = database.user_treasure_relation
+                    .Where(t => t.user_user_id == session.user_id && t.treasure_hunt_hunt_id == QRHuntIdLong)
+                    .ToList();
+
+                int totalTreasureCount = completedTreasures.Count();
+                int completedTreasureCount = 0;
+
+                // check to see if all treasures are found in hunt and mark treasure as completed
+                foreach(Models.GeneratedModels.user_treasure_relation completedTreasure in completedTreasures)
+                {
+                    if (Convert.ToBoolean(completedTreasure.found))
+                    {
+                        ++completedTreasureCount;
+                    }
+                }
 
                 response["huntId"] =  QRHuntId;
                 response["treasureId"] = QRTreasureId;

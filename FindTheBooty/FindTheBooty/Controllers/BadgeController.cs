@@ -14,10 +14,10 @@ namespace FindTheBooty.Controllers
     public class BadgeController : DataController
     {
         //creates a list of already obtained badges for the current user
-        public void checkBadges()
+        public void checkBadges(Models.GeneratedModels.user session)
         {
             //creates the session variable for the current user
-            Models.GeneratedModels.user session = (Models.GeneratedModels.user)Session["LoggedUser"];
+            //Models.GeneratedModels.user session = (Models.GeneratedModels.user)Session["LoggedUser"];
             List<Models.GeneratedModels.user_badge_relation> badgeList = database.user_badge_relation.Where(u => u.user_user_id == session.user_id)
                 .OrderBy(x => x.badge_badge_id)
                 .ToList();
@@ -166,9 +166,7 @@ namespace FindTheBooty.Controllers
 
             if (hunts == 1)
             {
-                var value = badgeList.First(item => item.badge_badge_id == 9);
-
-                if (value == null)
+                if (badgeList.Where(item => item.badge_badge_id == 9).Count() == 0)
                 {
                     Models.GeneratedModels.user_badge_relation temp = new user_badge_relation();
                     temp.user_user_id = session.user_id;
