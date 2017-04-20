@@ -147,7 +147,7 @@ namespace FindTheBooty.Controllers
             if (ModelState.IsValid)
             {
                 var UserID = (FindTheBooty.Models.GeneratedModels.user)Session["LoggedUser"];
-                Models.GeneratedModels.user currentUser = database.users.Where(x => x.display_name == UserID.ToString()).ToList().First();
+                Models.GeneratedModels.user user = database.users.Where(x => x.display_name == UserID.ToString()).ToList().First();
                 user.email = model.Email;
                 user.display_name = model.DisplayName;
                 //Initialize Model with null items
@@ -156,13 +156,11 @@ namespace FindTheBooty.Controllers
                 user.phone = System.Convert.ToInt64(model.PhoneNumber);
                 user.user_type = "User";
 
-                // Log user in and commit to database
-                setUser(user);
-                database.users.Add(user);
                 database.SaveChanges();
 
                 return RedirectToAction("UserProfile", "Account");
             }
+            return View(model);
         }
     }
 }
