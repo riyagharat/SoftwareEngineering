@@ -18,6 +18,7 @@ namespace FindTheBooty.Models
         public System.DateTime TimeExpire { get; set; }
         public int MaxNumOfUsers { get; set; }
         public bool MultiOrSingle { get; set; }
+        public string Completed { get; set; }
     }
 
     // Generic Treasure Model

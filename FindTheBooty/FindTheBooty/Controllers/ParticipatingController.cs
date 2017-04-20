@@ -87,54 +87,84 @@ namespace FindTheBooty.Controllers
         // Get list of Joinable hunts
         public List<Models.Hunt> GetJoinableHunts(Models.GeneratedModels.user session = null)
         {
-            List<Models.Hunt> huntList = new List<Models.Hunt>();
-            List<Models.GeneratedModels.hunt> joinableHuntList = new List<Models.GeneratedModels.hunt>();
+            //List<Models.Hunt> huntList = new List<Models.Hunt>();
+            //List<Models.GeneratedModels.hunt> joinableHuntList = new List<Models.GeneratedModels.hunt>();
 
             // if user is not logged in, return empty list
             if (session == null)
-                return huntList;
-            
-            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["FTBConnection"].ConnectionString;
-            
-            string query = "SELECT * " +
-            "FROM dbo.hunt as h " +
-            "LEFT JOIN dbo.user_hunt_relation as r " +
-            "ON r.hunt_hunt_id = h.hunt_id " +
-            "WHERE r.user_user_id IS NULL OR r.user_user_id != @Id;";
+                return new List<Models.Hunt>();
 
-            // open db connection and build list of hunts
-            using (System.Data.SqlClient.SqlConnection db = new System.Data.SqlClient.SqlConnection(connectionString))
-            using (System.Data.SqlClient.SqlCommand command = new System.Data.SqlClient.SqlCommand(query, db))
+            //string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["FTBConnection"].ConnectionString;
+
+            //string query = "SELECT * " +
+            //"FROM dbo.hunt as h " +
+            //"LEFT JOIN dbo.user_hunt_relation as r " +
+            //"ON r.hunt_hunt_id = h.hunt_id " +
+            //"WHERE r.user_user_id IS NULL OR r.user_user_id != @Id;";
+
+            //// open db connection and build list of hunts
+            //using (System.Data.SqlClient.SqlConnection db = new System.Data.SqlClient.SqlConnection(connectionString))
+            //using (System.Data.SqlClient.SqlCommand command = new System.Data.SqlClient.SqlCommand(query, db))
+            //{
+            //    db.Open();
+            //    command.Parameters.AddWithValue("@Id", session.user_id);
+            //    System.Data.SqlClient.SqlDataReader reader = command.ExecuteReader();
+
+            //    // loop and build huntList for joinable hunts
+            //    while (reader.Read())
+            //    {
+            //        FindTheBooty.Models.Hunt hunt = new FindTheBooty.Models.Hunt();
+            //        hunt.HuntID = System.Convert.ToInt32(reader["hunt_id"]);
+            //        hunt.HuntName = reader["hunt_name"].ToString();
+            //        hunt.HuntType = reader["hunt_type"].ToString();
+            //        hunt.TimeExpire = System.Convert.ToDateTime(reader["time_expire"].ToString());
+
+
+            //        Models.Hunt tmpHunt = new Models.Hunt();
+            //        tmpHunt.HuntID = Convert.ToInt64(reader["hunt_id"]);
+            //        tmpHunt.HuntName = (string)reader["hunt_name"];
+            //        tmpHunt.HuntType = (string)reader["hunt_type"];
+            //        tmpHunt.MaxNumOfUsers = (int)reader["max_users"];
+            //        //tmpHunt.MultiOrSingle = hunt.multi_single;
+            //        tmpHunt.SponsorID = reader["sponsor_sponsor_id"] as long? ?? -1;
+            //        tmpHunt.TimeCreate = (DateTime) reader["time_create"];
+            //        tmpHunt.TimeExpire = (DateTime) reader["time_expire"];
+            //        tmpHunt.SeqOrFFA = (string)reader["seq_ffa"];
+            //        huntList.Add(tmpHunt);
+            //    }
+            //}
+
+            List<Models.GeneratedModels.hunt> huntList = new List<Models.GeneratedModels.hunt>();
+            List<Models.Hunt> returnHuntList = new List<Models.Hunt>();
+            huntList = database.hunts.ToList();
+
+            List <Models.GeneratedModels.user_hunt_relation> huntRelations = database.user_hunt_relation
+                .Where(u => u.user_user_id == session.user_id)
+                .ToList();
+
+            // loop through relations and removed joined hunts
+            foreach(Models.GeneratedModels.user_hunt_relation relation in huntRelations)
             {
-                db.Open();
-                command.Parameters.AddWithValue("@Id", session.user_id);
-                System.Data.SqlClient.SqlDataReader reader = command.ExecuteReader();
-
-                // loop and build huntList for joinable hunts
-                while (reader.Read())
-                {
-                    FindTheBooty.Models.Hunt hunt = new FindTheBooty.Models.Hunt();
-                    hunt.HuntID = System.Convert.ToInt32(reader["hunt_id"]);
-                    hunt.HuntName = reader["hunt_name"].ToString();
-                    hunt.HuntType = reader["hunt_type"].ToString();
-                    hunt.TimeExpire = System.Convert.ToDateTime(reader["time_expire"].ToString());
-
-
-                    Models.Hunt tmpHunt = new Models.Hunt();
-                    tmpHunt.HuntID = Convert.ToInt64(reader["hunt_id"]);
-                    tmpHunt.HuntName = (string)reader["hunt_name"];
-                    tmpHunt.HuntType = (string)reader["hunt_type"];
-                    tmpHunt.MaxNumOfUsers = (int)reader["max_users"];
-                    //tmpHunt.MultiOrSingle = hunt.multi_single;
-                    tmpHunt.SponsorID = reader["sponsor_sponsor_id"] as long? ?? -1;
-                    tmpHunt.TimeCreate = (DateTime) reader["time_create"];
-                    tmpHunt.TimeExpire = (DateTime) reader["time_expire"];
-                    tmpHunt.SeqOrFFA = (string)reader["seq_ffa"];
-                    huntList.Add(tmpHunt);
-                }
+                // remove hunt for each relation
+                huntList.Remove(huntList.Where(h => h.hunt_id == relation.hunt_hunt_id).First());
             }
 
-            return huntList;
+
+            // modify hunts to custom model
+            foreach(Models.GeneratedModels.hunt hunt in huntList)
+            {
+                Models.Hunt tmpHunt = new Models.Hunt();
+                tmpHunt.HuntID = hunt.hunt_id;
+                tmpHunt.HuntName = hunt.hunt_name;
+                tmpHunt.HuntType = hunt.hunt_type;
+                tmpHunt.SeqOrFFA = hunt.hunt_type;
+                tmpHunt.TimeExpire = hunt.time_expire;
+                tmpHunt.TimeCreate = hunt.time_create;
+
+                returnHuntList.Add(tmpHunt);
+            }
+
+            return returnHuntList;
 
         }
 
@@ -178,6 +208,9 @@ namespace FindTheBooty.Controllers
                     tmpRelation.found = false.ToString();
                     database.user_treasure_relation.Add(tmpRelation);
                 }
+
+                // update user num_hunts
+                database.users.Where(u => u.user_id == userSession.user_id).First().num_hunts += 1;
 
                 // commit relation changes to the db
                 database.SaveChanges();
@@ -326,13 +359,14 @@ namespace FindTheBooty.Controllers
                     currentUser.points += treasure.points; 
                     currentUser.num_treasures += 1;
 
+                    database.SaveChanges();
+
                     // Check conditionals for award/badge/rank
                     BadgeController tmpController = new BadgeController();
                     tmpController.checkBadges(session);
                     tmpController.Dispose();
 
                 }
-                database.SaveChanges();
 
                 //TODO: Treasure reation count treasures completed for hunt to complete hunt
                 //      if found for all is equal to total increment user.num_hunts
@@ -343,13 +377,22 @@ namespace FindTheBooty.Controllers
                 int totalTreasureCount = completedTreasures.Count();
                 int completedTreasureCount = 0;
 
-                // check to see if all treasures are found in hunt and mark treasure as completed
+                // check to see if all treasures are found in hunt and mark hunt as completed
                 foreach(Models.GeneratedModels.user_treasure_relation completedTreasure in completedTreasures)
                 {
                     if (Convert.ToBoolean(completedTreasure.found))
                     {
                         ++completedTreasureCount;
                     }
+                }
+
+                // mark hunt as completed if found all treasures
+                if(completedTreasureCount == totalTreasureCount)
+                {
+                    database.user_hunt_relation
+                        .Where(r => r.hunt_hunt_id == QRHuntIdLong && r.user_user_id == session.user_id).First().completed = "Yes";
+
+                    database.SaveChanges();
                 }
 
                 response["huntId"] =  QRHuntId;

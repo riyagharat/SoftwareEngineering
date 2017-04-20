@@ -42,6 +42,8 @@ namespace FindTheBooty.Controllers
                     temp.badge_badge_id = 2;
                     temp.completed = true.ToString();
 
+                    database.users.Where(u => u.user_id == session.user_id).First().rank = "Scallywag";
+
                     database.user_badge_relation.Add(temp);
                     database.SaveChanges();
                 }
@@ -55,6 +57,8 @@ namespace FindTheBooty.Controllers
                     temp.user_user_id = session.user_id;
                     temp.badge_badge_id = 3;
                     temp.completed = true.ToString();
+
+                    database.users.Where(u => u.user_id == session.user_id).First().rank = "Deck Hand";
 
                     database.user_badge_relation.Add(temp);
                     database.SaveChanges();
@@ -70,6 +74,8 @@ namespace FindTheBooty.Controllers
                     temp.badge_badge_id = 4;
                     temp.completed = true.ToString();
 
+                    database.users.Where(u => u.user_id == session.user_id).First().rank = "Buccaneer";
+
                     database.user_badge_relation.Add(temp);
                     database.SaveChanges();
                 }
@@ -83,6 +89,8 @@ namespace FindTheBooty.Controllers
                     temp.user_user_id = session.user_id;
                     temp.badge_badge_id = 5;
                     temp.completed = true.ToString();
+
+                    database.users.Where(u => u.user_id == session.user_id).First().rank = "Quartermaster";
 
                     database.user_badge_relation.Add(temp);
                     database.SaveChanges();
@@ -98,6 +106,8 @@ namespace FindTheBooty.Controllers
                     temp.badge_badge_id = 6;
                     temp.completed = true.ToString();
 
+                    database.users.Where(u => u.user_id == session.user_id).First().rank = "Captain";
+
                     database.user_badge_relation.Add(temp);
                     database.SaveChanges();
                 }
@@ -112,6 +122,8 @@ namespace FindTheBooty.Controllers
                     temp.badge_badge_id = 7;
                     temp.completed = true.ToString();
 
+                    database.users.Where(u => u.user_id == session.user_id).First().rank = "Pirate Supreme";
+
                     database.user_badge_relation.Add(temp);
                     database.SaveChanges();
                 }
@@ -125,6 +137,8 @@ namespace FindTheBooty.Controllers
                     temp.user_user_id = session.user_id;
                     temp.badge_badge_id = 8;
                     temp.completed = true.ToString();
+
+                    database.users.Where(u => u.user_id == session.user_id).First().rank = "Doug Leas";
 
                     database.user_badge_relation.Add(temp);
                     database.SaveChanges();
