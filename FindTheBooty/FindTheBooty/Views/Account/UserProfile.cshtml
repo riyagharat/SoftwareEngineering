@@ -20,6 +20,7 @@
     long userPoints = 0;
     int numHunts = 0;
     int numTreasures = 0;
+    int test = 0;
     if (Session["LoggedUser"] != null)
     {
         var user = (FindTheBooty.Models.GeneratedModels.user)Session["LoggedUser"];
@@ -30,6 +31,7 @@
         gender = user.gender;
         numHunts = user.num_hunts;
         numTreasures = user.num_treasures;
+        
     }
     else
     {
@@ -73,9 +75,12 @@
 <div class="row">
     <div class="col-md-12" >
         <h2 class="kaushanScript">@userFullName</h2>
-        <p class="lead">User Statistics </p>
-        <p>Hunts Completed: @numHunts</p>
-        <p>Treasures Completed: @numTreasures</p>
-        <a class="btn btn-primary btn-lg outline kaushanScript">Edit Profile</a>
-        </div>
+        <h3 class="lead">User Statistics</h3>
+        <dl class="dl-horizontal">
+            <dt>Hunts Completed:    </dt><dd>@numHunts</dd>
+            <dt>Treasures Found:</dt><dd>@numTreasures</dd>
+            <dt>Total Points:</dt><dd>@userPoints</dd>
+        </dl>
     </div>
+    <center><a class="btn btn-primary btn-lg outline kaushanScript">Edit Profile</a></center>
+</div>
