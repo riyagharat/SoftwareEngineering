@@ -70,15 +70,7 @@
         @*<label for="">Display Name</label>
         <input id="userDispName" class="form-control" placeholder="Enter a public display name" />*@
     </div>
-    @*//TODO: link gender with RegisterViewModel*@
-    <div class="form-group">
-        <label for="">Gender</label>
-        <select id="userGender" class="form-control">
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-            <option value="Other">Other</option>
-        </select>
-    </div>
+    
     <div class="form-group">
         @Html.LabelFor(m => m.PhoneNumber)
         @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "Enter your phone number: (XXX) XXX-XXXX" })
