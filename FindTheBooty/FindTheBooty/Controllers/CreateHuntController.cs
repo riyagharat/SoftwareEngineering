@@ -32,13 +32,15 @@ namespace FindTheBooty.Controllers
                     newHunt.max_users = 150;
                     newHunt.multi_single = 1;
                     newHunt.seq_ffa = "ffa";
-                    newHunt.sponsor = new Models.GeneratedModels.sponsor();
+                    newHunt.sponsor = null;
                     newHunt.time_create = System.DateTime.Now;
                     newHunt.time_expire = System.DateTime.Now.AddDays(7.0);
 
                     // Add Hunt to database by adding primary key
                     int latestHunt = database.hunts.OrderBy(h => h.hunt_id.ToString() ?? int.MaxValue.ToString()).ToList().Last().hunt_id;
                     newHunt.hunt_id = (latestHunt + 1);
+                    database.hunts.Add(newHunt);
+                    database.SaveChanges();
                     //database.SaveChanges(); <-- NEEDS TO BE UNIT TESTED
 
                     return RedirectToAction("AddTreasures", new { huntId = newHunt.hunt_id });
@@ -55,7 +57,8 @@ namespace FindTheBooty.Controllers
         {
             if (huntId != null)
             {
-                IList<Models.GeneratedModels.treasure> bootyList = database.treasures.Where(t => t.hunt_hunt_id == huntId).ToList();
+                //Get list of treasures with same hunt_hunt_id as the current huntId
+                List<Models.GeneratedModels.treasure> bootyList = database.treasures.Where(t => t.hunt_hunt_id == huntId).ToList();
                 ViewBag.treasureList = bootyList;
                 ViewBag.huntId = huntId;
             }
@@ -71,25 +74,31 @@ namespace FindTheBooty.Controllers
         {
             if (ModelState.IsValid && huntId != null)
             {
-                if(done)
+                if(done != null && (bool)done)
                 {
                     //Redirect to the print page
                 }
                 ViewBag.huntId = huntId;
+                //Create the new treasure and set values
                 Models.GeneratedModels.treasure newTreasure = new Models.GeneratedModels.treasure();
                 newTreasure.description = model.Description;
                 newTreasure.hunt_hunt_id = (int)huntId;
-                newTreasure.confirmation = "false";
+                newTreasure.confirmation = "";
                 newTreasure.seq_order = 0;
                 newTreasure.points = 5;
-
-                int latestTreasure = database.treasures.OrderBy(t => t.treasure_id.ToString() ?? int.MaxValue.ToString()).ToList().Last().treasure_id;
+                //newTreasure.hunt = database.hunts.
+                //Give the treasure it's unique id
+                int latestTreasure = database.treasures.OrderBy(t => t.treasure_id).ToList().Last().treasure_id;
                 newTreasure.treasure_id = (latestTreasure + 1);
+                //Add and save the treasure to the database
+                database.treasures.Add(newTreasure);
+                database.SaveChanges();
 
+                //Call the GET AddTreasures to add another treasure
                 return RedirectToAction("AddTreasures", new { huntId = huntId });
 
             }
-            else if(huntId == null)
+            else if(huntId == null) //Error handling as in THEORY you shouldn't be able to reach AddTreasures without having seen a HuntId
             {
                 return RedirectToAction("AddTreasures");
             }
