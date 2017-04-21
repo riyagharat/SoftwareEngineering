@@ -60,31 +60,44 @@ namespace FindTheBooty.Controllers
             DotNet.Highcharts.Highcharts chart = new DotNet.Highcharts.Highcharts("chart")
             .SetXAxis(new XAxis
             {
-            Categories = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }
+            Categories = new[] {"Land Lubber", "Scallywag", "Deck Hand", "Buccaneer", "Quartermaster", "Captain", "Pirate Supreme", "Doug Leas", "Sea Legs", "Fortune Finder", "Master Plunderer",
+                    "So This Is Booty", "Live For the Booty", "Sic Parvis Magna"}
             })
             .SetSeries(new Series
             {
             Data = new Data(new object[] { 29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4 })
-            });
+            })
+            .SetTitle(new Title { Text = "Pirate Distribution" });
 
             return View(chart);
         }
         public ActionResult TypesOfUsers()
         {
+            int numberAdmins = 0;
+            int numberUsers = 0;
+            int numberCreators = 0;
+
             SqlConnection usercharts = new SqlConnection(ConfigurationManager.ConnectionStrings["FTBConnection"].ToString());
             usercharts.Open();
 
-            SqlCommand queryAdmin = new SqlCommand("SELECT COUNT(*) FROM dbo.user WHERE user_type = 'Admin';", usercharts);
-            SqlDataReader queryAdminReader = queryAdmin.ExecuteReader();
+            SqlCommand queryAdmin = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE user_type = 'Admin';", usercharts);
+            numberAdmins = Convert.ToInt32(queryAdmin.ExecuteScalar());
+
+            SqlCommand queryCreator = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE user_type = 'Creator';", usercharts);
+            numberCreators = Convert.ToInt32(queryCreator.ExecuteScalar());
+
+            SqlCommand queryUser = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE user_type = 'User';", usercharts);
+            numberUsers = Convert.ToInt32(queryUser.ExecuteScalar());
+
 
             DotNet.Highcharts.Highcharts chart = new DotNet.Highcharts.Highcharts("chart")
             .SetSeries(new Series
             {
                 Type = ChartTypes.Pie,
-                Name = "Browser share",
-                Data = new Data(new object[] { new object[] {"Admin", queryAdminReader.GetInt32(0)},
-                                               new object[] {"Creator", 2},
-                                               new object[] {"User", 3} })
+                Name = "Number of User",
+                Data = new Data(new object[] { new object[] {"Admin", numberAdmins},
+                                               new object[] {"Creator", numberCreators},
+                                               new object[] {"User", numberUsers } })
 
             })
             .SetTitle(new Title
