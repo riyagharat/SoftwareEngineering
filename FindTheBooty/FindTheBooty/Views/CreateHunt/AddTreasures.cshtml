@@ -4,7 +4,7 @@
     ViewBag.Title = "Add some booty";
 }
 
-<h2>Add a treasure!</h2>
+<h2 class="kaushanScript">Add a treasure!</h2>
 
 <form action="/CreateHunt/AddTreasures?huntId=@ViewBag.huntId " enctype="multipart/form-data" method="post" id="treasureForm">
     @Html.AntiForgeryToken()
