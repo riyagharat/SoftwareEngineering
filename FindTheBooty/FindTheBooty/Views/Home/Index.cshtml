@@ -1,5 +1,10 @@
 ﻿@{
     ViewBag.Title = "Splash Page";
+    bool loggedIn = true;
+    if (Session["LoggedUser"] == null)
+    {
+        loggedIn = false;
+    }
 }
 
 <!-- Start parallax wumbotron i hope this shit works -->
@@ -32,6 +37,13 @@
 <!-- end parallax wumbotron -->
 
 <div class="row text-center">
+    @if (!loggedIn)
+    {
+        <div style="margin-top: -50px;" class="col-xs-12">
+            <a class="btn btn-primary btn-lg outline kaushanScript" href="/Account/Login">Login</a>
+            <a class="btn btn-primary btn-lg outline kaushanScript" href="/Account/Register">Register</a>
+        </div>
+    }
     @if (Request["LoggedOut"] == "True")
     {
         <div class="alert alert-success">
@@ -41,11 +53,7 @@
             </p>
         </div>
     }
-    <div style="margin-top: -50px;" class="col-xs-12">
-        <a class="btn btn-primary btn-lg outline kaushanScript" href="/Account/Login">Login</a>
-        <a class="btn btn-primary btn-lg outline kaushanScript" href="/Account/Register">Register</a>
-    </div>
-    <div class="col-xs-12">
+    <div style="margin-top: 10px;"class="col-xs-12">
         <p>
             Find The Booty is a free, web-based treasure hunting game created by Javalanche Studios.
             All you need is a camera and an Internet connection! Login and start playing now!
