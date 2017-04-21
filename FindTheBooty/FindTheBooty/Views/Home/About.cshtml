@@ -2,18 +2,6 @@
     ViewBag.Title = "About";
 }
 
-
-<script>
-    var jumboHeight = $('.wumbotron1').outerHeight();
-    function parallax() {
-        var scrolled = $(window).scrollTop();
-        $('.splashbg').css('height', (jumboHeight - scrolled) + 'px');
-    }
-
-    $(window).scroll(function (e) {
-        parallax();
-    });
-</script>
 <div class="splashbg"></div>
 <div class="wumbotron1">
     <h1>@ViewBag.Title</h1>
@@ -24,6 +12,7 @@
         </p>
     
 </div>
+<div>
 <h3 style="margin-top: -50px;"class="kaushanScript">Javalanche Studios Crew:</h3>
 <p>Captain Riya Gharat, Michael Frederick, Kevin Janssen, Mai Nguyen, Kevin Poon, Dave Timmers, and Brandon White</p>
 
@@ -35,3 +24,15 @@
     <li>Stack Overflow</li>
     <li>Coffee</li>
 </ul>
+    </div>
+<script>
+    var jumboHeight = $('.wumbotron1').outerHeight();
+    function parallax() {
+        var scrolled = $(window).scrollTop();
+        $('.splashbg').css('height', (jumboHeight - scrolled) + 'px');
+    }
+
+    $(window).scroll(function (e) {
+        parallax();
+    });
+</script>
