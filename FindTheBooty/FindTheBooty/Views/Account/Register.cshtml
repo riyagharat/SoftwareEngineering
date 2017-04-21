@@ -3,7 +3,7 @@
     ViewBag.Title = "Come Aboard!";
 }
 
-<h3>Come Aboard, Matey!</h3>
+<h3 class="kaushanScript">Come Aboard, Matey!</h3>
 <form action="/Account/Register" method="post">
     @Html.AntiForgeryToken()
     @Html.ValidationSummary("", new { @class = "text-danger" })
@@ -80,8 +80,8 @@
         <input id="userPhoneNum" class="form-control" placeholder="Enter your phone number: (XXX) XXX-XXXX" />*@
     </div>
     <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary">Register</button>
-        <button type="reset" class="btn btn-danger">Clear Form</button>
+        <button type="submit" class="btn btn-primary outline btn-lg kaushanScript">Register</button>
+        <button type="reset" class="btn btn-primary outline btn-lg kaushanScript">Clear Form</button>
     </div>
 </form>
 
