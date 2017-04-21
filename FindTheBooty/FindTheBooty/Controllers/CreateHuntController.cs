@@ -40,7 +40,7 @@ namespace FindTheBooty.Controllers
                     int latestHunt = database.hunts.OrderBy(h => h.hunt_id.ToString() ?? int.MaxValue.ToString()).ToList().Last().hunt_id;
                     newHunt.hunt_id = (latestHunt + 1);
                     //database.SaveChanges(); <-- NEEDS TO BE UNIT TESTED
-                    String temp = "IT WORKED";
+
                     return RedirectToAction("AddTreasures", new { huntId = newHunt.hunt_id });
                 }
 
@@ -53,28 +53,45 @@ namespace FindTheBooty.Controllers
         // GET: AddTreasures
         public ActionResult AddTreasures(int? huntId)
         {
-            IList<Models.GeneratedModels.treasure> treasureList = database.treasures.Where(t => t.hunt_hunt_id == huntId).ToList();
-
-            //cshtml add treasure information, below that is the treasure list
-            //add a another treausre button - call add treausres[post] below
-            //add I'm Done btn, which will go to a different method (addT2)
+            if (huntId != null)
+            {
+                IList<Models.GeneratedModels.treasure> bootyList = database.treasures.Where(t => t.hunt_hunt_id == huntId).ToList();
+                ViewBag.treasureList = bootyList;
+                ViewBag.huntId = huntId;
+            }
+            else
+            {
+                return RedirectToAction("HuntSettings");
+            }
             return View();
         }
         // POST
         [HttpPost]
-        public ActionResult AddTreasures(AddTreasuresViewModal model, int? huntId)
+        public ActionResult AddTreasures(AddTreasuresViewModel model, int? huntId, Boolean? done) // if done = true, then send to printpage
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && huntId != null)
             {
-
+                if(done)
+                {
+                    //Redirect to the print page
+                }
+                ViewBag.huntId = huntId;
                 Models.GeneratedModels.treasure newTreasure = new Models.GeneratedModels.treasure();
                 newTreasure.description = model.Description;
-                newTreasure.hunt_hunt_id = huntId;
+                newTreasure.hunt_hunt_id = (int)huntId;
+                newTreasure.confirmation = "false";
+                newTreasure.seq_order = 0;
+                newTreasure.points = 5;
 
                 int latestTreasure = database.treasures.OrderBy(t => t.treasure_id.ToString() ?? int.MaxValue.ToString()).ToList().Last().treasure_id;
                 newTreasure.treasure_id = (latestTreasure + 1);
-                //return actionResult to addTreasure[get]
 
+                return RedirectToAction("AddTreasures", new { huntId = huntId });
+
+            }
+            else if(huntId == null)
+            {
+                return RedirectToAction("AddTreasures");
             }
 
             // If we got this far, something failed, redisplay form

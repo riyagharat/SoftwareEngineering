@@ -9,6 +9,7 @@ namespace FindTheBooty.Models
         // hunt identifier information
         public int HuntID { get; set; }
         public int SponsorID { get; set; }
+        [Required]
         public string HuntName { get; set; }
 
         // hunt type information
@@ -22,10 +23,11 @@ namespace FindTheBooty.Models
         public string EndDateTime { get; set; }
     }
 
-    public class AddTreasuresViewModal
+    public class AddTreasuresViewModel
     {
         public int HuntRelID { get; set; }
         public int TreasureID { get; set; }
+        [Required]
         public string Description { get; set; }
         public int Seq_Order { get; set; }
         public bool Confirmation { get; set; }

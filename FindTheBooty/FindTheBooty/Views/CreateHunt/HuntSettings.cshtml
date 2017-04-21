@@ -10,7 +10,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(m => m.HuntName)
+        <label for="image">Hunt Name</label>
         @Html.TextBoxFor(m => m.HuntName, new { @class = "form-control", @placeholder = "Enter the name of the hunt" })
         @Html.ValidationMessageFor(m => m.HuntName, "", new { @class = "text-danger" })
         @*<label for="">Hunt Name</label>
