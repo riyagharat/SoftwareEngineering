@@ -11,13 +11,17 @@
     //TODO: !!!PRODUCTION!!! Uncomment block of code above for production
 
     var userFullName = "";
-    if(Session["LoggedUser"] != null)
+    bool loggedIn;
+
+    if (Session["LoggedUser"] != null)
     {
         var user = (FindTheBooty.Models.GeneratedModels.user)Session["LoggedUser"];
         userFullName = user.first_name + " " + user.last_name;
+        loggedIn = true;
     }
     else
     {
+        loggedIn = false;
         userFullName = "Captain Leas";
     }
 }
@@ -59,13 +63,22 @@
         @* Menu sidebar information *@
         <div id="sidr">
             <ul>
-                <li id="homeNavLink"><a href="/">@userFullName</a></li>
-                <li id="huntsNavLink"><a href="/Participating/"><span class="glyphicon glyphicon-search"></span> Hunts</a></li>
-                <li id="profileNavLink"><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-                <li id="leaderboardsNavLink"><a href="/Leaderboard/"><span class="glyphicon glyphicon-th-list"></span> Leaderboards</a></li>
-                <li id="statisticsNavLink"><a href="#"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
-                <li id="adminSettingsNavLink"><a href="#"><span class="glyphicon glyphicon-cog"></span> Admin Settings</a></li>
-                <li id="logoutNavLink" class="danger"><a href="/Account/LogOut"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                @* check if user is logged in and display menu items accordingly*@
+                @if (loggedIn)
+                {
+                    <li id="homeNavLink"><a href="/">@userFullName</a></li>
+                    <li id="huntsNavLink"><a href="/Participating/"><span class="glyphicon glyphicon-search"></span> Hunts</a></li>
+                    <li id="profileNavLink"><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                    <li id="leaderboardsNavLink"><a href="/Leaderboard/"><span class="glyphicon glyphicon-th-list"></span> Leaderboards</a></li>
+                    <li id="statisticsNavLink"><a href="#"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
+                    <li id="adminSettingsNavLink"><a href="#"><span class="glyphicon glyphicon-cog"></span> Admin Settings</a></li>
+                    <li id="logoutNavLink" class="danger"><a href="/Account/LogOut"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                }
+                else
+                {
+                    <li id=""><a href="/Account/Login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+                    <li id=""><a href="/Account/Register"><span class="glyphicon glyphicon-pencil"></span> Register</a></li>
+                }
             </ul>
         </div>
 
