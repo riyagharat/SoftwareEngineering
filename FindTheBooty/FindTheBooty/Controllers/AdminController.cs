@@ -49,34 +49,43 @@ namespace FindTheBooty.Controllers
         public ActionResult TreasuresFound()
         {
             SqlConnection treasurecharts = new SqlConnection(ConfigurationManager.ConnectionStrings["FTBConnection"].ToString());
+
             treasurecharts.Open();
-
-            SqlCommand query1 = new SqlCommand("SELECT hunt_name FROM dbo.[hunt], dbo.[user_treasure_relation] WHERE(user_treasure_relation.found = 'true') GROUP BY hunt_name;", treasurecharts);
-            SqlCommand query2 = new SqlCommand("SELECT COUNT(*) FROM dbo.[hunt], dbo.[user_treasure_relation] WHERE(user_treasure_relation.found = 'true') GROUP BY hunt_name;", treasurecharts);
-
+            SqlCommand query1 = new SqlCommand("SELECT hunt_name FROM dbo.[hunt], dbo.[user_treasure_relation] WHERE(user_treasure_relation.found = 'true' AND user_treasure_relation.treasure_hunt_hunt_id = hunt.hunt_id) GROUP BY hunt_name;", treasurecharts);
+            SqlDataReader query1Reader = query1.ExecuteReader();
             DataTable tempHuntNames = new DataTable();
+            tempHuntNames.Load(query1Reader);
+            treasurecharts.Close();
+
+            treasurecharts.Open();
+            SqlCommand query2 = new SqlCommand("SELECT COUNT(*) AS number FROM dbo.[hunt], dbo.[user_treasure_relation] WHERE(user_treasure_relation.found = 'true' AND user_treasure_relation.treasure_hunt_hunt_id = hunt.hunt_id) GROUP BY hunt_name;", treasurecharts);
+            SqlDataReader query2Reader = query2.ExecuteReader();
             DataTable tempTreasureCount = new DataTable();
+            tempTreasureCount.Load(query2Reader);
+            treasurecharts.Close();
 
-            string[] test = new string[tempHuntNames.Columns.Count];
-            int[] vals = new int[tempTreasureCount.Columns.Count];
+            string[] test = new string[tempHuntNames.Rows.Count];
+            object[] vals = new object[tempTreasureCount.Rows.Count];
 
-            for(int i = 0; i < tempHuntNames.Columns.Count; i++){
-                string value = tempHuntNames.Columns[i].ToString();
+            for (int i = 0; i < tempHuntNames.Rows.Count; i++)
+            {
+                string value = tempHuntNames.Rows[i]["hunt_name"].ToString();
                 test[i] = value;
             }
 
-            for (int i = 0; i < tempTreasureCount.Columns.Count; i++)
+            for (int i = 0; i < tempTreasureCount.Rows.Count; i++)
             {
-                int value = Convert.ToInt32(tempTreasureCount.Columns[i]);
+                object value = tempTreasureCount.Rows[i]["number"];
                 vals[i] = value;
             }
 
             DotNet.Highcharts.Highcharts chart = new DotNet.Highcharts.Highcharts("chart")
             .SetXAxis(new XAxis { Categories = test })
             .SetYAxis(new YAxis { Title = new YAxisTitle { Text = "Number of Treasures Found" } })
-            .SetSeries(new Series { Data = new Data(new object[] { 20, 30, 40, 50, 20, 60, 14, 72, 30, 35, 10, 20 }), Name = "Treasure" })
+            .SetSeries(new Series { Data = new Data(vals), Name = "Treasure" })
             .SetTitle(new Title { Text = "Treasures Found in Hunts" })
             .InitChart(new Chart { DefaultSeriesType = ChartTypes.Column });
+
             return View(chart);
         }
         public ActionResult PirateDistribution()
