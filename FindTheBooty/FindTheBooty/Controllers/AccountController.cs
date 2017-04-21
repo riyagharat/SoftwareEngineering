@@ -1,4 +1,5 @@
 ﻿using FindTheBooty.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -10,8 +11,8 @@ namespace FindTheBooty.Controllers
 
         public AccountController()
         {
+
         }
-        
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -42,7 +43,7 @@ namespace FindTheBooty.Controllers
             // Model is valid successful login
             return RedirectToAction("Index", "Home");
         }
-        
+
         //
         // GET: /Account/Register
         [AllowAnonymous]
@@ -68,16 +69,30 @@ namespace FindTheBooty.Controllers
                 newUser.first_name = model.FirstName;
                 newUser.last_name = model.LastName;
                 newUser.gender = "";
-                newUser.phone = System.Convert.ToInt64(model.PhoneNumber);
+                string strippedPhone = model.PhoneNumber.Replace("(", string.Empty);
+                strippedPhone = strippedPhone.Replace(" ", string.Empty);
+                strippedPhone = strippedPhone.Replace(")", string.Empty);
+                strippedPhone = strippedPhone.Replace("-", string.Empty);
+                newUser.phone = System.Convert.ToInt64(strippedPhone);
                 newUser.points = 0;
-                newUser.rank = "";
+                newUser.rank = "Land Lubber";
                 newUser.num_hunts = 0;
                 newUser.num_treasures = 0;
                 newUser.user_type = "User";
 
                 // Add User to database by adding primary key
-                var latestUser = database.users.OrderBy(u => u.user_id ?? int.MaxValue.ToString()).ToList().Last();
-                newUser.user_id = (int.Parse(latestUser.user_id) + 1).ToString();
+                //var latestUser = database.users.OrderBy(u => u.user_id ?? int.MaxValue.ToString()).ToList().Last();
+                //newUser.user_id = (int.Parse(latestUser.user_id) + 1).ToString();
+                long latestUserId = 0;
+                long tmpUserId = 0;
+                List<Models.GeneratedModels.user> userList = database.users.ToList();
+                foreach(Models.GeneratedModels.user user in userList)
+                {
+                    tmpUserId = System.Convert.ToInt64(user.user_id);
+                    if (tmpUserId > latestUserId)
+                        latestUserId = tmpUserId;
+                }
+                newUser.user_id = (latestUserId + 1).ToString();
 
                 // Log user in and commit to database
                 setUser(newUser);
@@ -122,10 +137,54 @@ namespace FindTheBooty.Controllers
         {
             if (disposing)
             {
-                
+
             }
 
             base.Dispose(disposing);
+        }
+
+        [AllowAnonymous]
+        public ActionResult UserProfile()
+        {
+            Models.GeneratedModels.user session = (Models.GeneratedModels.user)Session["LoggedUser"];
+            /*List<Models.GeneratedModels.user_badge_relation> userBadges = database.user_badge_relation.Where(u => u.user_user_id == session.user_id)
+                .ToList();
+            ViewBag.user_badge_relation = userBadges;*/
+            return View(database.user_badge_relation.Where(u => u.user_user_id == "1" /*session.user_id*/).ToList());
+        }
+        [AllowAnonymous]
+        public ActionResult EditProfile()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        public ActionResult EditProfile(EditProfileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var UserID = (Models.GeneratedModels.user)Session["LoggedUser"];
+                Models.GeneratedModels.user user = database.users.Where(x => x.user_id == UserID.user_id).ToList().First();
+                user.email = model.Email;
+                user.display_name = model.DisplayName;
+                //Initialize Model with null items
+                user.first_name = model.FirstName;
+                user.last_name = model.LastName;
+                string strippedPhone = model.PhoneNumber.Replace("(", string.Empty);
+                strippedPhone = strippedPhone.Replace(" ", string.Empty);
+                strippedPhone = strippedPhone.Replace(")", string.Empty);
+                strippedPhone = strippedPhone.Replace("-", string.Empty);
+                user.phone = System.Convert.ToInt64(strippedPhone);
+                user.user_type = "User";
+                // save to database
+                setUser(user);
+                database.SaveChanges();
+
+                return RedirectToAction("UserProfile", "Account");
+            }
+            return View(model);
         }
     }
 }

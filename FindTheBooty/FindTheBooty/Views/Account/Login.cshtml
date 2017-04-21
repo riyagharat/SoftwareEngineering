@@ -7,7 +7,7 @@
     <div class="col-md-offset-2 col-sm-offset-2 col-md-8 col-sm-8">
         <div style="width: 100%; margin-bottom: 2em;"><img class="center-block img-rounded" style="width:150px; height:auto;" src="~/Content/Images/parrot logo.png" /></div>
         <div style="width:100%;">
-            <h2 class="center-block">Check Yer Booty!</h2>
+            <h2 class="center-block kaushanScript">Check Yer Booty!</h2>
         </div>
         <form action="/Account/Login" method="post">
             @Html.AntiForgeryToken()
@@ -28,11 +28,11 @@
             </div>
             <div class="form-group">
                 <div class="col-xs-12 text-center">
-                    <button tyle="submit" class="btn btn-primary outline kaushanScript">Login</button>
-                    <button type="reset" class="btn btn-danger outline kaushanScript">Clear Form</button>
+                    <button type="submit" class="btn btn-primary btn-lg outline kaushanScript">Login</button>
+                    <button type="reset" class="btn btn-primary btn-lg outline kaushanScript">Clear Form</button>
                 </div>
             </div>
-            <div style="margin-top: 60px;">
+            <div style="margin-top: 75px;">
                 <h4>Don't have an account?</h4>
                 @Html.ActionLink("Sign Up Today!", "Register")
             </div>

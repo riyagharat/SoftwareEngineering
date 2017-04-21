@@ -1,17 +1,146 @@
 ﻿/* fonts 
+
 font-family: 'Jim Nightshade', cursive;
+
 font-family: 'Kaushan Script', cursive;
+
 font-family: 'Great Vibes', cursive;
+
 font-family: 'Tangerine', cursive;
+
 font-family: 'Italianno', cursive;
+
 font-family: 'La Belle Aurore', cursive;
+
 font-family: 'Bilbo Swash Caps', cursive;
+
 font-family: 'Dawning of a New Day', cursive; */
 
-@import url('https://fonts.googleapis.com/css?family=Bilbo+Swash+Caps|Dawning+of+a+New+Day|Great+Vibes|Italianno|Jim+Nightshade|Kaushan+Script|La+Belle+Aurore|Tangerine');
+
+
+/* latin-ext */
+@font-face {
+  font-family: 'Bilbo Swash Caps';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Bilbo Swash Caps'), local('BilboSwashCaps-Regular'), url(https://fonts.gstatic.com/s/bilboswashcaps/v7/UB_-crLvhx-PwGKW1oosDo218ryL1NyE3iq50Mso_MU.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Bilbo Swash Caps';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Bilbo Swash Caps'), local('BilboSwashCaps-Regular'), url(https://fonts.gstatic.com/s/bilboswashcaps/v7/UB_-crLvhx-PwGKW1oosDhj-AqoPRuAbf1eZyhj8Aik.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+/* latin */
+@font-face {
+  font-family: 'Dawning of a New Day';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Dawning of a New Day'), local('DawningofaNewDay'), url(https://fonts.gstatic.com/s/dawningofanewday/v7/JiDsRhiKZt8uz3NJ5xA06sXt6O2RzdGnaiPim4oAiF0.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Great Vibes';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Great Vibes'), local('GreatVibes-Regular'), url(https://fonts.gstatic.com/s/greatvibes/v4/6q1c0ofG6NKsEhAc2eh-3SYE0-AqJ3nfInTTiDXDjU4.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Great Vibes';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Great Vibes'), local('GreatVibes-Regular'), url(https://fonts.gstatic.com/s/greatvibes/v4/6q1c0ofG6NKsEhAc2eh-3Y4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Italianno';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Italianno'), local('Italianno-Regular'), url(https://fonts.gstatic.com/s/italianno/v6/r8-H81S5And8WyrrbOrbExJtnKITppOI_IvcXXDNrsc.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Italianno';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Italianno'), local('Italianno-Regular'), url(https://fonts.gstatic.com/s/italianno/v6/RzzA8gdr3WCK_nxdg53KGltXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Jim Nightshade';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Jim Nightshade'), local('JimNightshade-Regular'), url(https://fonts.gstatic.com/s/jimnightshade/v4/_n43lYHXVWNgXegdYRIK9ATk6Kx6rt5BLQDHdZhIGiE.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Jim Nightshade';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Jim Nightshade'), local('JimNightshade-Regular'), url(https://fonts.gstatic.com/s/jimnightshade/v4/_n43lYHXVWNgXegdYRIK9NJmD_dqQ94bUc_vtZFnud0.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Kaushan Script';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Kaushan Script'), local('KaushanScript-Regular'), url(https://fonts.gstatic.com/s/kaushanscript/v5/qx1LSqts-NtiKcLw4N03IO87R-l0-Xx_7cYc0ZX1ifE.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Kaushan Script';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Kaushan Script'), local('KaushanScript-Regular'), url(https://fonts.gstatic.com/s/kaushanscript/v5/qx1LSqts-NtiKcLw4N03IEd0sm1ffa_JvZxsF_BEwQk.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+/* latin */
+@font-face {
+  font-family: 'La Belle Aurore';
+  font-style: normal;
+  font-weight: 400;
+  src: local('La Belle Aurore'), local('LaBelleAurore'), url(https://fonts.gstatic.com/s/labelleaurore/v7/Irdbc4ASuUoWDjd_Wc3md8dxVGbf3qyhvoXHfU-LjZg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+/* latin */
+@font-face {
+  font-family: 'Tangerine';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Tangerine'), url(https://fonts.gstatic.com/s/tangerine/v7/HGfsyCL5WASpHOFnouG-RFtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
 /* Jim Nightshade font */
+
 .jimNightShade {
     font-family: 'Jim Nightshade', cursive;
+}
+
+@media screen and (min-width: 990px){
+    .treasure-box {
+        margin-top: 1em;
+    }
+}
+
+.borderless, .borderless>tbody>tr>td {
+    border: none;
+}
+
+.no-padding, .no-padding>tbody>tr>td {
+    padding: 0px !important;
 }
 
 /* Kaushan Script font */
@@ -33,7 +162,7 @@ font-family: 'Dawning of a New Day', cursive; */
   background: url('./Images/schooner.jpg') no-repeat center center;
   position: fixed;
   width: 100%;
-  height: 200px; 
+  height: 400px; 
   top:0;
   left:0;
   z-index: -1;
@@ -43,7 +172,9 @@ font-family: 'Dawning of a New Day', cursive; */
   margin-bottom: 0px;
   height: 350px;
   color: white;
+  
   text-shadow: black 0.1em 0.1em 0.1em;
+      
   background:transparent;
 }
 

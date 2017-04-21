@@ -18,6 +18,7 @@ namespace FindTheBooty.Models
         public System.DateTime TimeExpire { get; set; }
         public int MaxNumOfUsers { get; set; }
         public bool MultiOrSingle { get; set; }
+        public string Completed { get; set; }
     }
 
     // Generic Treasure Model
@@ -51,7 +52,9 @@ namespace FindTheBooty.Models
     // used in the DoHunt action
     public class DoHuntList
     {
-        public Hunt Hunt { get; set; }  // hunt information
+        public Models.GeneratedModels.hunt Hunt { get; set; }  // hunt information
         public List<Treasure> TreasureList { get; set; } // list of treasures for the hunt
+        public int PercentageComplete { get; set; } // percentage of the hunt complete
     }
+
 }

@@ -1,56 +1,28 @@
 ﻿﻿@{
     ViewBag.Title = "Splash Page";
-}
-
-<!-- Start parallax wumbotron i hope this shit works -->
-
+    bool loggedIn = true;
+    if (Session["LoggedUser"] == null)
+    {
+        loggedIn = false;
+    }
+}
+<!-- Start parallax wumbotron i hope this shit works -->
 <div class="splashbg"></div>
 <div class="wumbotron1">
     <div class="row">
         <div class="col-md-4">
-            <center>
-                <img src="~/Content/Images/ms-icon-150x150.png" />
-                <h1 class="kaushanScript">Splash Page</h1>
-                <p class="lead">Arr matey! Let's find some booty!</p>
-            </center>
-        </div>
-    </div>
-</div>
-
-<script>
-    var jumboHeight = $('.wumbotron1').outerHeight();
-    function parallax() {
-        var scrolled = $(window).scrollTop();
-        $('.splashbg').css('height', (jumboHeight - scrolled) + 'px');
-    }
-
-    $(window).scroll(function (e) {
-        parallax();
-    });
-</script>
-<!-- end parallax wumbotron -->
-<div class="row text-center">
-    <p>
-        <a class="btn btn-primary btn-lg outline kaushanScript" href="/Account/Login">Login</a>
-        <a class="btn btn-primary btn-lg outline kaushanScript" href="/Account/Register">Register</a>
-    </p>
-    <div class="col-lg-12">
-        <p>
-            Find The Booty is a free, web-based treasure hunting game created by Javalanche Studios.
-            All you need is a camera and an internet connection! Login and start playing now!
-            
-        </p><a href="/Home/About">Learn More >></a>
-
-
-    </div>
-</div>
-
-@if (Request["LoggedOut"] == "True")
-{
-    <div class="alert alert-success">
-        <p>
-            <span class="glyphicon glyphicon-info-sign"></span>
-            You have successfully logged out!
-        </p>
-    </div>
-}
+            <center>                <img src="~/Content/Images/ms-icon-150x150.png" />                <h1 class="kaushanScript">Splash Page</h1>                <p class="lead">Arr matey! Let's find some booty!</p>            </center>        </div>    </div></div>
+
+<script>    var jumboHeight = $('.wumbotron1').outerHeight();    function parallax() {        var scrolled = $(window).scrollTop();        $('.splashbg').css('height', (jumboHeight - scrolled) + 'px');    }
+
+    $(window).scroll(function (e) {        parallax();    });
+</script>
+
+<!-- end parallax wumbotron --><div class="row text-center">    @if (!loggedIn)    {        <div style="margin-top: -50px;" class="col-xs-12">            <a class="btn btn-primary btn-lg outline kaushanScript" href="/Account/Login">Login</a>            <a class="btn btn-primary btn-lg outline kaushanScript" href="/Account/Register">Register</a>        </div>    }
+    @if (Request["LoggedOut"] == "True")    {        <div class="alert alert-success">            <p>                <span class="glyphicon glyphicon-info-sign"></span>                You have successfully logged out!            </p>        </div>    }
+    <div style="margin-top: 10px;"class="col-xs-12">        <p>            Find The Booty is a free, web-based treasure hunting game created by Javalanche Studios.            All you need is a camera and an Internet connection! Login and start playing now!        </p><a href="/Home/About">Learn More >></a>
+    </div>
+</div>
+
+
+
