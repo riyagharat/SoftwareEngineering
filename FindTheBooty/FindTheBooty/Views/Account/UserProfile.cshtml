@@ -16,6 +16,7 @@
     var userFullName = "";
     var userName = "";
     var userRank = "";
+    var rankIcon = "";
     var gender = "";
     long userPoints = 0;
     int numHunts = 0;
@@ -33,6 +34,8 @@
         numHunts = user.num_hunts;
         numTreasures = user.num_treasures;
         huntCount = user.user_hunt_relation.Count;
+        rankIcon = "~/Content/Images/";
+        rankIcon += user.rank + ".png";
     }
     else
     {
@@ -45,18 +48,19 @@
         numHunts = 9001;
         numTreasures = 1000000;
     }
-    if (gender == "M" || gender == "Male")
-    {
-        gender = "Male";
-    }
-    else { gender = "Female"; }
+
 }
+<script type="text/javascript>
+    function changeImage(a) {
+        document.getElementById("img").src = a;
+    }
+</script>
 <div class="wumbobg2"></div>
 <div class="wumbotron1">
     <div class="row">
         <div class="col-md-12">
             <center>
-                <img src="~/Content/Images/rank0.png" />
+                <img src= @rankIcon />
                 <h1 class="kaushanScript">@userName</h1>
                 <p class="lead">Rank: @userRank</p>
             </center>
