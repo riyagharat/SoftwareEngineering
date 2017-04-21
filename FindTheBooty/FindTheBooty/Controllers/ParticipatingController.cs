@@ -218,7 +218,8 @@ namespace FindTheBooty.Controllers
                     ++found;
 
                 // assign creator uploaded image file, if exists, otherwise placeholder image
-                if (System.IO.File.Exists("/Content/Images/" + treasure.hunt_hunt_id + "/" + treasure.treasure_id + ".png"))
+                string newFilePath = string.Format("{0}\\{1}", Server.MapPath("~/Content/Images/"+treasure.hunt_hunt_id), treasure.treasure_id + ".png");
+                if (System.IO.File.Exists(newFilePath))
                 {
                     tmpTreasure.Image = "/Content/Images/" + treasure.hunt_hunt_id + "/" + treasure.treasure_id + ".png";
                 }

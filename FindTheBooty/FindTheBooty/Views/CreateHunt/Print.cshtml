@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Print";
+}
+
+<h2>Print</h2>
+
+<form action="/CreateHunt/Print" method="post">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    
+
+</form>
