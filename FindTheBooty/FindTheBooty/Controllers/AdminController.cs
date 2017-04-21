@@ -57,15 +57,75 @@ namespace FindTheBooty.Controllers
         }
         public ActionResult PirateDistribution()
         {
+            int num1 = 0;
+            int num2 = 0;
+            int num3 = 0;
+            int num4 = 0;
+            int num5 = 0;
+            int num6 = 0;
+            int num7 = 0;
+            int num8 = 0;
+            int num9 = 0;
+            int num10 = 0;
+            int num11 = 0;
+            int num12 = 0;
+            int num13 = 0;
+            int num14 = 0;
+
+            SqlConnection piratecharts = new SqlConnection(ConfigurationManager.ConnectionStrings["FTBConnection"].ToString());
+            piratecharts.Open();
+
+            SqlCommand query1 = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE rank = 'Land Lubber';", piratecharts);
+            num1 = Convert.ToInt32(query1.ExecuteScalar());
+
+            SqlCommand query2 = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE rank = 'Scallywag';", piratecharts);
+            num2 = Convert.ToInt32(query2.ExecuteScalar());
+
+            SqlCommand query3 = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE rank = 'Deck Hand';", piratecharts);
+            num3 = Convert.ToInt32(query3.ExecuteScalar());
+
+            SqlCommand query4 = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE rank = 'Buccaneer';", piratecharts);
+            num4 = Convert.ToInt32(query4.ExecuteScalar());
+
+            SqlCommand query5 = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE rank = 'Quartermaster';", piratecharts);
+            num5 = Convert.ToInt32(query5.ExecuteScalar());
+
+            SqlCommand query6 = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE rank = 'Captain';", piratecharts);
+            num6 = Convert.ToInt32(query6.ExecuteScalar());
+
+            SqlCommand query7 = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE rank = 'Pirate Supreme';", piratecharts);
+            num7 = Convert.ToInt32(query7.ExecuteScalar());
+
+            SqlCommand query8 = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE rank = 'Doug Leas';", piratecharts);
+            num8 = Convert.ToInt32(query8.ExecuteScalar());
+
+            SqlCommand query9 = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE rank = 'Sea Legs';", piratecharts);
+            num9 = Convert.ToInt32(query9.ExecuteScalar());
+
+            SqlCommand query10 = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE rank = 'Fortune Finder';", piratecharts);
+            num10 = Convert.ToInt32(query10.ExecuteScalar());
+
+            SqlCommand query11 = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE rank = 'Master Plunderer';", piratecharts);
+            num11 = Convert.ToInt32(query11.ExecuteScalar());
+
+            SqlCommand query12 = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE rank = 'So This Is Booty';", piratecharts);
+            num12 = Convert.ToInt32(query12.ExecuteScalar());
+
+            SqlCommand query13 = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE rank = 'Live For the Booty';", piratecharts);
+            num13 = Convert.ToInt32(query13.ExecuteScalar());
+
+            SqlCommand query14 = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE rank = 'Sic Parvis Magna';", piratecharts);
+            num14 = Convert.ToInt32(query14.ExecuteScalar());
+
             DotNet.Highcharts.Highcharts chart = new DotNet.Highcharts.Highcharts("chart")
             .SetXAxis(new XAxis
             {
-            Categories = new[] {"Land Lubber", "Scallywag", "Deck Hand", "Buccaneer", "Quartermaster", "Captain", "Pirate Supreme", "Doug Leas", "Sea Legs", "Fortune Finder", "Master Plunderer",
-                    "So This Is Booty", "Live For the Booty", "Sic Parvis Magna"}
+                Categories = new[] {"Land Lubber", "Scallywag", "Deck Hand", "Buccaneer", "Quartermaster", "Captain", "Pirate Supreme", "Doug Leas", "Sea Legs",
+                "Fortune Finder", "Master Plunderer", "So This Is Booty", "Live For the Booty", "Sic Parvis Magna"}
             })
             .SetSeries(new Series
-            {
-            Data = new Data(new object[] { 29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4 })
+            {   Name = "Pirate Type",
+                Data = new Data(new object[] { num1, num2, num3, num4, num5, num6, num7, num8, num9, num10, num11, num12, num13, num14 })
             })
             .SetTitle(new Title { Text = "Pirate Distribution" });
 
