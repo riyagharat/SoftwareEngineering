@@ -50,9 +50,10 @@
     }
 
 }
-<script type="text/javascript>
-    function changeImage(a) {
-        document.getElementById("img").src = a;
+<script type="text/javascript">
+    function changeImage(domImg, srcImage) {
+        var img = new Image();
+        img.onload = function()
     }
 </script>
 <div class="wumbobg2"></div>
@@ -60,7 +61,7 @@
     <div class="row">
         <div class="col-md-12">
             <center>
-                <img src= @rankIcon />
+                <img = @rankIcon />
                 <h1 class="kaushanScript">@userName</h1>
                 <p class="lead">Rank: @userRank</p>
             </center>
