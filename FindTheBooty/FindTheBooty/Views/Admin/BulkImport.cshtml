@@ -6,5 +6,32 @@
     <h1 class="bilbo-swash-caps">Welcome to the Bulk Import page</h1>
 </div>
 <div>
-    <a href="/Admin/Admin" class="btn btn-info" role="button">Back</a>
+    <p>
+        From this page you can perform a bulk import of data to the treasures table in the database.  The data that is imported to the
+        treasures table must follow a specific format to be inserted into the treasures table correctly.  The correct format is listed below.  The
+        bulk import tool only accepts CSV (comma seperated value) files for import into the database.  Click the Choose File button below
+        to select a file to upload.  Then click the Import Data button to execute the import.
+    </p>
+    <p>
+        - The first row lists the attribute names and must be exactly as appears in the image below <br/>
+        - treasure_id is a primary key and must be an int <br/>
+        - hunt_hunt_id is a foreign key and must be an int <br/>
+        - description is a required value and must be a nvarchar(MAX) <br/>
+        - seq_order is a nullable value but if used it must be an int <br/>
+        - confirmation is a required value and must be a nvarchar(20) <br/>
+        - points is a required value and must be an int <br/>
+            <center>
+                <img src="~/Content/Images/importExample.png" />
+            </center>
+    </p>
 </div>
+<form action="/Admin/PerformImport" method="post" enctype="multipart/form-data">
+    <div class="control-label col-md-2">CSV File:</div>
+    <div class="col-md-10">
+        <input type="file" id="FileUpload" name="FileUpload" class="" />
+    </div>
+    <div>
+        <button type="submit" class="btn btn-info">Import Data</button>
+        <a href="/Admin/Admin" class="btn btn-info" role="button">Back</a>
+    </div>
+</form>

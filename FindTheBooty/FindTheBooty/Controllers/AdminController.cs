@@ -4,12 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FindTheBooty.Models;
-using DotNet.Highcharts.Options;
-using DotNet.Highcharts.Helpers;
-using DotNet.Highcharts.Enums;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using System.Data.OleDb;
+using Microsoft.VisualBasic.FileIO;
+using DotNet.Highcharts.Options;
+using DotNet.Highcharts.Helpers;
+using DotNet.Highcharts.Enums;
 
 namespace FindTheBooty.Controllers
 {
@@ -202,18 +204,152 @@ namespace FindTheBooty.Controllers
         }
         public ActionResult UpgradeUser()
         {
+            // Make check here
             return View();
         }
         [HttpPost]
         public ActionResult UpgradeUser(UpgradeUserViewModel model)
         {
-            var usersList = new Models.GeneratedModels.user();
             if (ModelState.IsValid)
             {
-               usersList = database.users.Where(test => test.display_name == model.AdminInput).ToList().First();
+                // Get list of user with that display_name
+                List<Models.GeneratedModels.user> users = database.users.Where(test => test.display_name.Contains(model.AdminInput)).ToList();
+                // If number of users is greater then one, give view a list
+                if (users.Count > 1)
+                {
+                    ViewBag.ReturnedUserList = users;
+                }
+                // Go ahead and promote the user
+                else if (users.Count == 1)
+                {
+                    var userId = users.First().user_id;
+
+                    return RedirectToAction("PromoteUser", new { userId = userId });
+                }
             }
             return View();
         }
 
+        public ActionResult PromoteUser(int? userId)
+        {
+            if (userId != null && database.users.Any(x => x.user_id == userId.ToString()))
+            {
+                Models.GeneratedModels.user user = database.users.Where(x => x.user_id == userId.ToString()).First();
+                user.user_type = "Creator";
+                database.SaveChanges();
+                ViewBag.user = user.display_name;
+                return View();
+            }
+
+            return RedirectToAction("UpgradeUser");
+        }
+
+        public ActionResult PerformExport()
+        {
+            SqlConnection exportConn = new SqlConnection(ConfigurationManager.ConnectionStrings["FTBConnection"].ToString());
+            exportConn.Open();
+
+            SqlCommand queryTreasures = new SqlCommand("SELECT * FROM dbo.treasure", exportConn);
+            SqlDataReader queryTreasuresReader = queryTreasures.ExecuteReader();
+            DataTable tempTreasuresTable = new DataTable();
+            tempTreasuresTable.Load(queryTreasuresReader);
+
+            DataTable treasuresTable = tempTreasuresTable.Clone();
+
+            for (int i =0; i < tempTreasuresTable.Columns.Count; i++)
+            {
+                treasuresTable.Columns[i].DataType = typeof(string);
+            }
+            foreach (DataRow row in tempTreasuresTable.Rows)
+            {
+                treasuresTable.ImportRow(row);
+            }
+
+            string attachment = "attachment; filename=treasuresExport.csv";
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", attachment);
+            Response.ContentType = "application/vnd.ms-excel";
+            string tab = "";
+            foreach (DataColumn dc in treasuresTable.Columns)
+            {
+                Response.Write(tab + dc.ColumnName);
+                tab = ",";
+            }
+            Response.Write("\n");
+
+            foreach (DataRow dr2 in treasuresTable.Rows)
+            {
+                tab = "";
+                for (int i = 0; i < treasuresTable.Columns.Count; i++)
+                {
+                    Response.Write(tab + dr2[i].ToString());
+                    tab = ",";
+                }
+                Response.Write("\n");
+            }
+            Response.End();
+
+            exportConn.Close();
+
+            return View();
+        }
+        
+        [HttpPost]
+        public ActionResult PerformImport()
+        {
+            SqlConnection importConn = new SqlConnection(ConfigurationManager.ConnectionStrings["FTBConnection"].ToString());
+            importConn.Open();
+
+            if (Request.Files["FileUpload"].ContentLength > 0)
+            {
+                string extension = System.IO.Path.GetExtension(Request.Files["FileUpload"].FileName);
+                string path1 = string.Format("{0}\\{1}", Server.MapPath("~/Content/UploadedFolder"), Request.Files["FileUpload"].FileName);
+                if (System.IO.File.Exists(path1))
+                    System.IO.File.Delete(path1);
+
+                Request.Files["FileUpload"].SaveAs(path1);
+
+                DataTable csvData = new DataTable();
+                try
+                {
+                    TextFieldParser csvReader = new TextFieldParser(path1);
+                    csvReader.SetDelimiters(new string[] { "," });
+                    csvReader.HasFieldsEnclosedInQuotes = true;
+                    string[] colFields = csvReader.ReadFields();
+                    foreach (string column in colFields)
+                    {
+                        DataColumn datecolumn = new DataColumn(column);
+                        datecolumn.AllowDBNull = true;
+                        csvData.Columns.Add(datecolumn);
+                    }
+                    while (!csvReader.EndOfData)
+                    {
+                        string[] fieldData = csvReader.ReadFields();
+                        //Making empty value as null
+                        for (int i = 0; i < fieldData.Length; i++)
+                        {
+                            if (fieldData[i] == "")
+                            {
+                                fieldData[i] = null;
+                            }
+                        }
+                        csvData.Rows.Add(fieldData);
+                    }
+                }
+                catch (Exception ex)
+                { }
+
+                SqlBulkCopy s = new SqlBulkCopy(importConn);
+                s.DestinationTableName = "dbo.treasure";
+                foreach (var column in csvData.Columns)
+                {
+                    s.ColumnMappings.Add(column.ToString(), column.ToString());
+                }
+
+                s.WriteToServer(csvData);
+            }
+
+            return View();
+        }     
     }
 }
