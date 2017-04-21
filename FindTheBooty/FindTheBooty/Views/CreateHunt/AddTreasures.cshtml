@@ -6,7 +6,7 @@
 
 <h2>Add a treasure!</h2>
 
-<form action="/CreateHunt/AddTreasures?huntId=@ViewBag.huntId " method="post" id="treasureForm">
+<form action="/CreateHunt/AddTreasures?huntId=@ViewBag.huntId " enctype="multipart/form-data" method="post" id="treasureForm">
     @Html.AntiForgeryToken()
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">

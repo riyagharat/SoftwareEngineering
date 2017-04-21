@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FindTheBooty.Models;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace FindTheBooty.Controllers
 {
@@ -98,6 +100,22 @@ namespace FindTheBooty.Controllers
                 database.treasures.Add(newTreasure);
                 database.SaveChanges();
 
+                //Save treasure image section
+                if (Request.Files["treasureImage"].ContentLength > 0)
+                {
+                    if (!System.IO.File.Exists(Server.MapPath("~/Content/Images/" + huntId.ToString())))
+                    {
+                        System.IO.Directory.CreateDirectory(Server.MapPath("~/Content/Images/" + huntId.ToString()));
+                    }
+                    string path1 = string.Format("{0}\\{1}", Server.MapPath("~/Content/Images/" + huntId), (latestTreasure + 1).ToString() + ".png" );
+                    if (System.IO.File.Exists(path1))
+                        System.IO.File.Delete(path1);
+
+                    Request.Files["treasureImage"].SaveAs(path1);
+
+                }
+
+
                 //Call the GET AddTreasures to add another treasure
                 return RedirectToAction("AddTreasures", new { huntId = huntId });
 
@@ -130,8 +148,8 @@ namespace FindTheBooty.Controllers
                 {
                     if (!System.IO.File.Exists(Server.MapPath("~/Content/Codes/" + huntId.ToString() + "/") + huntId.ToString() + "-" + treasure.treasure_id + ".png"))
                     {
-                        System.Drawing.Bitmap image = QRGenerator.generateQRCode(HuntId.ToString() + "-" + treasure.treasure_id);
-                        outputPath = Server.MapPath("~/Content/Codes/" + HuntId.ToString() + "/") + HuntId.ToString() + "-" + treasure.treasure_id + ".png";
+                        System.Drawing.Bitmap image = QRGenerator.generateQRCode(huntId.ToString() + "-" + treasure.treasure_id);
+                        outputPath = Server.MapPath("~/Content/Codes/" + huntId.ToString() + "/") + huntId.ToString() + "-" + treasure.treasure_id + ".png";
                         image.Save(outputPath, System.Drawing.Imaging.ImageFormat.Png);
                     }
                     treasureList.Add(treasure);
