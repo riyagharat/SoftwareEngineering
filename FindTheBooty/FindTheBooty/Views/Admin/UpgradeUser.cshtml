@@ -29,14 +29,14 @@
             @Html.TextBoxFor(m => m.AdminInput, new { @class = "form-control", @placeholder = "Enter a username" })
             @Html.ValidationMessageFor(m => m.AdminInput, "", new { @class = "text-danger" })
         </div>
+        <button class="btn btn-primary" type="submit">
+            <span class="glyphicon glyphicon-search"></span>
+        </button>
     </form>
-    <button class="btn btn-primary" type="submit" onclick="formSubmit()">
-        <span class="glyphicon glyphicon-search"></span>
-    </button>
     <div>
-        @if (@Model.ReturnedUser != null)
+        @if (ViewBag.ReturnedUser != null)
         {
-            <p>Username: @Model.ReturnedUser</p>
+            <p>Username: @ViewBag.ReturnedUser.display_name</p>
         }else
         {
             <p>The User does not exist.</p>
@@ -47,11 +47,3 @@
 <div>
     <a href="/Admin/Admin" class="btn btn-info" role="button">Back</a>
 </div>
-
-<script>
-    function formSubmit() {
-        var grabForm;
-        grabForm = $('#userSearch');
-        grabForm.submit();
-    }
-</script>
