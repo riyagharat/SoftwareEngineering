@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
@@ -407,28 +407,25 @@
     <Content Include="Views\Participating\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Admin\BulkImport.cshtml" />
-    <Content Include="Views\Admin\BulkExport.cshtml" />
-    <Content Include="Views\Admin\TreasuresFound.cshtml" />
-    <Content Include="Views\Admin\SystemEngagement.cshtml" />
-    <Content Include="Views\Admin\TotalPlayTime.cshtml" />
-    <Content Include="Views\Admin\TypesOfHunt.cshtml" />
-    <Content Include="Views\Admin\UpgradeUser.cshtml" />
-    <Content Include="Views\Admin\PromoteUser.cshtml" />
-    <Content Include="Views\Admin\PerformExport.cshtml" />
-    <Content Include="Views\Admin\PerformImport.cshtml" />
-    <Content Include="Views\Account\UserProfile.cshtml" />
-    <Content Include="Views\Account\EditProfile.cshtml" />
+    <Content Include="Views\Leaderboard\Index.cshtml" />
+    <Content Include="Views\Leaderboard\Points.cshtml" />
+    <Content Include="Views\Leaderboard\Treasures.cshtml" />
+    <Content Include="Views\Leaderboard\Rank.cshtml" />
+    <Content Include="Views\Leaderboard\Hunts.cshtml" />
     <Content Include="Views\Badge\Create.cshtml" />
     <Content Include="Views\Badge\Delete.cshtml" />
     <Content Include="Views\Badge\Details.cshtml" />
     <Content Include="Views\Badge\Edit.cshtml" />
     <Content Include="Views\Badge\Index.cshtml" />
-    <Content Include="Views\Leaderboard\Hunts.cshtml" />
-    <Content Include="Views\Leaderboard\Index.cshtml" />
-    <Content Include="Views\Leaderboard\Points.cshtml" />
-    <Content Include="Views\Leaderboard\Rank.cshtml" />
-    <Content Include="Views\Leaderboard\Treasures.cshtml" />
+    <Content Include="Views\Admin\BulkImport.cshtml" />
+    <Content Include="Views\Admin\BulkExport.cshtml" />
+    <Content Include="Views\Admin\TreasuresFound.cshtml" />
+    <Content Include="Views\Admin\PerformImport.cshtml" />
+    <Content Include="Views\Admin\PerformExport.cshtml" />
+    <Content Include="Views\Admin\UpgradeUser.cshtml" />
+    <Content Include="Views\Admin\PromoteUser.cshtml" />
+    <Content Include="Views\Admin\TypesOfUsers.cshtml" />
+    <Content Include="Views\Admin\PirateDistribution.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Treasure.cshtml" />
     <Content Include="Views\CreateHunt\HuntSettings.cshtml" />
     <Content Include="Views\CreateHunt\AddTreasures.cshtml" />

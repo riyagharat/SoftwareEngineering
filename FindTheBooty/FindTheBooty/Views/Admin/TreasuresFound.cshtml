@@ -11,8 +11,16 @@ SELECT COUNT(*) FROM [user_treasure_relation] WHERE [found] = 'true' AND [treasu
 Bar chart X = treasures, Y = number of times they've been found
 -->
 
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script src="../../Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+
 <div class="title">
     <h1 class="bilbo-swash-caps">Welcome to the Treasures Found Graph</h1>
+</div>
+<div>
+    @model DotNet.Highcharts.Highcharts
+
+    @(Model)
 </div>
 <div>
     <a href="/Admin/Admin" class="btn btn-info" role="button">Back</a>

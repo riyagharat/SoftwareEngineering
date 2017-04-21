@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "PirateDistribution";
+}
+
+<!--
+SELECT * FROM [user] WHERE [rank] = 'Land Lubber';
+SELECT * FROM [user] WHERE [rank] = 'Scallywang';
+SELECT * FROM [user] WHERE [rank] = 'Deck Hand';
+SELECT * FROM [user] WHERE [rank] = 'Buccaneer';
+SELECT * FROM [user] WHERE [rank] = 'Quartermaster';
+SELECT * FROM [user] WHERE [rank] = 'Captain';
+SELECT * FROM [user] WHERE [rank] = 'Pirate Supreme';
+SELECT * FROM [user] WHERE [rank] = 'Doug Leas';
+SELECT * FROM [user] WHERE [rank] = 'Sea Legs';
+SELECT * FROM [user] WHERE [rank] = 'Fortune Finder';
+SELECT * FROM [user] WHERE [rank] = 'Master Plunderer';
+SELECT * FROM [user] WHERE [rank] = 'So This Is Booty';
+SELECT * FROM [user] WHERE [rank] = 'Live For the Booty';
+SELECT * FROM [user] WHERE [rank] = 'Sic Parvis Magna';   
+-->
+
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script src="../../Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+
+<div class="title">
+    <h1 class="bilbo-swash-caps">Welcome to the Pirate Distribution Graph</h1>
+
+</div>
+<div>
+    @model DotNet.Highcharts.Highcharts
+
+    @(Model)
+</div>
+<div>
+    <a href="/Admin/Admin" class="btn btn-info" role="button">Back</a>
+</div>
