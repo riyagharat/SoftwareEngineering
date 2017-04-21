@@ -11,11 +11,12 @@
     //TODO: !!!PRODUCTION!!! Uncomment block of code above for production
 
     var userFullName = "";
+    FindTheBooty.Models.GeneratedModels.user user = null;
     bool loggedIn;
 
     if (Session["LoggedUser"] != null)
     {
-        var user = (FindTheBooty.Models.GeneratedModels.user)Session["LoggedUser"];
+        user = (FindTheBooty.Models.GeneratedModels.user)Session["LoggedUser"];
         userFullName = user.first_name + " " + user.last_name;
         loggedIn = true;
     }
@@ -71,8 +72,11 @@
                     <li id="huntsNavLink"><a href="/Participating/"><span class="glyphicon glyphicon-search"></span> Hunts</a></li>
                     <li id="profileNavLink"><a href="/Account/UserProfile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                     <li id="leaderboardsNavLink"><a href="/Leaderboard/"><span class="glyphicon glyphicon-th-list"></span> Leaderboards</a></li>
-                    <li id="statisticsNavLink"><a href="#"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
-                    <li id="adminSettingsNavLink"><a href="#"><span class="glyphicon glyphicon-cog"></span> Admin Settings</a></li>
+                    if (user.user_type == "Admin")
+                    {
+                        <li id="statisticsNavLink"><a href="#"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
+                        <li id="adminSettingsNavLink"><a href="/Admin/Admin"><span class="glyphicon glyphicon-cog"></span> Admin Settings</a></li>
+                    }
                     <li id="logoutNavLink" class="danger"><a href="/Account/LogOut"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                 }
                 else
