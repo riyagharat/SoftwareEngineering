@@ -127,6 +127,20 @@ hr {
   color: #DD0000 !important;
 }
 
+@media screen and (min-width: 990px){
+    .treasure-box {
+        margin-top: 1em;
+    }
+}
+
+.borderless, .borderless>tbody>tr>td {
+    border: none;
+}
+
+.no-padding, .no-padding>tbody>tr>td {
+    padding: 0px !important;
+}
+
 .great-vibes{
     font-family: 'Great Vibes', cursive;
 }

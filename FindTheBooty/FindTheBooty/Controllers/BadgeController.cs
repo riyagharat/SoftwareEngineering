@@ -14,10 +14,10 @@ namespace FindTheBooty.Controllers
     public class BadgeController : DataController
     {
         //creates a list of already obtained badges for the current user
-        public void checkBadges()
+        public void checkBadges(Models.GeneratedModels.user session)
         {
             //creates the session variable for the current user
-            Models.GeneratedModels.user session = (Models.GeneratedModels.user)Session["LoggedUser"];
+            //Models.GeneratedModels.user session = (Models.GeneratedModels.user)Session["LoggedUser"];
             List<Models.GeneratedModels.user_badge_relation> badgeList = database.user_badge_relation.Where(u => u.user_user_id == session.user_id)
                 .OrderBy(x => x.badge_badge_id)
                 .ToList();
@@ -35,14 +35,14 @@ namespace FindTheBooty.Controllers
 
             if (points == 5)
             {
-                var value = badgeList.First(item => item.badge_badge_id == 2);
-
-                if (value == null)
+                if (badgeList.Where(item => item.badge_badge_id == 2).Count() == 0)
                 {
                     Models.GeneratedModels.user_badge_relation temp = new user_badge_relation();
                     temp.user_user_id = session.user_id;
                     temp.badge_badge_id = 2;
                     temp.completed = true.ToString();
+
+                    database.users.Where(u => u.user_id == session.user_id).First().rank = "Scallywag";
 
                     database.user_badge_relation.Add(temp);
                     database.SaveChanges();
@@ -51,14 +51,14 @@ namespace FindTheBooty.Controllers
 
             if (points == 15)
             {
-                var value = badgeList.First(item => item.badge_badge_id == 3);
-
-                if (value == null)
+                if (badgeList.Where(item => item.badge_badge_id == 3).Count() == 0)
                 {
                     Models.GeneratedModels.user_badge_relation temp = new user_badge_relation();
                     temp.user_user_id = session.user_id;
                     temp.badge_badge_id = 3;
                     temp.completed = true.ToString();
+
+                    database.users.Where(u => u.user_id == session.user_id).First().rank = "Deck Hand";
 
                     database.user_badge_relation.Add(temp);
                     database.SaveChanges();
@@ -67,14 +67,14 @@ namespace FindTheBooty.Controllers
 
             if (points == 25)
             {
-                var value = badgeList.First(item => item.badge_badge_id == 4);
-
-                if (value == null)
+                if (badgeList.Where(item => item.badge_badge_id == 4).Count() == 0)
                 {
                     Models.GeneratedModels.user_badge_relation temp = new user_badge_relation();
                     temp.user_user_id = session.user_id;
                     temp.badge_badge_id = 4;
                     temp.completed = true.ToString();
+
+                    database.users.Where(u => u.user_id == session.user_id).First().rank = "Buccaneer";
 
                     database.user_badge_relation.Add(temp);
                     database.SaveChanges();
@@ -83,14 +83,14 @@ namespace FindTheBooty.Controllers
 
             if (points == 40)
             {
-                var value = badgeList.First(item => item.badge_badge_id == 5);
-
-                if (value == null)
+                if (badgeList.Where(item => item.badge_badge_id == 5).Count() == 0)
                 {
                     Models.GeneratedModels.user_badge_relation temp = new user_badge_relation();
                     temp.user_user_id = session.user_id;
                     temp.badge_badge_id = 5;
                     temp.completed = true.ToString();
+
+                    database.users.Where(u => u.user_id == session.user_id).First().rank = "Quartermaster";
 
                     database.user_badge_relation.Add(temp);
                     database.SaveChanges();
@@ -99,14 +99,14 @@ namespace FindTheBooty.Controllers
 
             if (points == 60)
             {
-                var value = badgeList.First(item => item.badge_badge_id == 6);
-
-                if (value == null)
+                if (badgeList.Where(item => item.badge_badge_id == 6).Count() == 0)
                 {
                     Models.GeneratedModels.user_badge_relation temp = new user_badge_relation();
                     temp.user_user_id = session.user_id;
                     temp.badge_badge_id = 6;
                     temp.completed = true.ToString();
+
+                    database.users.Where(u => u.user_id == session.user_id).First().rank = "Captain";
 
                     database.user_badge_relation.Add(temp);
                     database.SaveChanges();
@@ -115,14 +115,14 @@ namespace FindTheBooty.Controllers
 
             if (points == 75)
             {
-                var value = badgeList.First(item => item.badge_badge_id == 7);
-
-                if (value == null)
+                if (badgeList.Where(item => item.badge_badge_id == 7).Count() == 0)
                 {
                     Models.GeneratedModels.user_badge_relation temp = new user_badge_relation();
                     temp.user_user_id = session.user_id;
                     temp.badge_badge_id = 7;
                     temp.completed = true.ToString();
+
+                    database.users.Where(u => u.user_id == session.user_id).First().rank = "Pirate Supreme";
 
                     database.user_badge_relation.Add(temp);
                     database.SaveChanges();
@@ -131,22 +131,20 @@ namespace FindTheBooty.Controllers
 
             if (points == 100)
             {
-                var value = badgeList.First(item => item.badge_badge_id == 8);
-
-                if (value == null)
+                if (badgeList.Where(item => item.badge_badge_id == 8).Count() == 0)
                 {
                     Models.GeneratedModels.user_badge_relation temp = new user_badge_relation();
                     temp.user_user_id = session.user_id;
                     temp.badge_badge_id = 8;
                     temp.completed = true.ToString();
 
+                    database.users.Where(u => u.user_id == session.user_id).First().rank = "Doug Leas";
+
                     database.user_badge_relation.Add(temp);
                     database.SaveChanges();
                 }
-
-                value = badgeList.First(item => item.badge_badge_id == 14);
-
-                if (value == null)
+                
+                if (badgeList.Where(item => item.badge_badge_id == 14).Count() == 0)
                 {
                     Models.GeneratedModels.user_badge_relation temp = new user_badge_relation();
                     temp.user_user_id = session.user_id;
@@ -166,9 +164,7 @@ namespace FindTheBooty.Controllers
 
             if (hunts == 1)
             {
-                var value = badgeList.First(item => item.badge_badge_id == 9);
-
-                if (value == null)
+                if (badgeList.Where(item => item.badge_badge_id == 9).Count() == 0)
                 {
                     Models.GeneratedModels.user_badge_relation temp = new user_badge_relation();
                     temp.user_user_id = session.user_id;
@@ -182,9 +178,7 @@ namespace FindTheBooty.Controllers
 
             if (hunts == 5)
             {
-                var value = badgeList.First(item => item.badge_badge_id == 13);
-
-                if (value == null)
+                if (badgeList.Where(item => item.badge_badge_id == 13).Count() == 0)
                 {
                     Models.GeneratedModels.user_badge_relation temp = new user_badge_relation();
                     temp.user_user_id = session.user_id;
@@ -204,9 +198,7 @@ namespace FindTheBooty.Controllers
 
             if (treasures == 1)
             {
-                var value = badgeList.First(item => item.badge_badge_id == 12);
-
-                if (value == null)
+                if (badgeList.Where(item => item.badge_badge_id == 12).Count() == 0)
                 {
                     Models.GeneratedModels.user_badge_relation temp = new user_badge_relation();
                     temp.user_user_id = session.user_id;
@@ -220,9 +212,7 @@ namespace FindTheBooty.Controllers
 
             if (treasures == 10)
             {
-                var value = badgeList.First(item => item.badge_badge_id == 10);
-
-                if (value == null)
+                if (badgeList.Where(item => item.badge_badge_id == 10).Count() == 0)
                 {
                     Models.GeneratedModels.user_badge_relation temp = new user_badge_relation();
                     temp.user_user_id = session.user_id;
@@ -236,9 +226,7 @@ namespace FindTheBooty.Controllers
 
             if (treasures == 20)
             {
-                var value = badgeList.First(item => item.badge_badge_id == 11);
-
-                if (value == null)
+                if (badgeList.Where(item => item.badge_badge_id == 11).Count() == 0)
                 {
                     Models.GeneratedModels.user_badge_relation temp = new user_badge_relation();
                     temp.user_user_id = session.user_id;
