@@ -69,7 +69,11 @@ namespace FindTheBooty.Controllers
                 newUser.first_name = model.FirstName;
                 newUser.last_name = model.LastName;
                 newUser.gender = "";
-                newUser.phone = System.Convert.ToInt64(model.PhoneNumber);
+                string strippedPhone = model.PhoneNumber.Replace("(", string.Empty);
+                strippedPhone = strippedPhone.Replace(" ", string.Empty);
+                strippedPhone = strippedPhone.Replace(")", string.Empty);
+                strippedPhone = strippedPhone.Replace("-", string.Empty);
+                newUser.phone = System.Convert.ToInt64(strippedPhone);
                 newUser.points = 0;
                 newUser.rank = "Land Lubber";
                 newUser.num_hunts = 0;
@@ -168,7 +172,11 @@ namespace FindTheBooty.Controllers
                 //Initialize Model with null items
                 user.first_name = model.FirstName;
                 user.last_name = model.LastName;
-                user.phone = System.Convert.ToInt64(model.PhoneNumber);
+                string strippedPhone = model.PhoneNumber.Replace("(", string.Empty);
+                strippedPhone = strippedPhone.Replace(" ", string.Empty);
+                strippedPhone = strippedPhone.Replace(")", string.Empty);
+                strippedPhone = strippedPhone.Replace("-", string.Empty);
+                user.phone = System.Convert.ToInt64(strippedPhone);
                 user.user_type = "User";
                 // save to database
                 setUser(user);
