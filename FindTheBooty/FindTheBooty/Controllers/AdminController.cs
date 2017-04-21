@@ -9,6 +9,7 @@ using DotNet.Highcharts.Helpers;
 using DotNet.Highcharts.Enums;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data;
 
 namespace FindTheBooty.Controllers
 {
@@ -47,11 +48,34 @@ namespace FindTheBooty.Controllers
         }
         public ActionResult TreasuresFound()
         {
+            SqlConnection treasurecharts = new SqlConnection(ConfigurationManager.ConnectionStrings["FTBConnection"].ToString());
+            treasurecharts.Open();
+
+            SqlCommand query1 = new SqlCommand("SELECT hunt_name FROM dbo.[hunt], dbo.[user_treasure_relation] WHERE(user_treasure_relation.found = 'true') GROUP BY hunt_name;", treasurecharts);
+            SqlCommand query2 = new SqlCommand("SELECT COUNT(*) FROM dbo.[hunt], dbo.[user_treasure_relation] WHERE(user_treasure_relation.found = 'true') GROUP BY hunt_name;", treasurecharts);
+
+            DataTable tempHuntNames = new DataTable();
+            DataTable tempTreasureCount = new DataTable();
+
+            string[] test = new string[tempHuntNames.Columns.Count];
+            int[] vals = new int[tempTreasureCount.Columns.Count];
+
+            for(int i = 0; i < tempHuntNames.Columns.Count; i++){
+                string value = tempHuntNames.Columns[i].ToString();
+                test[i] = value;
+            }
+
+            for (int i = 0; i < tempTreasureCount.Columns.Count; i++)
+            {
+                int value = Convert.ToInt32(tempTreasureCount.Columns[i]);
+                vals[i] = value;
+            }
+
             DotNet.Highcharts.Highcharts chart = new DotNet.Highcharts.Highcharts("chart")
-            .SetXAxis(new XAxis { Categories = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" } })
-            .SetYAxis(new YAxis { Title = new YAxisTitle { Text = "Sales" } })
-            .SetSeries(new Series { Data = new Data(new object[] { 20, 30, 40, 50, 20, 60, 14, 72, 30, 35, 10, 20 }), Name = "Sales" })
-            .SetTitle(new Title { Text = "Sales Data" })
+            .SetXAxis(new XAxis { Categories = test })
+            .SetYAxis(new YAxis { Title = new YAxisTitle { Text = "Number of Treasures Found" } })
+            .SetSeries(new Series { Data = new Data(new object[] { 20, 30, 40, 50, 20, 60, 14, 72, 30, 35, 10, 20 }), Name = "Treasure" })
+            .SetTitle(new Title { Text = "Treasures Found in Hunts" })
             .InitChart(new Chart { DefaultSeriesType = ChartTypes.Column });
             return View(chart);
         }
