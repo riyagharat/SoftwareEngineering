@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using FindTheBooty.Models;
 using DotNet.Highcharts.Options;
 using DotNet.Highcharts.Helpers;
+using DotNet.Highcharts.Enums;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace FindTheBooty.Controllers
 {
@@ -44,25 +47,52 @@ namespace FindTheBooty.Controllers
         }
         public ActionResult TreasuresFound()
         {
-            return View();
+            DotNet.Highcharts.Highcharts chart = new DotNet.Highcharts.Highcharts("chart")
+            .SetXAxis(new XAxis { Categories = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" } })
+            .SetYAxis(new YAxis { Title = new YAxisTitle { Text = "Sales" } })
+            .SetSeries(new Series { Data = new Data(new object[] { 20, 30, 40, 50, 20, 60, 14, 72, 30, 35, 10, 20 }), Name = "Sales" })
+            .SetTitle(new Title { Text = "Sales Data" })
+            .InitChart(new Chart { DefaultSeriesType = ChartTypes.Column });
+            return View(chart);
         }
         public ActionResult PirateDistribution()
         {
             DotNet.Highcharts.Highcharts chart = new DotNet.Highcharts.Highcharts("chart")
-        .SetXAxis(new XAxis
-        {
+            .SetXAxis(new XAxis
+            {
             Categories = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }
-        })
-        .SetSeries(new Series
-        {
+            })
+            .SetSeries(new Series
+            {
             Data = new Data(new object[] { 29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4 })
-        });
+            });
 
             return View(chart);
         }
         public ActionResult TypesOfUsers()
         {
-            return View();
+            SqlConnection usercharts = new SqlConnection(ConfigurationManager.ConnectionStrings["FTBConnection"].ToString());
+            usercharts.Open();
+
+            SqlCommand queryAdmin = new SqlCommand("SELECT COUNT(*) FROM dbo.user WHERE user_type = 'Admin';", usercharts);
+            SqlDataReader queryAdminReader = queryAdmin.ExecuteReader();
+
+            DotNet.Highcharts.Highcharts chart = new DotNet.Highcharts.Highcharts("chart")
+            .SetSeries(new Series
+            {
+                Type = ChartTypes.Pie,
+                Name = "Browser share",
+                Data = new Data(new object[] { new object[] {"Admin", queryAdminReader.GetInt32(0)},
+                                               new object[] {"Creator", 2},
+                                               new object[] {"User", 3} })
+
+            })
+            .SetTitle(new Title
+            {
+                Text = "Types of User"
+            });
+
+            return View(chart);
         }
         public ActionResult UpgradeUser()
         {

@@ -19,9 +19,17 @@ SELECT * FROM [user] WHERE [rank] = 'Live For the Booty';
 SELECT * FROM [user] WHERE [rank] = 'Sic Parvis Magna';   
 -->
 
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script src="../../Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+
 <div class="title">
     <h1 class="bilbo-swash-caps">Welcome to the Pirate Distribution Graph</h1>
 
+</div>
+<div>
+    @model DotNet.Highcharts.Highcharts
+
+    @(Model)
 </div>
 <div>
     <a href="/Admin/Admin" class="btn btn-info" role="button">Back</a>
