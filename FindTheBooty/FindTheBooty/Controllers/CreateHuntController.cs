@@ -28,10 +28,10 @@ namespace FindTheBooty.Controllers
                     //Generate the hunt with the information entered by the user
                     Models.GeneratedModels.hunt newHunt = new Models.GeneratedModels.hunt();
                     newHunt.hunt_name = model.HuntName;
-                    newHunt.hunt_type = "ffa";
+                    newHunt.hunt_type = "FFA";
                     newHunt.max_users = 150;
                     newHunt.multi_single = 1;
-                    newHunt.seq_ffa = "ffa";
+                    newHunt.seq_ffa = "FFA";
                     newHunt.sponsor = null;
                     newHunt.time_create = System.DateTime.Now;
                     newHunt.time_expire = System.DateTime.Now.AddDays(7.0);
@@ -41,7 +41,6 @@ namespace FindTheBooty.Controllers
                     newHunt.hunt_id = (latestHunt + 1);
                     database.hunts.Add(newHunt);
                     database.SaveChanges();
-                    //database.SaveChanges(); <-- NEEDS TO BE UNIT TESTED
 
                     return RedirectToAction("AddTreasures", new { huntId = newHunt.hunt_id });
                 }
@@ -74,7 +73,7 @@ namespace FindTheBooty.Controllers
         {
             if (ModelState.IsValid && huntId != null)
             {
-                if(done != null && (bool)done)
+                if (done != null && (bool)done)
                 {
                     //Redirect to the print page
                 }
@@ -86,7 +85,6 @@ namespace FindTheBooty.Controllers
                 newTreasure.confirmation = "";
                 newTreasure.seq_order = 0;
                 newTreasure.points = 5;
-                //newTreasure.hunt = database.hunts.
                 //Give the treasure it's unique id
                 int latestTreasure = database.treasures.OrderBy(t => t.treasure_id).ToList().Last().treasure_id;
                 newTreasure.treasure_id = (latestTreasure + 1);
@@ -98,7 +96,7 @@ namespace FindTheBooty.Controllers
                 return RedirectToAction("AddTreasures", new { huntId = huntId });
 
             }
-            else if(huntId == null) //Error handling as in THEORY you shouldn't be able to reach AddTreasures without having seen a HuntId
+            else if (huntId == null) //Error handling as in THEORY you shouldn't be able to reach AddTreasures without having seen a HuntId
             {
                 return RedirectToAction("AddTreasures");
             }
@@ -107,6 +105,65 @@ namespace FindTheBooty.Controllers
             return View(model);
         }
 
-    }
+        //QR-Print Section
 
+        [HttpGet]
+        [ActionName("PrintPage")]
+        public ActionResult PrintPage(int? HuntId)
+        {
+            if (HuntId != null && this.database.treasures.Any(x => x.hunt_hunt_id == HuntId))
+            {
+                if (!System.IO.File.Exists(Server.MapPath("~/Content/Codes/" + HuntId.ToString())))
+                {
+                    System.IO.Directory.CreateDirectory(Server.MapPath("~/Content/Codes/" + HuntId.ToString()));
+                }
+
+                IQueryable<FindTheBooty.Models.GeneratedModels.treasure> treasures = this.database.treasures.Where(x => x.hunt_hunt_id == HuntId);
+                List<Models.GeneratedModels.treasure> treasureList = new List<Models.GeneratedModels.treasure>();
+                string outputPath;
+                foreach (Models.GeneratedModels.treasure treasure in treasures)
+                {
+                    if (!System.IO.File.Exists(Server.MapPath("~/Content/Codes/" + HuntId.ToString() + "/") + HuntId.ToString() + "-" + treasure.treasure_id + ".png"))
+                    {
+                        System.Drawing.Bitmap image = QRGenerator.generateQRCode(HuntId.ToString() + "-" + treasure.hunt_hunt_id);
+                        outputPath = Server.MapPath("~/Content/Codes/" + HuntId.ToString() + "/") + HuntId.ToString() + "-" + treasure.treasure_id + ".png";
+                        image.Save(outputPath, System.Drawing.Imaging.ImageFormat.Png);
+                    }
+                    treasureList.Add(treasure);
+                }
+
+                if (treasureList.Count > 0)
+                {
+                    ViewBag.treasureList = treasureList;
+                }
+            }
+            return View();
+        }
+
+        /// <summary>
+        /// Use this page for testing the responses to front-end code
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Test(string inputString)
+        {
+            HttpPostedFileBase file = Request.Files["inputFile"];
+            string str, streamString, output;
+            if (file.ContentLength > 0)
+            {
+                str = file.ToString();
+                System.IO.StreamReader reader = new System.IO.StreamReader(file.InputStream);
+                streamString = reader.ReadToEnd();
+                output = QRReader.getQRCode(file.InputStream);
+            }
+            else if (inputString.Length > 0)
+            {
+                System.Drawing.Bitmap image = QRGenerator.generateQRCode(inputString);
+                string outputPath = Server.MapPath("~/Content/Codes") + "output.png";
+                image.Save(outputPath, System.Drawing.Imaging.ImageFormat.Png);
+            }
+
+            return RedirectToAction("TestPage");
+        }
+    }
 }
