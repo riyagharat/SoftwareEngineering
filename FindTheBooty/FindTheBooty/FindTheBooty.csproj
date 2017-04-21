@@ -374,6 +374,7 @@
     <Content Include="Views\Admin\UpgradeUser.cshtml" />
     <Content Include="Views\CreateHunt\HuntSettings.cshtml" />
     <Content Include="Views\CreateHunt\AddTreasures.cshtml" />
+    <Content Include="Views\CreateHunt\PrintPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

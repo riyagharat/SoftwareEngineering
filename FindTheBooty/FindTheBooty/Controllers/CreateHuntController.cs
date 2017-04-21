@@ -71,11 +71,17 @@ namespace FindTheBooty.Controllers
         [HttpPost]
         public ActionResult AddTreasures(AddTreasuresViewModel model, int? huntId, Boolean? done) // if done = true, then send to printpage
         {
+            if (done != null && (bool)done && huntId != null)
+            {
+                //Redirect to the print page
+                return RedirectToAction("PrintPage", new { huntId = huntId });
+            }
             if (ModelState.IsValid && huntId != null)
             {
                 if (done != null && (bool)done)
                 {
-                    return RedirectToAction("PrintPage", new { HuntId = huntId });
+                    //Redirect to the print page
+                    return RedirectToAction("PrintPage", new { huntId = huntId });
                 }
                 ViewBag.huntId = huntId;
                 //Create the new treasure and set values
@@ -108,22 +114,21 @@ namespace FindTheBooty.Controllers
         //QR-Print Section
 
         [HttpGet]
-        [ActionName("PrintPage")]
-        public ActionResult PrintPage(int? HuntId)
+        public ActionResult PrintPage(int? huntId)
         {
-            if (HuntId != null && this.database.treasures.Any(x => x.hunt_hunt_id == HuntId))
+            if (huntId != null && this.database.treasures.Any(x => x.hunt_hunt_id == huntId))
             {
-                if (!System.IO.File.Exists(Server.MapPath("~/Content/Codes/" + HuntId.ToString())))
+                if (!System.IO.File.Exists(Server.MapPath("~/Content/Codes/" + huntId.ToString())))
                 {
-                    System.IO.Directory.CreateDirectory(Server.MapPath("~/Content/Codes/" + HuntId.ToString()));
+                    System.IO.Directory.CreateDirectory(Server.MapPath("~/Content/Codes/" + huntId.ToString()));
                 }
 
-                IQueryable<FindTheBooty.Models.GeneratedModels.treasure> treasures = this.database.treasures.Where(x => x.hunt_hunt_id == HuntId);
+                IQueryable<FindTheBooty.Models.GeneratedModels.treasure> treasures = this.database.treasures.Where(x => x.hunt_hunt_id == huntId);
                 List<Models.GeneratedModels.treasure> treasureList = new List<Models.GeneratedModels.treasure>();
                 string outputPath;
                 foreach (Models.GeneratedModels.treasure treasure in treasures)
                 {
-                    if (!System.IO.File.Exists(Server.MapPath("~/Content/Codes/" + HuntId.ToString() + "/") + HuntId.ToString() + "-" + treasure.treasure_id + ".png"))
+                    if (!System.IO.File.Exists(Server.MapPath("~/Content/Codes/" + huntId.ToString() + "/") + huntId.ToString() + "-" + treasure.treasure_id + ".png"))
                     {
                         System.Drawing.Bitmap image = QRGenerator.generateQRCode(HuntId.ToString() + "-" + treasure.treasure_id);
                         outputPath = Server.MapPath("~/Content/Codes/" + HuntId.ToString() + "/") + HuntId.ToString() + "-" + treasure.treasure_id + ".png";
@@ -138,32 +143,6 @@ namespace FindTheBooty.Controllers
                 }
             }
             return View();
-        }
-
-        /// <summary>
-        /// Use this page for testing the responses to front-end code
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult Test(string inputString)
-        {
-            HttpPostedFileBase file = Request.Files["inputFile"];
-            string str, streamString, output;
-            if (file.ContentLength > 0)
-            {
-                str = file.ToString();
-                System.IO.StreamReader reader = new System.IO.StreamReader(file.InputStream);
-                streamString = reader.ReadToEnd();
-                output = QRReader.getQRCode(file.InputStream);
-            }
-            else if (inputString.Length > 0)
-            {
-                System.Drawing.Bitmap image = QRGenerator.generateQRCode(inputString);
-                string outputPath = Server.MapPath("~/Content/Codes") + "output.png";
-                image.Save(outputPath, System.Drawing.Imaging.ImageFormat.Png);
-            }
-
-            return RedirectToAction("PrintPage");
         }
     }
 }

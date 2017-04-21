@@ -1,29 +1,14 @@
 ﻿@{
+    ViewBag.Title = "Print Hunt QR Codes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script type="text/javascript">
-    function submitForm() {
-        var form = $('#form');
-        form.submit();
-    }
-</script>
-<!-- Use this view as a scratch board for code -->
-<div class="row">
-    <div class="col-xs-12">
-        <form id="form" action="/home/Test" method="post" enctype="multipart/form-data">
-            <label for="inputFile">Picture Upload</label>
-            <input name="inputFile" type="file" accept="image/*;capture=camera*" />
-            <label for="inputString">QR Code Generate</label>
-            <input name="inputString" type="text" />
-        </form>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-12">
-        <button type="submit" class="btn btn-success" onclick="submitForm()">Submit</button>
-    </div>
-</div>
 @{
+    <div class="row hidden-print">
+        <div class="col-xs-12">
+            <h1>Generated Hunt Codes</h1>
+            <p>Here are the generated codes for your hunt. Please print and attach to treasures for other pirates to find.</p>
+        </div>
+    </div>
     if (ViewBag.treasureList != null)
     {
         int count = 0;
@@ -31,17 +16,17 @@
         <div class="row">
             @foreach (FindTheBooty.Models.GeneratedModels.treasure treasure in treausreList)
             {
+                if (count % 4 == 0)
+                { @Html.Raw("</div><div class=\"pagebreak row\">") }
                 <div class="col-xs-6 col-md-4 col-lg-3 text-center">
                     <div class="qr-print-border">
-                        <h2 class="visible-print">FindTheBooty &trade;</h2>
+                        <h4 class="visible-print">FindTheBooty &trade;</h4>
                         <img src="@Url.Content("~/Content/Codes/" + treasure.hunt_hunt_id.ToString() + "/" + treasure.hunt_hunt_id.ToString() + "-" + treasure.treasure_id.ToString() + ".png")" alt="treasureId" class="padding good-image" />
-
-                        <h2 class="visible-print">FindTheBooty &trade;</h2>
+                        <h4>@treasure.description</h4>
+                        <h4 class="visible-print">FindTheBooty &trade;</h4>
                     </div>
                 </div>
                 count++;
-                if (count % 4 == 0)
-                { <div class="visible-print pagebreak"> </div>}
             }
         </div>
     }
