@@ -34,8 +34,8 @@
         numHunts = user.num_hunts;
         numTreasures = user.num_treasures;
         huntCount = user.user_hunt_relation.Count;
-        rankIcon = "~/Content/Images/";
-        rankIcon += user.rank + ".png";
+        rankIcon = "/Content/Images/";
+        rankIcon += userRank + ".png";
     }
     else
     {
@@ -47,21 +47,18 @@
         gender = "M";
         numHunts = 9001;
         numTreasures = 1000000;
+        rankIcon = "/Content/Images/";
+        rankIcon += userRank + ".png";
     }
 
 }
-<script type="text/javascript">
-    function changeImage(domImg, srcImage) {
-        var img = new Image();
-        img.onload = function()
-    }
-</script>
+
 <div class="wumbobg2"></div>
 <div class="wumbotron1">
     <div class="row">
         <div class="col-md-12">
             <center>
-                <img = @rankIcon />
+                <img id="rank" src="@rankIcon"/>
                 <h1 class="kaushanScript">@userName</h1>
                 <p class="lead">Rank: @userRank</p>
             </center>
@@ -111,3 +108,12 @@
     </div>
     <center><a class="btn btn-primary btn-lg outline kaushanScript">Edit Profile</a></center>
 </div>
+@*
+<script type="text/javascript">
+    function changeIMG() {
+        if(userRank.equals("Doug Leas"))
+        document.getElementById(rank).src='Doug Leas.png';
+    }
+    window.onload = changeIMG();
+</script>
+*@
