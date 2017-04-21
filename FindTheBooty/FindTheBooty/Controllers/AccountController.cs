@@ -11,8 +11,8 @@ namespace FindTheBooty.Controllers
 
         public AccountController()
         {
-        }
 
+        }
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -77,8 +77,18 @@ namespace FindTheBooty.Controllers
                 newUser.user_type = "User";
 
                 // Add User to database by adding primary key
-                var latestUser = database.users.OrderBy(u => u.user_id ?? int.MaxValue.ToString()).ToList().Last();
-                newUser.user_id = (int.Parse(latestUser.user_id) + 1).ToString();
+                //var latestUser = database.users.OrderBy(u => u.user_id ?? int.MaxValue.ToString()).ToList().Last();
+                //newUser.user_id = (int.Parse(latestUser.user_id) + 1).ToString();
+                long latestUserId = 0;
+                long tmpUserId = 0;
+                List<Models.GeneratedModels.user> userList = database.users.ToList();
+                foreach(Models.GeneratedModels.user user in userList)
+                {
+                    tmpUserId = System.Convert.ToInt64(user.user_id);
+                    if (tmpUserId > latestUserId)
+                        latestUserId = tmpUserId;
+                }
+                newUser.user_id = (latestUserId + 1).ToString();
 
                 // Log user in and commit to database
                 setUser(newUser);

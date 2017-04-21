@@ -1,17 +1,204 @@
-﻿/* fonts 
-font-family: 'Jim Nightshade', cursive;
-font-family: 'Kaushan Script', cursive;
-font-family: 'Great Vibes', cursive;
-font-family: 'Tangerine', cursive;
-font-family: 'Italianno', cursive;
-font-family: 'La Belle Aurore', cursive;
-font-family: 'Bilbo Swash Caps', cursive;
-font-family: 'Dawning of a New Day', cursive; */
-
-@import url('https://fonts.googleapis.com/css?family=Bilbo+Swash+Caps|Dawning+of+a+New+Day|Great+Vibes|Italianno|Jim+Nightshade|Kaushan+Script|La+Belle+Aurore|Tangerine');
-/* Jim Nightshade font */
-.jimNightShade {
-    font-family: 'Jim Nightshade', cursive;
+﻿/* fonts 
+font-family: 'Jim Nightshade', cursive;
+font-family: 'Kaushan Script', cursive;
+font-family: 'Great Vibes', cursive;
+font-family: 'Tangerine', cursive;
+font-family: 'Italianno', cursive;
+font-family: 'La Belle Aurore', cursive;
+font-family: 'Bilbo Swash Caps', cursive;
+font-family: 'Dawning of a New Day', cursive; */
+
+@import url('https://fonts.googleapis.com/css?family=Bilbo+Swash+Caps|Dawning+of+a+New+Day|Great+Vibes|Italianno|Jim+Nightshade|Kaushan+Script|La+Belle+Aurore|Tangerine');
+/* Jim Nightshade font */
+.jimNightShade {
+    font-family: 'Jim Nightshade', cursive;
+}
+
+/* Kaushan Script font */
+.kaushanScript {
+    font-family: 'Kaushan Script', cursive;
+}
+
+.splashbg {
+  background: url('./Images/ship.jpg') no-repeat center center;
+  position: fixed;
+  width: 100%;
+  height: 350px;  
+  top:0;
+  left:0;
+  z-index: -1;
+}
+
+.wumbobg2 {
+  background: url('./Images/schooner.jpg') no-repeat center center;
+  position: fixed;
+  width: 100%;
+  height: 200px; 
+  top:0;
+  left:0;
+  z-index: -1;
+}
+
+.wumbotron1 {
+  margin-bottom: 0px;
+  height: 350px;
+  color: white;
+  text-shadow: black 0.1em 0.1em 0.1em;
+  background:transparent;
+}
+
+.wumbotron2 {
+  margin-bottom: 0px;
+  height: 200px;
+  color: white;
+  background-image: url('./Images/schooner.jpg');
+  text-shadow: black 0.1em 0.1em 0.1em;
+      
+  background:transparent;
+}
+
+/* start parchment paper look */
+css {
+    height: 100% !important;
+}
+
+body {
+    background-image: url(./Images/subtle-grunge.png) !important;
+    background-color: #F1F1D4 !important;
+}
+/* end parchment paper look */
+
+hr {
+    border-color: burlywood !important;
+}
+
+.header .btn-inverse {
+  margin-top: 8px;
+  color: #FFF;
+  background-color: #333;
+  border-color: #DDD;
+}
+
+.header .btn-inverse:hover {
+  background-color: #444 !important;
+  color: #FFF !important;
+}
+
+.header .btn-inverse:active {
+  background-color: #AAA !important;
+  color: #000 !important;
+}
+
+#nav-logo {
+  float: right;
+  font-family: "Jim Nightshade" !important;
+  color: #FFF !important;
+  font-size: x-large;
+  line-height: 50px;
+  vertical-align: middle;
+}
+
+/* --- SIDEBAR MENU SCROLLBAR STYLE START --- */
+#sidr::-webkit-scrollbar {
+    width: 8px;
+}
+
+#sidr::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+
+#sidr::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+/* --- SIDEBAR MENU SCROLLBAR STYLE END --- */
+
+#sidr span {
+  padding: 0px;
+  display: inline;
+}
+
+.danger a {
+  color: #DD0000 !important;
+}
+
+.danger .glyphicon {
+  color: #DD0000 !important;
+}
+
+@media screen and (min-width: 990px){
+    .treasure-box {
+        margin-top: 1em;
+    }
+}
+
+.borderless, .borderless>tbody>tr>td {
+    border: none;
+}
+
+.no-padding, .no-padding>tbody>tr>td {
+    padding: 0px !important;
+}
+
+.great-vibes{
+    font-family: 'Great Vibes', cursive;
+}
+
+.tangerine{
+    font-family: 'Tangerine', cursive;
+}
+
+.italianno{
+    font-family: 'Italianno', cursive;
+}
+
+.la-belle-aurore{
+    font-family: 'La Belle Aurore', cursive;
+}
+
+.bilbo-swash-caps{
+    font-family: 'Bilbo Swash Caps', cursive;
+}
+
+.dawning-of-a-new-day{
+    font-family: 'Dawning of a New Day', cursive; 
+}
+
+
+/* --- SEARCH BAR --- */
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+/* --- END SEARCH BAR --- */
+
+/*button outline*/
+.btn.outline {
+	background: none;
+	padding: 10px 25px;
+}
+.btn-primary.outline {
+    border: 2px solid #000000;
+    color: #000000;
+    width: 150px;
+}
+.btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
+    color: #7bdcf1;
+    border-color: #33a6cc;
+}
+.btn-primary.outline:active, .btn-primary.outline.active {
+    border-color: #a6e6ff;
+    color: white;
+    box-shadow: none;
 }
 
 /* Kaushan Script font */
