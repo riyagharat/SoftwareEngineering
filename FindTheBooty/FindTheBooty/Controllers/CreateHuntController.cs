@@ -37,7 +37,7 @@ namespace FindTheBooty.Controllers
                     newHunt.time_expire = System.DateTime.Now.AddDays(7.0);
 
                     // Add Hunt to database by adding primary key
-                    int latestHunt = database.hunts.OrderBy(h => h.hunt_id.ToString() ?? int.MaxValue.ToString()).ToList().Last().hunt_id;
+                    int latestHunt = database.hunts.OrderBy(h => h.hunt_id).ToList().Last().hunt_id;
                     newHunt.hunt_id = (latestHunt + 1);
                     database.hunts.Add(newHunt);
                     database.SaveChanges();
@@ -75,7 +75,7 @@ namespace FindTheBooty.Controllers
             {
                 if (done != null && (bool)done)
                 {
-                    //Redirect to the print page
+                    return RedirectToAction("PrintPage", new { HuntId = huntId });
                 }
                 ViewBag.huntId = huntId;
                 //Create the new treasure and set values
@@ -125,7 +125,7 @@ namespace FindTheBooty.Controllers
                 {
                     if (!System.IO.File.Exists(Server.MapPath("~/Content/Codes/" + HuntId.ToString() + "/") + HuntId.ToString() + "-" + treasure.treasure_id + ".png"))
                     {
-                        System.Drawing.Bitmap image = QRGenerator.generateQRCode(HuntId.ToString() + "-" + treasure.hunt_hunt_id);
+                        System.Drawing.Bitmap image = QRGenerator.generateQRCode(HuntId.ToString() + "-" + treasure.treasure_id);
                         outputPath = Server.MapPath("~/Content/Codes/" + HuntId.ToString() + "/") + HuntId.ToString() + "-" + treasure.treasure_id + ".png";
                         image.Save(outputPath, System.Drawing.Imaging.ImageFormat.Png);
                     }
@@ -163,7 +163,7 @@ namespace FindTheBooty.Controllers
                 image.Save(outputPath, System.Drawing.Imaging.ImageFormat.Png);
             }
 
-            return RedirectToAction("TestPage");
+            return RedirectToAction("PrintPage");
         }
     }
 }

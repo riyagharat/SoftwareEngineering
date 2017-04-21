@@ -44,6 +44,7 @@
 <script>
     function actionGrabber() {
         var form = $('#treasureForm');
+        $("#Description").val("something");
         var string = form.attr("action");
         string = string + "&done=true";
         form.attr("action", string);
