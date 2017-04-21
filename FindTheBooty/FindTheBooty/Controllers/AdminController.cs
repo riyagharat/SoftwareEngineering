@@ -58,6 +58,7 @@ namespace FindTheBooty.Controllers
         }
         public ActionResult UpgradeUser()
         {
+            // Make check here
             return View();
         }
         [HttpPost]
@@ -65,14 +66,36 @@ namespace FindTheBooty.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Change to list and check length of list
-                List<Models.GeneratedModels.user> user = database.users.Where(test => test.display_name == model.AdminInput).ToList();
-                if (user.Count == 1)
+                // Get list of user with that display_name
+                List<Models.GeneratedModels.user> users = database.users.Where(test => test.display_name.Contains(model.AdminInput)).ToList();
+                // If number of users is greater then one, give view a list
+                if (users.Count > 1)
                 {
-                    ViewBag.ReturnedUser = user.First();
+                    ViewBag.ReturnedUserList = users;
+                }
+                // Go ahead and promote the user
+                else if (users.Count == 1)
+                {
+                    var userId = users.First().user_id;
+
+                    return RedirectToAction("PromoteUser", new { userId = userId });
                 }
             }
             return View();
+        }
+
+        public ActionResult PromoteUser(int? userId)
+        {
+            if (userId != null && database.users.Any(x => x.user_id == userId.ToString()))
+            {
+                Models.GeneratedModels.user user = database.users.Where(x => x.user_id == userId.ToString()).First();
+                user.user_type = "Creator";
+                database.SaveChanges();
+                ViewBag.user = user.display_name;
+                return View();
+            }
+
+            return RedirectToAction("UpgradeUser");
         }
 
     }
