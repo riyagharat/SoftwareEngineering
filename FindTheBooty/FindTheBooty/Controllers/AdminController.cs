@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using DotNet.Highcharts.Enums;
+using DotNet.Highcharts.Helpers;
+using DotNet.Highcharts.Options;
 using FindTheBooty.Models;
-using System.Data.SqlClient;
+using Microsoft.VisualBasic.FileIO;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.OleDb;
-using Microsoft.VisualBasic.FileIO;
-using DotNet.Highcharts.Options;
-using DotNet.Highcharts.Helpers;
-using DotNet.Highcharts.Enums;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace FindTheBooty.Controllers
 {
