@@ -14,7 +14,7 @@ namespace FindTheBooty
             QRCodeEncoder encoder = new QRCodeEncoder();
 
             // set QR Code Format info
-            encoder.QRCodeVersion = 2;
+            encoder.QRCodeVersion = 1;
             encoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.M;
             encoder.QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.ALPHA_NUMERIC;
 
