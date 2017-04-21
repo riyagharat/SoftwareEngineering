@@ -147,10 +147,14 @@ namespace FindTheBooty.Controllers
         public ActionResult UserProfile()
         {
             Models.GeneratedModels.user session = (Models.GeneratedModels.user)Session["LoggedUser"];
-            /*List<Models.GeneratedModels.user_badge_relation> userBadges = database.user_badge_relation.Where(u => u.user_user_id == session.user_id)
-                .ToList();
-            ViewBag.user_badge_relation = userBadges;*/
-            return View(database.user_badge_relation.Where(u => u.user_user_id == "1" /*session.user_id*/).ToList());
+            if (session != null)
+            {
+                return View(database.user_badge_relation.Where(u => u.user_user_id == session.user_id).ToList());
+            }
+            else
+            {
+                return Redirect("Login");
+            }
         }
         [AllowAnonymous]
         public ActionResult EditProfile()
