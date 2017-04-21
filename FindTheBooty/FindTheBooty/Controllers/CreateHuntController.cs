@@ -1,12 +1,9 @@
 ﻿//CreateHuntController
+using FindTheBooty.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using FindTheBooty.Models;
-using System.Data.SqlClient;
-using System.Configuration;
 
 namespace FindTheBooty.Controllers
 {
@@ -29,7 +26,7 @@ namespace FindTheBooty.Controllers
                 {
                     //Generate the hunt with the information entered by the user
                     Models.GeneratedModels.hunt newHunt = new Models.GeneratedModels.hunt();
-                    newHunt.hunt_name = model.HuntName;
+                    newHunt.hunt_name = model.HuntName.Replace("'", String.Empty);
                     newHunt.hunt_type = "FFA";
                     newHunt.max_users = 150;
                     newHunt.multi_single = 1;

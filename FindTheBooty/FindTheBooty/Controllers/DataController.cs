@@ -1,5 +1,4 @@
 ﻿using FindTheBooty.Models.GeneratedModels;
-using System;
 using System.Web.Mvc;
 
 namespace FindTheBooty.Controllers

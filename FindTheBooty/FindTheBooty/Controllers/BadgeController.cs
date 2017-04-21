@@ -1,12 +1,7 @@
-﻿using System;
+﻿using FindTheBooty.Models.GeneratedModels;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using FindTheBooty.Models.GeneratedModels;
 
 namespace FindTheBooty.Controllers
 {

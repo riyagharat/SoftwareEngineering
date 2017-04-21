@@ -72,6 +72,10 @@
                     <li id="huntsNavLink"><a href="/Participating/"><span class="glyphicon glyphicon-search"></span> Hunts</a></li>
                     <li id="profileNavLink"><a href="/Account/UserProfile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                     <li id="leaderboardsNavLink"><a href="/Leaderboard/"><span class="glyphicon glyphicon-th-list"></span> Leaderboards</a></li>
+                    if (user.user_type == "Creator" || user.user_type == "Admin")
+                    {
+                        <li id="createHuntNavLink"><a href="CreateHunt/HuntSettings"><span class="glyphicon glyphicon-edit"></span> Create Hunt</a></li>
+                    }
                     if (user.user_type == "Admin")
                     {
                         <li id="statisticsNavLink"><a href="#"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
