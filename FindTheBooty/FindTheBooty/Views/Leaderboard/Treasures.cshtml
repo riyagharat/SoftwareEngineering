@@ -11,15 +11,15 @@
     <!--<a href="/Leaderboard/Rank" class="btn btn-default">Famous Pirates</a>-->
     <p>
         <strong>Filter: </strong>
-        <a href="/Leaderboard/Points" class="btn btn-default">Gold Claimed</a>
-        <a href="/Leaderboard/Hunts" class="btn btn-default">Seas Pillaged</a>
-        <a href="/Leaderboard/Treasures" class="btn btn-success">Booty Collection</a>
+        <a href="/Leaderboard/Points" class="btn btn-default">Gold Claimed</a><!-- Button that sorts based on the gold claimed -->
+        <a href="/Leaderboard/Hunts" class="btn btn-default">Seas Pillaged</a><!-- Button that sorts based on the the number of hunts the user is in -->
+        <a href="/Leaderboard/Treasures" class="btn btn-success">Booty Collection</a><!-- Button that sorts based on the number of treasures the user found -->
     </p>
 </div>
 
 <br />
 
-<table class="table">
+<table class="table"><!-- Creates the table for the leaderboard data to be stored -->
     <tr>
         <th>Pirate</th>
         <th>Rank</th>
@@ -30,7 +30,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr><!-- For each user in the model, display their information -->
             <td>@Html.DisplayFor(modelItem => item.display_name)</td>
             <td>@Html.DisplayFor(modelItem => item.rank)</td>
             <td>@Html.DisplayFor(modelItem => item.points)</td>
