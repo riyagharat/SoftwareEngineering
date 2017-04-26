@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FindTheBooty.Models
 {
+    // View Model for the Login
+    // Has what the user is prompted for
     public class LoginViewModel
     {
         [Required]
@@ -16,6 +18,8 @@ namespace FindTheBooty.Models
         public string Password { get; set; }
     }
 
+    // View Model for the Register
+    // Has what the user is prompted for
     public class RegisterViewModel
     {
         [Required]
@@ -57,6 +61,8 @@ namespace FindTheBooty.Models
         public string PhoneNumber { get; set; }
         
     }
+    
+    // The View Model for Edit Profile 
     public class EditProfileViewModel
     {
         [Required]

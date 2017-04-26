@@ -8,7 +8,7 @@
 </div>
 <div class="row">
     <div class="col-xs-12">
-        <form action="/Admin/UpgradeUser" id="userSearch" method="post">
+        <form action="/Admin/UpgradeUser" id="userSearch" method="post"><!-- The search bar for the Admin to search for a user -->
             @Html.AntiForgeryToken()
             @Html.ValidationSummary("", new { @class = "text-danger" })
             <div class="form-group">
@@ -24,7 +24,7 @@
     @if (ViewBag.ReturnedUserList != null)
     {
         <div class="col-xs-12">
-            <h3>Multiple Users with that Username</h3>
+            <h3>Multiple Users with that Username</h3><!--Notifies the Admin that there are multiple Users with similar usernames -->
             <ul>
                 @foreach(FindTheBooty.Models.GeneratedModels.user user in ViewBag.ReturnedUserList)
                 {
@@ -34,6 +34,6 @@
         </div>
     }
     <div class="col-xs-12">
-        <a href="/Admin/Admin" class="btn btn-info" role="button">Back</a>
+        <a href="/Admin/Admin" class="btn btn-info" role="button">Back</a><!-- Back button for the User to return to the Admin Landing Page-->
     </div>
 </div>

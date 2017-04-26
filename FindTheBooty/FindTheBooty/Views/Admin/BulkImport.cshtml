@@ -6,7 +6,7 @@
     <h1 class="bilbo-swash-caps">Welcome to the Bulk Import page</h1>
 </div>
 <div>
-    <p>
+    <p><!-- Instructions for the user on what needs to be done if they wish to import a file -->
         From this page you can perform a bulk import of data to the treasures table in the database.  The data that is imported to the
         treasures table must follow a specific format to be inserted into the treasures table correctly.  The correct format is listed below.  The
         bulk import tool only accepts CSV (comma seperated value) files for import into the database.  Click the Choose File button below
@@ -31,7 +31,7 @@
         <input type="file" id="FileUpload" name="FileUpload" class="" />
     </div>
     <div>
-        <button type="submit" class="btn btn-info">Import Data</button>
-        <a href="/Admin/Admin" class="btn btn-info" role="button">Back</a>
+        <button type="submit" class="btn btn-info">Import Data</button> <!-- After uploading the file, the file can be imported -->
+        <a href="/Admin/Admin" class="btn btn-info" role="button">Back</a><!-- If the user does not wish to import, they can return to the Admin page -->
     </div>
 </form>

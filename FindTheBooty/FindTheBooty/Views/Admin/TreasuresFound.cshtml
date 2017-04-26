@@ -5,6 +5,8 @@
 
 <!--
     
+List of SQL queries
+    
 SELECT COUNT(*) FROM [treasure] WHERE [hunt_hunt_id] = 4;
 SELECT COUNT(*) FROM [user_treasure_relation] WHERE [found] = 'true' AND [treasure_hunt_hunt_id] = '4';
 
@@ -17,11 +19,11 @@ Bar chart X = treasures, Y = number of times they've been found
 <div class="title">
     <h1 class="bilbo-swash-caps">Welcome to the Treasures Found Graph</h1>
 </div>
-<div>
+<div><!-- Displays the chart from the Model -->
     @model DotNet.Highcharts.Highcharts
 
     @(Model)
 </div>
 <div>
-    <a href="/Admin/Admin" class="btn btn-info" role="button">Back</a>
+    <a href="/Admin/Admin" class="btn btn-info" role="button">Back</a><!-- Back button for the User to return to the Admin Landing Page-->
 </div>

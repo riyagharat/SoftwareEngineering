@@ -46,11 +46,15 @@ namespace FindTheBooty.Controllers
         {
             return View();
         }
+
+        // Used DotNet HighCharts to develop A treasures found graph
+        // It checked hunts that are currently active and counted the number of times treasures have been recorded for that hunt
         public ActionResult TreasuresFound()
         {
             SqlConnection treasurecharts = new SqlConnection(ConfigurationManager.ConnectionStrings["FTBConnection"].ToString());
 
             treasurecharts.Open();
+            // Create the SQL query and connect to the db
             SqlCommand query1 = new SqlCommand("SELECT hunt_name FROM dbo.[hunt], dbo.[user_treasure_relation] WHERE(user_treasure_relation.found = 'true' AND user_treasure_relation.treasure_hunt_hunt_id = hunt.hunt_id) GROUP BY hunt_name;", treasurecharts);
             SqlDataReader query1Reader = query1.ExecuteReader();
             DataTable tempHuntNames = new DataTable();
@@ -58,12 +62,14 @@ namespace FindTheBooty.Controllers
             treasurecharts.Close();
 
             treasurecharts.Open();
+            // Create the SQL query and connect to the db
             SqlCommand query2 = new SqlCommand("SELECT COUNT(*) AS number FROM dbo.[hunt], dbo.[user_treasure_relation] WHERE(user_treasure_relation.found = 'true' AND user_treasure_relation.treasure_hunt_hunt_id = hunt.hunt_id) GROUP BY hunt_name;", treasurecharts);
             SqlDataReader query2Reader = query2.ExecuteReader();
             DataTable tempTreasureCount = new DataTable();
             tempTreasureCount.Load(query2Reader);
             treasurecharts.Close();
 
+            // create arrays and store the results of the query in there
             string[] test = new string[tempHuntNames.Rows.Count];
             object[] vals = new object[tempTreasureCount.Rows.Count];
 
@@ -79,6 +85,7 @@ namespace FindTheBooty.Controllers
                 vals[i] = value;
             }
 
+            // Create the Bar graph with DotNet Highcharts by assigning the arrays to the appropriate sections
             DotNet.Highcharts.Highcharts chart = new DotNet.Highcharts.Highcharts("chart")
             .SetXAxis(new XAxis { Categories = test })
             .SetYAxis(new YAxis { Title = new YAxisTitle { Text = "Number of Treasures Found" } })
@@ -88,6 +95,9 @@ namespace FindTheBooty.Controllers
 
             return View(chart);
         }
+
+        // Used DotNet HighCharts to develop a pirate distribution graph
+        // It checked the types of pirates that were currently playing and displayed the numbers in a line graph
         public ActionResult PirateDistribution()
         {
             int num1 = 0;
@@ -107,7 +117,7 @@ namespace FindTheBooty.Controllers
 
             SqlConnection piratecharts = new SqlConnection(ConfigurationManager.ConnectionStrings["FTBConnection"].ToString());
             piratecharts.Open();
-
+            // Create the SQL queries and connect to the db
             SqlCommand query1 = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE rank = 'Land Lubber';", piratecharts);
             num1 = Convert.ToInt32(query1.ExecuteScalar());
 
@@ -150,6 +160,7 @@ namespace FindTheBooty.Controllers
             SqlCommand query14 = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE rank = 'Sic Parvis Magna';", piratecharts);
             num14 = Convert.ToInt32(query14.ExecuteScalar());
 
+            // Passed the values to the DotNet HighCharts in arrays
             DotNet.Highcharts.Highcharts chart = new DotNet.Highcharts.Highcharts("chart")
             .SetXAxis(new XAxis
             {
@@ -164,6 +175,9 @@ namespace FindTheBooty.Controllers
 
             return View(chart);
         }
+
+        // Used DotNet HighCharts to develop a types of users pie chart
+        // It checked the types of users that were currently active and displayed them
         public ActionResult TypesOfUsers()
         {
             int numberAdmins = 0;
@@ -172,7 +186,7 @@ namespace FindTheBooty.Controllers
 
             SqlConnection usercharts = new SqlConnection(ConfigurationManager.ConnectionStrings["FTBConnection"].ToString());
             usercharts.Open();
-
+            // Create the SQL queries and connect to the db
             SqlCommand queryAdmin = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE user_type = 'Admin';", usercharts);
             numberAdmins = Convert.ToInt32(queryAdmin.ExecuteScalar());
 
@@ -182,7 +196,7 @@ namespace FindTheBooty.Controllers
             SqlCommand queryUser = new SqlCommand("SELECT COUNT(*) FROM dbo.[user] WHERE user_type = 'User';", usercharts);
             numberUsers = Convert.ToInt32(queryUser.ExecuteScalar());
 
-
+            // Passed the values to the DotNet HighCharts in arrays
             DotNet.Highcharts.Highcharts chart = new DotNet.Highcharts.Highcharts("chart")
             .SetSeries(new Series
             {
@@ -205,6 +219,8 @@ namespace FindTheBooty.Controllers
             // Make check here
             return View();
         }
+
+        // Changes a user status to Creator from User if it matches
         [HttpPost]
         public ActionResult UpgradeUser(UpgradeUserViewModel model)
         {
@@ -228,6 +244,7 @@ namespace FindTheBooty.Controllers
             return View();
         }
 
+        // Upgrade the User
         public ActionResult PromoteUser(int? userId)
         {
             if (userId != null && database.users.Any(x => x.user_id == userId.ToString()))
@@ -242,6 +259,7 @@ namespace FindTheBooty.Controllers
             return RedirectToAction("UpgradeUser");
         }
 
+        //Bulk Export
         public ActionResult PerformExport()
         {
             SqlConnection exportConn = new SqlConnection(ConfigurationManager.ConnectionStrings["FTBConnection"].ToString());
@@ -292,6 +310,7 @@ namespace FindTheBooty.Controllers
             return View();
         }
         
+        // Bulk Import
         [HttpPost]
         public ActionResult PerformImport()
         {

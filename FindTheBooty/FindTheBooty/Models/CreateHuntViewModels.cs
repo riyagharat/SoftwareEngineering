@@ -22,7 +22,8 @@ namespace FindTheBooty.Models
         // calculated timeLeft in seconds
         public string EndDateTime { get; set; }
     }
-
+    
+    // view Model to add treasures to a hunt
     public class AddTreasuresViewModel
     {
         public int HuntRelID { get; set; }

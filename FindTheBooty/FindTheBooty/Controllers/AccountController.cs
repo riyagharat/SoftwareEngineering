@@ -114,12 +114,14 @@ namespace FindTheBooty.Controllers
             Session.Abandon();
             return RedirectToAction("Index", "Home", new { LoggedOut = true });
         }
-
+        
+        // Check that the user credentials exist in the db
         protected bool checkLogin(LoginViewModel model)
         {
             return (database.users.Any(user => user.email == model.Email && user.password == model.Password));
         }
 
+        // get the information of the logged in user if they exist else display error
         protected Models.GeneratedModels.user getUser(LoginViewModel model)
         {
             if (checkLogin(model))
@@ -143,6 +145,7 @@ namespace FindTheBooty.Controllers
             base.Dispose(disposing);
         }
 
+        // Displays the user profile of a currently logged in user
         [AllowAnonymous]
         public ActionResult UserProfile()
         {
@@ -162,6 +165,8 @@ namespace FindTheBooty.Controllers
             return View();
         }
 
+        // Allows a logged in user to edit their current information in the system
+        // Upoon completion they are redirected to the User Profile page where their information is displayed
         [HttpPost]
         [AllowAnonymous]
         //[ValidateAntiForgeryToken]

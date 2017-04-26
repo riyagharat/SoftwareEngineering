@@ -65,7 +65,7 @@
         </div>
     </div>
 </div>
-<script>
+<script>@* The parallax with the ship is here *@
     var jumboHeight = $('.wumbotron1').outerHeight();
     function parallax() {
         var scrolled = $(window).scrollTop();
@@ -95,7 +95,7 @@
                 <th>Badge</th>
                 <th>Description</th>
             </tr>
-
+            @* Displays the list of badges and their appropriate description that are associated with a user*@
             @foreach (var item in Model)
             {
                 <tr>
