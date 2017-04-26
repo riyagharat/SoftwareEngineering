@@ -24,7 +24,7 @@
 
 
 
-<script>
+<script> //Implementation of the parallax effect
     var jumboHeight = $('.wumbotron1').outerHeight();
     function parallax() {
         var scrolled = $(window).scrollTop();
@@ -46,8 +46,8 @@
     @if (!loggedIn)
     {
         <div style="margin-top: -50px;" class="col-xs-12">
-            <a class="btn btn-primary btn-lg outline kaushanScript" href="/Account/Login">Login</a>
-            <a class="btn btn-primary btn-lg outline kaushanScript" href="/Account/Register">Register</a>
+            <a class="btn btn-primary btn-lg outline kaushanScript" href="/Account/Login">Login</a><!-- Button to let the user login -> redirects to the login page -->
+            <a class="btn btn-primary btn-lg outline kaushanScript" href="/Account/Register">Register</a><!-- Button to let the user register -> redirects to the register page-->
         </div>
     }
 
@@ -55,14 +55,14 @@
     {
         <div class="alert alert-success">
             <p>
-                <span class="glyphicon glyphicon-info-sign"></span>
+                <span class="glyphicon glyphicon-info-sign"></span><!-- Message that lets the user know that they have logged out successfully -->
                 You have successfully logged out!
             </p>
         </div>
     }
 
     <div style="margin-top: 10px;"class="col-xs-12">
-        <p>
+        <p><!-- Short description of the app, more information is on the Learn More page -->
             Find The Booty is a free, web-based treasure hunting game created by Javalanche Studios.
             All you need is a camera and an Internet connection! Login and start playing now!
         </p><a href="/Home/About">Learn More >></a>

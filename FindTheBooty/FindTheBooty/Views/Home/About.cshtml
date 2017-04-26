@@ -6,7 +6,7 @@
 <div class="wumbotron1">
     <h2>@ViewBag.Title</h2>
     <h1 class="bilbo-swash-caps"><b>@ViewBag.Title</b></h1>
-    <h3 class="kaushanScript">Swiggity swooty I'm comin' for tha booty</h3>
+    <h3 class="kaushanScript">Swiggity swooty I'm comin' for tha booty</h3> <!-- General Description of the application -->
      <p>Find The Booty was developed using Microsoft .NET MVC and Bootstrap CSS by Javalanche Studios.
         Bootstrap is a mobile-first framework that offers modern styling to web development.
         Our goal was to create a game that anyone with a smartphone and an internet connection to play.
@@ -14,10 +14,10 @@
 
 </div>
 <div>
-    <h3 style="margin-top: -50px;"class="kaushanScript">Javalanche Studios Crew:</h3>
+    <h3 style="margin-top: -50px;"class="kaushanScript">Javalanche Studios Crew:</h3><!-- List of Team Members -->
     <p>Captain Riya Gharat, Michael Frederick, Kevin Janssen, Mai Nguyen, Kevin Poon, Dave Timmers, and Brandon White</p>
 
-    <h3 class="kaushanScript">Special Thanks:</h3>
+    <h3 class="kaushanScript">Special Thanks:</h3><!-- List of people or things that contributed -->
     <ul class="list-unstyled">
         <li>Doug Leas</li>
         <li>Karthekan Umapathy</li>
@@ -26,10 +26,10 @@
         <li>Coffee</li>
     </ul>
     <div>
-        <a href="/Home/Index" class="btn btn-primary btn-lg outline kaushanScript" role="button">Back</a>
+        <a href="/Home/Index" class="btn btn-primary btn-lg outline kaushanScript" role="button">Back</a> <!-- Button to enable the user to go back to the Index page -->
     </div>
 </div>
-<script>
+<script> // Implemented the parallax effect on this page as well
     var jumboHeight = $('.wumbotron1').outerHeight();
     function parallax() {
         var scrolled = $(window).scrollTop();

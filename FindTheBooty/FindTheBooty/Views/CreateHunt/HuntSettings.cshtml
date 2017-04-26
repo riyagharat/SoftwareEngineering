@@ -11,12 +11,12 @@
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
         <label for="image">Hunt Name</label>
-        @Html.TextBoxFor(m => m.HuntName, new { @class = "form-control", @placeholder = "Enter the name of the hunt" })
+        @Html.TextBoxFor(m => m.HuntName, new { @class = "form-control", @placeholder = "Enter the name of the hunt" }) <!-- Prompts for a hunt name -->
         @Html.ValidationMessageFor(m => m.HuntName, "", new { @class = "text-danger" })
         @*<label for="">Hunt Name</label>
             <input id="huntName" class="form-control" placeholder="Enter the name of the hunt" />*@
     </div>
     <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary">Now add some treasures!</button>
+        <button type="submit" class="btn btn-primary">Now add some treasures!</button><!-- After creating the hunt, the user is then prompted to add treasures to the hunt -->
     </div>
 </form>
